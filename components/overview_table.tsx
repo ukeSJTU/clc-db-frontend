@@ -45,7 +45,9 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                             {molecule.cas_id}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {molecule.class_type[0].name}
+                            {molecule.class_type.length > 0
+                                ? molecule.class_type[0].name
+                                : "None"}
                         </td>
                     </tr>
                 ))}
