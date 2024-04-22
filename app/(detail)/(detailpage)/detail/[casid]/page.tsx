@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { completeMoleculeProps } from "@/types/molecule";
-import MoleculeDetailSheet from "@/components/detail_molecule";
+import MoleculeDetailSheet from "@/components/detailpage/detail_molecule";
 
 const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
     const [molecule, setResults] = useState<completeMoleculeProps[]>([]);
