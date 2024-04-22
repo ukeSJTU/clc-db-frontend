@@ -8,7 +8,6 @@ import {
     ViewIcon,
     LinkIcon,
 } from "lucide-react";
-import { Skeleton } from "../ui/skeleton";
 
 export const sections = {
     "molecule-name": {
@@ -74,12 +73,21 @@ export const sections = {
             icon: <ViewIcon className="h-5 w-5" />,
         },
 
-        content: (molecule: completeMoleculeProps) => (
-            <>
-                <h3 className="text-xl font-semibold">Image</h3>
-                <Skeleton className="h-[200px] rounded-lg" />
-            </>
-        ),
+        content: (molecule: completeMoleculeProps) => {
+            const moleculeId = molecule.pubchem_url.split("/").pop(); // This line extracts the ID
+            console.log("Molecule ID:", moleculeId);
+
+            return (
+                <>
+                    <h3 className="text-xl font-semibold">Image</h3>
+                    <img
+                        src={`https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${moleculeId}&width=500&height=500`}
+                        alt="Molecule Image"
+                        className="h-[200px] rounded-lg"
+                    />
+                </>
+            );
+        },
     },
     smile: {
         title: "SMILE",
