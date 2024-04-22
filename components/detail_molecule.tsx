@@ -11,8 +11,8 @@ import {
 
 const MoleculeDetailSheet = (molecule: completeMoleculeProps) => {
     return (
-        <div className="grid grid-cols-[300px_1fr] gap-8 p-8">
-            <div className="sticky top-8 h-[calc(100vh-2rem)] overflow-y-auto rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="flex gap-8 p-8">
+            <div className="flex flex-col sticky top-8  w-[300px] overflow-y-auto rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
                 <nav className="space-y-4">
                     <a
                         className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
@@ -65,7 +65,7 @@ const MoleculeDetailSheet = (molecule: completeMoleculeProps) => {
                     </a>
                 </nav>
             </div>
-            <div className="space-y-8">
+            <div className="space-y-8 ">
                 <section id="molecule-name">
                     <h2 className="text-2xl font-bold">{molecule.name}</h2>
                     <p className="text-gray-500 dark:text-gray-400">

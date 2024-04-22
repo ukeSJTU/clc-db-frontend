@@ -29,11 +29,6 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
     return (
         <div className="container mx-auto px-4 py-8">
             {molecule.length > 0 && <MoleculeDetailSheet {...molecule[0]} />}
-            <div className="flex">
-                <div className="w-1/4">
-                    {/* TODO: Scroll Bar will go here */}
-                </div>
-            </div>
         </div>
     );
 };
