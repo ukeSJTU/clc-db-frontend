@@ -19,7 +19,7 @@ import {
 
 const NavbarComponent = () => {
     return (
-        <div className="flex justify-between flex-row w-full top-0 p-4 z-10 fixed">
+        <div className="flex justify-between flex-row w-full top-0 p-4 z-10 fixed bg-white">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
