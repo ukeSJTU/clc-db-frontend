@@ -8,6 +8,7 @@ import {
     ViewIcon,
     LinkIcon,
 } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 export const sections = {
     "molecule-name": {
@@ -62,6 +63,21 @@ export const sections = {
                         </span>
                     ))}
                 </p>
+            </>
+        ),
+    },
+    image: {
+        title: "Image",
+        sidenav: {
+            id: "image",
+            label: "Image",
+            icon: <ViewIcon className="h-5 w-5" />,
+        },
+
+        content: (molecule: completeMoleculeProps) => (
+            <>
+                <h3 className="text-xl font-semibold">Image</h3>
+                <Skeleton className="h-[200px] rounded-lg" />
             </>
         ),
     },
