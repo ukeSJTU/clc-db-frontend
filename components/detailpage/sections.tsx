@@ -1,9 +1,23 @@
 import { completeMoleculeProps } from "@/types/molecule";
 import Link from "next/link";
 
+import {
+    AtomIcon,
+    UserIcon,
+    Rows3Icon,
+    ViewIcon,
+    LinkIcon,
+} from "lucide-react";
+
 export const sections = {
     "molecule-name": {
         title: "Molecule Name",
+        sidenav: {
+            id: "molecule-name",
+            label: "Molecule Name",
+            icon: <AtomIcon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h2 className="text-2xl font-bold">{molecule.name}</h2>
@@ -15,6 +29,13 @@ export const sections = {
     },
     "cas-id": {
         title: "CAS ID",
+
+        sidenav: {
+            id: "cas-id",
+            label: "CAS ID",
+            icon: <UserIcon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">CAS ID</h3>
@@ -24,6 +45,12 @@ export const sections = {
     },
     "class-type": {
         title: "Class Type",
+        sidenav: {
+            id: "class-type",
+            label: "Class Type",
+            icon: <Rows3Icon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">Class Type</h3>
@@ -40,6 +67,12 @@ export const sections = {
     },
     smile: {
         title: "SMILE",
+        sidenav: {
+            id: "smile",
+            label: "SMILE",
+            icon: <AtomIcon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">SMILE</h3>
@@ -49,6 +82,12 @@ export const sections = {
     },
     "smile-type": {
         title: "SMILE Type",
+        sidenav: {
+            id: "smile-type",
+            label: "SMILE Type",
+            icon: <AtomIcon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">SMILE Type</h3>
@@ -58,6 +97,12 @@ export const sections = {
     },
     description: {
         title: "Description",
+        sidenav: {
+            id: "description",
+            label: "Description",
+            icon: <ViewIcon className="h-5 w-5" />,
+        },
+
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">Description</h3>
@@ -67,6 +112,11 @@ export const sections = {
     },
     urls: {
         title: "URLs",
+        sidenav: {
+            id: "urls",
+            label: "URLs",
+            icon: <LinkIcon className="h-5 w-5" />,
+        },
 
         content: (molecule: completeMoleculeProps) => (
             <>
