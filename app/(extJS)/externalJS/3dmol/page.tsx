@@ -42,4 +42,30 @@ const Molecule3DStructureDisplayComponent = () => {
     );
 };
 
-export default Molecule3DStructureDisplayComponent;
+// Fallback component to show 3d structure using cid
+// const Molecule3DStructureDisplayComponent = ({ cid = '2244' }) => {
+//     const viewerRef = useRef(null);
+
+//     useEffect(() => {
+//         if (!viewerRef.current) return; // Ensure the ref is attached
+
+//         // Dynamically import the 3Dmol library
+//         import('3dmol/build/3Dmol.js').then($3Dmol => {
+//             // Initialize the viewer in the div ref
+//             const viewer = new $3Dmol.createViewer(viewerRef.current, {
+//                 backgroundColor: "white"
+//             });
+
+//             // Load the compound by CID from PubChem
+//             $3Dmol.download(`cid:${cid}`, viewer, {}, function() {
+//                 viewer.setStyle({}, {stick: {}});
+//                 viewer.zoomTo(); // Adjust camera to molecule
+//                 viewer.render(); // Render the scene
+//             });
+//         });
+//     }, [cid]);
+
+//     return (
+//         <div style={{ width: '400px', height: '400px' }} ref={viewerRef}></div>
+//     );
+// };
