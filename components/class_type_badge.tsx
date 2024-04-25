@@ -19,14 +19,24 @@ const dynamicColor = (typeName: string) => {
     return baseColors[Math.abs(hash) % baseColors.length]; // Use the absolute value of hash to ensure a positive index
 };
 
+const abbreviateName = (name: string) => {
+    return name
+        .split(/\s+/)
+        .map((word) => word[0])
+        .join("")
+        .toUpperCase(); // Create an abbreviation by taking first letters of each word
+};
+
 const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({ classType }) => {
     const colorClass = dynamicColor(classType.name);
+    const abbreviation = abbreviateName(classType.name);
 
     return (
         <Badge
             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass}`}
+            title={classType.name}
         >
-            {classType.name}
+            {abbreviation}
         </Badge>
     );
 };
