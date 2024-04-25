@@ -1,6 +1,8 @@
 import { completeMoleculeProps } from "@/types/molecule";
 import Link from "next/link";
 
+import ClassTypeBadge from "@/components/class_type_badge";
+
 import {
     AtomIcon,
     UserIcon,
@@ -54,14 +56,11 @@ export const sections = {
         content: (molecule: completeMoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">Class Type</h3>
-                <p>
+                <div className="flex flex-wrap">
                     {molecule.class_type.map((type, index) => (
-                        <span key={index}>
-                            {type.name}
-                            {index < molecule.class_type.length - 1 ? ", " : ""}
-                        </span>
+                        <ClassTypeBadge key={index} classType={type} />
                     ))}
-                </p>
+                </div>
             </>
         ),
     },
