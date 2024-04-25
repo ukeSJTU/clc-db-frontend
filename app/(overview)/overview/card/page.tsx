@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MoleculeCard from "@/components/molecule_card";
 
-import { simplifiedMoleculeProps } from "@/types/molecule";
+import { overviewCardMoleculeProps } from "@/types/molecule";
 
 const fetchMoleculeData = async (page: number) => {
     const response = await axios.get(
@@ -40,7 +40,7 @@ const IndexPage = () => {
         <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4">
                 {molecules.map(
-                    (molecule: simplifiedMoleculeProps, index: number) => (
+                    (molecule: overviewCardMoleculeProps, index: number) => (
                         <MoleculeCard key={index} {...molecule} />
                     )
                 )}
