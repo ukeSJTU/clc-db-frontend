@@ -134,10 +134,10 @@ const NavbarComponent = () => {
                                     </NavigationMenuLink>
                                 </li>
                                 <ListItem
-                                    href="/externalJS/jsmol"
-                                    title="JSmol"
+                                    href="/externalJS/3dmol"
+                                    title="3Dmol"
                                 >
-                                    J(S)mol: an open-source Java(Script) viewer
+                                    3Dmol: an open-source Java(Script) viewer
                                     for chemical structures in 3D.
                                 </ListItem>
                                 <ListItem
