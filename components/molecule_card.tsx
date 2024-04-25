@@ -27,9 +27,9 @@ const MoleculeCard = ({
     return (
         <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
             <Card className="w-full h-full flex flex-col flex-grow">
-                <CardHeader className="flex justify-between items-center p-4 border-b">
+                <CardHeader className="flex justify-between items-start p-4 border-b" style={{height: '40%'}}>
                     <div className="space-y-1">
-                        <CardTitle className="text-lg font-semibold">
+                        <CardTitle className="text-lg font-semibold ">
                             {name}
                         </CardTitle>
                         <p className="text-sm text-gray-500">
