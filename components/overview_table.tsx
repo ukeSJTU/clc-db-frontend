@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
+import ClassTypeBadge from "@/components/class_type_badge";
 
 type MoleculeTableProps = {
     molecules: {
@@ -44,10 +45,22 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                         <td className="px-6 py-4 whitespace-nowrap">
                             {molecule.cas_id}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        {/* <td className="px-6 py-4 whitespace-nowrap">
                             {molecule.class_type.length > 0
                                 ? molecule.class_type[0].name
                                 : "None"}
+                        </td> */}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {molecule.class_type.length > 0 ? (
+                                molecule.class_type.map((type, idx) => (
+                                    <ClassTypeBadge
+                                        key={idx}
+                                        classType={type}
+                                    />
+                                ))
+                            ) : (
+                                <ClassTypeBadge classType={{ name: "None" }} />
+                            )}
                         </td>
                     </tr>
                 ))}
