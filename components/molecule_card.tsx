@@ -1,6 +1,9 @@
 import React from "react";
 
-import { simplifiedMoleculeProps } from "@/types/molecule";
+import {
+    simplifiedMoleculeProps,
+    overviewCardMoleculeProps,
+} from "@/types/molecule";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +14,9 @@ const MoleculeCard = ({
     name,
     cas_id,
     class_type,
-}: simplifiedMoleculeProps) => {
+    molecule_formula,
+    molecular_weight,
+}: overviewCardMoleculeProps) => {
     const router = useRouter();
 
     const handleClick = () => {
@@ -49,15 +54,15 @@ const MoleculeCard = ({
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <p className="text-sm text-gray-500">
-                                Molecule Name
+                                Molecule Formula
                             </p>
-                            <p>{name}</p>
+                            <p>{molecule_formula}</p>
                         </div>
                         <div className="space-y-2">
                             <p className="text-sm text-gray-500">
                                 Molecular Weight
                             </p>
-                            <p>194.19 g/mol</p>
+                            <p>{molecular_weight.toFixed(3)}</p>
                         </div>
                         <div className="space-y-2 col-span-2">
                             <p className="text-sm text-gray-500">
