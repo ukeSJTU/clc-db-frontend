@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import ClassTypeBadge from "./class_type_badge";
 
 const MoleculeCard = ({
     name,
@@ -39,13 +40,7 @@ const MoleculeCard = ({
                         <p className="font-semibold">Category:</p>
                         <div className="flex flex-wrap">
                             {class_type.map((type, index) => (
-                                <Badge
-                                    key={index}
-                                    variant="outline"
-                                    className="m-1"
-                                >
-                                    {type.name}
-                                </Badge>
+                                <ClassTypeBadge key={index} classType={type} />
                             ))}
                         </div>
                     </div>
