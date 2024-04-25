@@ -6,10 +6,10 @@ import MoleculeCard from "@/components/molecule_card";
 
 import { overviewCardMoleculeProps } from "@/types/molecule";
 
+import api from "@/utils/api";
+
 const fetchMoleculeData = async (page: number) => {
-    const response = await axios.get(
-        `http://www.ukehome.top/api/overview/card/?page=${page}`
-    );
+    const response = await api.get(`/overview/card/?page=${page}`);
     return response.data;
 };
 
