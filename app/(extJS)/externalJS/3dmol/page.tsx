@@ -42,6 +42,8 @@ const Molecule3DStructureDisplayComponent = () => {
     );
 };
 
+export default Molecule3DStructureDisplayComponent;
+
 // Fallback component to show 3d structure using cid
 // const Molecule3DStructureDisplayComponent = ({ cid = '2244' }) => {
 //     const viewerRef = useRef(null);
