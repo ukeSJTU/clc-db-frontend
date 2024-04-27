@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import ClassTypeBadge from "./class_type_badge";
+import Molecule3DViewer from "@/components/Molecule3DViewer";
 
 const MoleculeCard = ({
     name,
@@ -27,7 +28,10 @@ const MoleculeCard = ({
     return (
         <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
             <Card className="w-full h-full flex flex-col flex-grow">
-                <CardHeader className="flex justify-between items-start p-4 border-b" style={{height: '40%'}}>
+                <CardHeader
+                    className="flex justify-between items-start p-4 border-b"
+                    style={{ height: "40%" }}
+                >
                     <div className="space-y-1">
                         <CardTitle className="text-lg font-semibold ">
                             {name}
@@ -63,7 +67,12 @@ const MoleculeCard = ({
                             <p className="text-sm text-gray-500">
                                 3D Structure
                             </p>
-                            <Skeleton className="h-[200px] rounded-lg" />
+                            {/* TODO: some molecules don't have corresponding [cas-id].sdf 
+                                file to generate Molecule3DViewer component, 
+                                so either retrive the pubchem cid and use fallback component 
+                                or simply use Skeleton as placeholder */}
+                            {/* <Skeleton className="h-[200px] rounded-lg" /> */}
+                            <Molecule3DViewer casId={cas_id} />
                         </div>
                     </div>
                 </CardContent>
