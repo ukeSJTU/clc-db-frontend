@@ -39,6 +39,17 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
         fetchData();
     }, [page, pageSize]);
 
+    const handlePageSizeChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const newSize = parseInt(event.target.value, 10);
+        if (!isNaN(newSize) && newSize > 0) {
+            setPageSize(newSize);
+        } else {
+            setPageSize(10); // Default to 10 if the input is invalid or zero
+        }
+    };
+
     return (
         <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4">
@@ -57,7 +68,7 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
                     type="number"
                     value={pageSize}
                     placeholder="10"
-                    onChange={(e) => setPageSize(parseInt(e.target.value, 10))}
+                    onChange={handlePageSizeChange}
                     className="border rounded px-2 py-1"
                 />
             </div>
