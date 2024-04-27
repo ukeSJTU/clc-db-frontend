@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
     Pagination,
@@ -13,20 +15,37 @@ import {
 interface PaginationProps {
     page: number;
     setPage: (page: number) => void;
+    pageSize: number;
+    setPageSize: (size: number) => void;
     totalPages: number;
+    baseUrl: string;
 }
 
 const PaginationComponent: React.FC<PaginationProps> = ({
     page,
     setPage,
+    pageSize,
+    setPageSize,
     totalPages,
+    baseUrl,
 }) => {
     const router = useRouter();
 
     const handlePageChange = (newPage: number) => {
         if (newPage > 0 && newPage <= totalPages) {
             setPage(newPage);
-            router.push(`/overview/card/${newPage}`); // Update the URL
+            router.push(`${baseUrl}/${newPage}?pageSize=${pageSize}`);
+        }
+    };
+
+    const handlePageSizeChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const newSize = parseInt(event.target.value, 10);
+        if (!isNaN(newSize) && newSize > 0) {
+            setPageSize(newSize);
+            setPage(1); // Optional: Reset to page 1 on page size change
+            router.push(`${baseUrl}/1?pageSize=${newSize}`);
         }
     };
 
@@ -40,6 +59,14 @@ const PaginationComponent: React.FC<PaginationProps> = ({
 
     return (
         <div className="flex justify-center items-center space-x-4">
+            <input
+                type="number"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+                className="ml-4 border rounded px-2 py-1"
+                placeholder="Items per page"
+            />
+
             <Pagination>
                 <PaginationContent>
                     <PaginationItem>

@@ -15,7 +15,6 @@ const fetchMoleculeData = async (page: number, pageSize: number) => {
     );
     const data = response.data;
     const totalPages = Math.ceil(data.count / pageSize); // Calculate total pages
-    console.log("[debug]=>", "totalPages:", totalPages);
     return { results: data.results, totalPages };
 };
 
@@ -34,21 +33,21 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
                 pageSize
             );
             setMolecules(results);
-            setTotalPages(totalPages); // Update state with the fetched total pages
+            setTotalPages(totalPages);
         };
         fetchData();
     }, [page, pageSize]);
 
-    const handlePageSizeChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const newSize = parseInt(event.target.value, 10);
-        if (!isNaN(newSize) && newSize > 0) {
-            setPageSize(newSize);
-        } else {
-            setPageSize(10); // Default to 10 if the input is invalid or zero
-        }
-    };
+    // const handlePageSizeChange = (
+    //     event: React.ChangeEvent<HTMLInputElement>
+    // ) => {
+    //     const newSize = parseInt(event.target.value, 10);
+    //     if (!isNaN(newSize) && newSize > 0) {
+    //         setPageSize(newSize);
+    //     } else {
+    //         setPageSize(10); // Default to 10 if the input is invalid or zero
+    //     }
+    // };
 
     return (
         <div>
@@ -59,24 +58,15 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
                     )
                 )}
             </div>
-            <div className="mt-2 flex justify-center">
-                <label htmlFor="pageSize" className="mr-2">
-                    Rows per page:
-                </label>
-                <input
-                    id="pageSize"
-                    type="number"
-                    value={pageSize}
-                    placeholder="10"
-                    onChange={handlePageSizeChange}
-                    className="border rounded px-2 py-1"
-                />
-            </div>
+
             <div className="mt-4 flex justify-center">
                 <PaginationComponent
                     page={page}
                     setPage={setPage}
+                    pageSize={pageSize}
+                    setPageSize={setPageSize}
                     totalPages={totalPages}
+                    baseUrl="/overview/card"
                 />
             </div>
         </div>
