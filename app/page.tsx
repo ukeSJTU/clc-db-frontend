@@ -1,7 +1,31 @@
-// pages/index.tsx
+"use client";
+
+import api from "@/utils/api";
 import type { NextPage } from "next";
+import { useState, useEffect } from "react";
+
+const fetchStatistics = async () => {
+    const response = await api.get("/statistics/");
+    return response.data;
+};
 
 const Home: NextPage = () => {
+    const [stats, setStats] = useState({
+        totalMolecules: 0,
+        totalCategories: 0,
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await fetchStatistics();
+            setStats({
+                totalMolecules: data.total_molecules,
+                totalCategories: data.total_categories,
+            });
+        };
+        fetchData();
+    }, []);
+
     return (
         <div>
             <main className="pt-20">
@@ -22,8 +46,9 @@ const Home: NextPage = () => {
                 <section className="container mx-auto p-4 mt-8 bg-gray-100 rounded-md">
                     <h2 className="text-2xl font-semibold">Statistics</h2>
                     <p>
-                        Number of molecules collected:{" "}
-                        {/* Display your data here */}
+                        Number of molecules collected: {stats.totalMolecules}
+                        <br />
+                        Number of categories: {stats.totalCategories}
                     </p>
                 </section>
             </main>
