@@ -1,30 +1,28 @@
 "use client";
 
-// Assume this code is in pages/search.tsx or a similar file
 import React, { useState } from "react";
 import axios from "axios";
 
 import SearchBarComponent from "@/components/searchbar";
 import MoleculeCard from "@/components/molecule_card";
-import { completeMoleculeProps } from "@/types/molecule";
+import {
+    completeMoleculeProps,
+    simplifiedMoleculeProps,
+} from "@/types/molecule";
 
-type Molecule = {
-    name: string;
-    cas_id: string;
-    class_type: string;
-    url: string;
-    pubchem_url: string;
-    smiles: string;
-    smiles_type: string;
-    remarks?: string;
-};
+import SearchHeading from "@/components/searchpage/heading";
+import SearchBar from "@/components/searchpage/bar";
+import SearchTip from "@/components/searchpage/tip";
+import SearchOption from "@/components/searchpage/option";
 
 const SearchPage = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<completeMoleculeProps[]>([]); // Simplified type usage
 
+    const options = [{ name: "CAS ID" }, { name: "Name" }, { name: "SMILE" }];
+
     const handleSearch = async () => {
-        if (query === "") {
+        if (query.trim() === "") {
             return; // Do not search if query is empty
         }
 
@@ -40,23 +38,29 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 w-full">
-            <div className="w-full p-4 bg-white shadow-md">
-                <SearchBarComponent
+        <div className="flex flex-col items-center py-12 space-y-4">
+            <SearchHeading />
+            <div className="flex flex-col gap-2 w-full max-w-md sm:max-w-lg md:max-w-2xl">
+                <SearchBar
                     query={query}
                     setQuery={setQuery}
                     handleSearch={handleSearch}
                 />
+                <SearchTip />
+                <div className="flex items-center gap-4">
+                    {options.map((option, index) => (
+                        <SearchOption key={index} name={option.name} />
+                    ))}
+                </div>
             </div>
-            <div className="w-full p-8 grid grid-cols-3 gap-4 ">
-                {results.length > 0 ? (
-                    results.map((molecule, idx) => (
-                        <MoleculeCard key={idx} {...molecule} />
-                    ))
-                ) : (
-                    <div className="flex items-center justify-center p-8">
-                        {/* <p className="text-xl">No results found.</p> */}
-                    </div>
+            <div
+                id="search-result"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4"
+            >
+                {results.map(
+                    (molecule: simplifiedMoleculeProps, index: number) => (
+                        <MoleculeCard key={index} {...molecule} />
+                    )
                 )}
             </div>
         </div>
