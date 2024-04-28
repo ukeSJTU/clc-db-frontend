@@ -1,12 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Kekule } from "kekule";
 import "kekule/theme/default";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const KekuleComponent = () => {
     const containerRef = useRef(null); // DOM container for the composer
     const composerRef = useRef(null); // Ref to store the composer instance
+    const [smiles, setSmiles] = useState(""); // State to store SMILES string
 
     useEffect(() => {
         // Initialize the Composer only once and store it in the ref
@@ -25,8 +27,9 @@ const KekuleComponent = () => {
         if (composerRef.current) {
             const chemDoc = composerRef.current.getChemObj();
             const mol = chemDoc.getChildAt(0); // Assuming the molecule is the first child
-            const smiles = Kekule.IO.saveFormatData(mol, "smi");
-            console.log("SMILES: ", smiles);
+            const newSmiles = Kekule.IO.saveFormatData(mol, "smi");
+            console.log("SMILES: ", newSmiles);
+            setSmiles(newSmiles); // Update state
         } else {
             console.log("Composer not initialized");
         }
@@ -38,7 +41,10 @@ const KekuleComponent = () => {
                 ref={containerRef}
                 style={{ width: "600px", height: "400px" }}
             ></div>
-            <button onClick={logMoleculeInfo}>Log Molecule Info</button>
+            <div className="flex">
+                <Button onClick={logMoleculeInfo}>Log Molecule Info</Button>
+                <p>{smiles}</p>
+            </div>
         </div>
     );
 };
