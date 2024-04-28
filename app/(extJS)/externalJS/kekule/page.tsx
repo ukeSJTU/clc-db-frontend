@@ -5,7 +5,11 @@ import { Kekule } from "kekule";
 import "kekule/theme/default";
 import React, { useEffect, useRef, useState } from "react";
 
-const KekuleComponent = () => {
+interface KekuleComponentProps {
+    onSmilesInput: (smiles: string) => void;
+}
+
+const KekuleComponent: React.FC<KekuleComponentProps> = ({ onSmilesInput }) => {
     const containerRef = useRef(null); // DOM container for the composer
     const composerRef = useRef(null); // Ref to store the composer instance
     const [smiles, setSmiles] = useState(""); // State to store SMILES string
@@ -30,6 +34,7 @@ const KekuleComponent = () => {
             const newSmiles = Kekule.IO.saveFormatData(mol, "smi");
             console.log("SMILES: ", newSmiles);
             setSmiles(newSmiles); // Update state
+            onSmilesInput(newSmiles); // Call the onSmilesInput prop with the SMILES string
         } else {
             console.log("Composer not initialized");
         }
