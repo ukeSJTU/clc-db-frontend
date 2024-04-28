@@ -8,12 +8,14 @@ interface SearchBarProps {
     query: string;
     setQuery: (query: string) => void;
     handleSearch: () => void;
+    onSmilesInput: (smiles: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
     query,
     setQuery,
     handleSearch,
+    onSmilesInput,
 }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -46,7 +48,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             {showDropdown && (
                 <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm z-50">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-                        <KekuleComponent />
+                        <KekuleComponent onSmilesInput={onSmilesInput} />
                         <Button
                             className="mt-4"
                             variant="ghost"
