@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, SquarePlus } from "lucide-react";
+import KekuleComponent from "@/app/(extJS)/externalJS/kekule/page";
 
 interface SearchBarProps {
     query: string;
@@ -14,8 +15,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setQuery,
     handleSearch,
 }) => {
+    const [showDropdown, setShowDropdown] = useState(false);
+
     return (
         <div className="relative flex items-center">
+            <Button
+                className="relative left-2"
+                variant="ghost"
+                onClick={() => setShowDropdown(!showDropdown)}
+            >
+                <SquarePlus className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+            </Button>
+
             <Input
                 value={query} // Binds input value to query state
                 onChange={(e) => setQuery(e.target.value)} // Updates state on input change
@@ -23,6 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 placeholder="Search documentation..."
                 type="search"
             />
+
             <Button
                 className="absolute right-2"
                 variant="ghost"
@@ -31,6 +43,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 {/* TODO: should implement handleSearch callback function */}
                 <SearchIcon className="w-5 h-5 text-gray-400 dark:text-gray-500" />
             </Button>
+            {showDropdown && (
+                <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm z-50">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+                        <KekuleComponent />
+                        <Button
+                            className="mt-4"
+                            variant="ghost"
+                            onClick={() => setShowDropdown(false)}
+                        >
+                            Close
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
