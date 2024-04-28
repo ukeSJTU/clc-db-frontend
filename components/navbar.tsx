@@ -45,7 +45,7 @@ const NavbarComponent = () => {
                                         </a>
                                     </NavigationMenuLink>
                                 </li>
-                                <ListItem href="/overview/card" title="Card">
+                                <ListItem href="/overview/card/1" title="Card">
                                     View all the molecules in the database in a
                                     card format.
                                 </ListItem>
