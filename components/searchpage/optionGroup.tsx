@@ -1,22 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SearchOption from "@/components/searchpage/option";
 
 const SearchOptionsGroup = ({
     options,
     setSearchOpt,
+    searchOpt,
 }: {
     options: { displayName: string; searchName: string }[];
     setSearchOpt: (opt: string) => void;
+    searchOpt: string;
 }) => {
     const [checkedOption, setCheckedOption] = useState<string | null>(null);
 
-    const handleOptionChange = (optionName: string) => {
-        console.log("Option changed to:", optionName);
-        setCheckedOption(optionName);
-        setSearchOpt(optionName);
+    useEffect(() => {
+        const selectedOption = options.find(
+            (option) => option.searchName === searchOpt
+        );
+        if (selectedOption) {
+            setCheckedOption(selectedOption.displayName);
+        } else {
+            setCheckedOption(null);
+        }
+    }, [searchOpt, options]);
+
+    const handleOptionChange = (displayName: string, searchName: string) => {
+        console.log("Option changed to:", displayName);
+        setCheckedOption(displayName);
+        setSearchOpt(searchName);
     };
 
     return (
@@ -26,8 +39,13 @@ const SearchOptionsGroup = ({
                     key={index}
                     displayName={option.displayName}
                     searchName={option.searchName}
-                    isChecked={option.searchName === checkedOption}
-                    onChange={handleOptionChange}
+                    isChecked={option.displayName === checkedOption}
+                    onChange={() =>
+                        handleOptionChange(
+                            option.displayName,
+                            option.searchName
+                        )
+                    }
                 />
             ))}
         </div>
