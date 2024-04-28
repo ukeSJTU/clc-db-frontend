@@ -23,15 +23,15 @@ const ResultsContainer = ({
 );
 
 const SearchPage = () => {
-    const [searchOpt, setSearchOpt] = useState("");
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState<overviewCardMoleculeProps[]>([]);
-
     const options = [
         { displayName: "CAS ID", searchName: "cas_id" },
         { displayName: "Name", searchName: "name" },
         { displayName: "SMILES", searchName: "smiles" },
     ];
+
+    const [searchOpt, setSearchOpt] = useState(options[0].searchName);
+    const [query, setQuery] = useState("");
+    const [results, setResults] = useState<overviewCardMoleculeProps[]>([]);
 
     const handleSmilesInput = (smiles: string) => {
         setQuery(smiles);
