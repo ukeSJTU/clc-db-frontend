@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SearchIcon, SquarePlus } from "lucide-react";
-import KekuleComponent from "@/app/(extJS)/externalJS/kekule/page";
+import KekuleComponent from "@/components/searchpage/kekule";
 
 interface SearchBarProps {
     query: string;
@@ -42,20 +42,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 variant="ghost"
                 onClick={handleSearch}
             >
-                {/* TODO: should implement handleSearch callback function */}
                 <SearchIcon className="w-5 h-5 text-gray-400 dark:text-gray-500" />
             </Button>
             {showDropdown && (
                 <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm z-50">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-                        <KekuleComponent onSmilesInput={onSmilesInput} />
-                        <Button
-                            className="mt-4"
-                            variant="ghost"
-                            onClick={() => setShowDropdown(false)}
-                        >
-                            Close
-                        </Button>
+                        <KekuleComponent
+                            onSmilesInput={onSmilesInput}
+                            onClose={() => setShowDropdown(false)} // Close the dropdown when onClose is called
+                        />
                     </div>
                 </div>
             )}
