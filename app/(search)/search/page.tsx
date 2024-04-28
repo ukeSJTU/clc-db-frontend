@@ -23,6 +23,11 @@ const SearchPage = () => {
         { displayName: "SMILES", searchName: "smiles" },
     ];
 
+    const handleSmilesInput = (smiles: string) => {
+        setQuery(smiles);
+        setSearchOpt("smiles");
+    };
+
     const handleSearch = async () => {
         if (query.trim() === "") {
             return; // Do not search if query is empty
@@ -68,12 +73,14 @@ const SearchPage = () => {
                 <SearchOptionsGroup
                     options={options}
                     setSearchOpt={setSearchOpt}
+                    searchOpt={searchOpt}
                 />
                 {/* This is the search bar component */}
                 <SearchBar
                     query={query}
                     setQuery={setQuery}
                     handleSearch={handleSearch}
+                    onSmilesInput={handleSmilesInput}
                 />
             </div>
             {/* This is where to display search results */}
