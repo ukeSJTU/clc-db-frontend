@@ -127,7 +127,7 @@ const NavbarComponent = () => {
                                             <p className="text-sm leading-tight text-muted-foreground">
                                                 ChemNexus also supports multiple
                                                 external JS library such as
-                                                ChemDoodle and JSmol. Play with
+                                                3Dmol and Kekulejs. Play with
                                                 them here.
                                             </p>
                                         </a>
@@ -141,8 +141,8 @@ const NavbarComponent = () => {
                                     for chemical structures in 3D.
                                 </ListItem>
                                 <ListItem
-                                    href="/externalJS/chemdoodle"
-                                    title="ChemDoodle"
+                                    href="/externalJS/kekule"
+                                    title="Kekule"
                                 >
                                     A pure JavaScript chemical graphics and
                                     cheminformatics library.
