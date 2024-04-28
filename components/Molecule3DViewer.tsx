@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Molecule3DViewerProps = {
     casId: string; // CAS Registry Number as a prop
@@ -10,6 +11,7 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
     const viewerRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if (!viewerRef.current || !data) return;
@@ -24,16 +26,20 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
                     viewer.setStyle({}, { stick: {} });
                     viewer.zoomTo();
                     viewer.render();
+                    setIsLoading(false);
                 } catch (e) {
                     setError("Failed to initialize the molecular viewer.");
+                    setIsLoading(false);
                 }
             })
             .catch(() => {
                 setError("3Dmol.js library could not be loaded.");
+                setIsLoading(false);
             });
     }, [data]);
 
     useEffect(() => {
+        setIsLoading(true);
         // Fetch the .sdf file based on the CAS ID
         const fetchData = async () => {
             try {
@@ -46,6 +52,7 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
             } catch (e) {
                 setData(null);
                 setError("Failed to load .sdf data.");
+                setIsLoading(false);
             }
         };
 
@@ -54,15 +61,22 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
 
     return (
         <div>
-            {error ? <div>Error: {error}</div> : null}
-            <div
-                style={{
-                    position: "relative",
-                    width: "400px",
-                    height: "400px",
-                }}
-                ref={viewerRef}
-            ></div>
+            {error ? (
+                <div>
+                    <Skeleton className="h-[400px]" />
+                </div>
+            ) : (
+                <div
+                    style={{
+                        position: "relative",
+                        width: "400px",
+                        height: "400px",
+                    }}
+                    ref={viewerRef}
+                >
+                    {isLoading && <Skeleton className="h-[400px]" />}
+                </div>
+            )}
         </div>
     );
 };
