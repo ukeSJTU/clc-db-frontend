@@ -1,16 +1,52 @@
 import React from "react";
-
+import { useRouter } from "next/navigation";
 import {
     simplifiedMoleculeProps,
     overviewCardMoleculeProps,
 } from "@/types/molecule";
-import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import ClassTypeBadge from "./class_type_badge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
+
+const escapeCsvField = (field: string): string => {
+    if (field.includes(",") || field.includes('"') || field.includes("\n")) {
+        return `"${field.replace(/"/g, '""')}"`;
+    }
+    return field;
+};
+const downloadMolecule = (molecule: overviewCardMoleculeProps) => {
+    const csvHeaders = [
+        "Name",
+        "CAS ID",
+        "Class Type(s)",
+        "Molecule Formula",
+        "Molecular Weight",
+    ];
+
+    const classTypes =
+        molecule.class_type.map((type) => type.name).join(", ") || "";
+    const data = [
+        escapeCsvField(molecule.name || ""),
+        escapeCsvField(molecule.cas_id || ""),
+        escapeCsvField(classTypes),
+        escapeCsvField(molecule.molecule_formula || ""),
+        molecule.molecular_weight ? molecule.molecular_weight.toFixed(3) : "",
+    ];
+
+    const csvContent = [csvHeaders, data]
+        .map((row) => row.join(","))
+        .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `${molecule.name || "molecule"}.csv`;
+    link.click();
+
+    URL.revokeObjectURL(url);
+};
 
 const MoleculeCard = ({
     name,
@@ -23,6 +59,17 @@ const MoleculeCard = ({
 
     const handleClick = () => {
         router.push(`/detail/${cas_id}`);
+    };
+
+    const handleDownload = () => {
+        const molecule = {
+            name,
+            cas_id,
+            class_type,
+            molecule_formula,
+            molecular_weight,
+        };
+        downloadMolecule(molecule);
     };
 
     return (
@@ -76,17 +123,28 @@ const MoleculeCard = ({
                         </div>
                     </div>
                 </CardContent>
-                <div className="px-4 py-3 bg-gray-50 text-right">
+                <div className="px-4 py-3 bg-gray-50 text-right flex gap-2 justify-between">
+                    {/* Download  Button */}
+                    <Button
+                        variant="outline"
+                        color="green"
+                        onClick={handleDownload}
+                    >
+                        Download
+                    </Button>
+
+                    {/* View Details Button */}
                     <Button
                         variant="outline"
                         color="blue"
                         onClick={handleClick}
                     >
-                        View Details
+                        View
                     </Button>
                 </div>
             </Card>
         </div>
     );
 };
+
 export default MoleculeCard;
