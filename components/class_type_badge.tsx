@@ -40,7 +40,7 @@ const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
         : classType.name;
 
     const handleBadgeClick = (name: string) => {
-        router.push(`/download/categories/${name}`);
+        router.push(`/download/classtypes/${name}`);
     };
 
     return (
