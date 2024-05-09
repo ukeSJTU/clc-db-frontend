@@ -3,32 +3,28 @@ import { useRouter } from "next/navigation";
 import { MoleculeProps } from "@/types/molecule";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import DownloadButton from "@/components/download_button";
 import ClassTypeBadge from "./class_type_badge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
 
-const MoleculeCard = ({
-    name,
-    cas_id,
-    class_type,
-    molecule_formula,
-    molecular_weight,
-}: MoleculeProps) => {
+const MoleculeCard = (molecule: MoleculeProps) => {
     const router = useRouter();
+    const sdfFiles = [`/all_sdfs/${molecule.cas_id}.sdf`];
 
     const handleClick = () => {
-        router.push(`/detail/${cas_id}`);
+        router.push(`/detail/${molecule.cas_id}`);
     };
 
     const handleDownload = () => {
-        const molecule = {
-            name,
-            cas_id,
-            class_type,
-            molecule_formula,
-            molecular_weight,
-        };
-        downloadMolecule(molecule);
+        // const molecule = {
+        //     name,
+        //     cas_id,
+        //     class_type,
+        //     molecule_formula,
+        //     molecular_weight,
+        // };
+        downloadMolecule("zip", [molecule], sdfFiles);
     };
 
     return (
@@ -40,16 +36,16 @@ const MoleculeCard = ({
                 >
                     <div className="space-y-1">
                         <CardTitle className="text-lg font-semibold ">
-                            {name}
+                            {molecule.name}
                         </CardTitle>
                         <p className="text-sm text-gray-500">
-                            CAS ID: {cas_id}
+                            CAS ID: {molecule.cas_id}
                         </p>
                     </div>
                     <div className="flex items-center space-x-3">
                         <p className="font-semibold">Category:</p>
                         <div className="flex flex-wrap">
-                            {class_type.map((type, index) => (
+                            {molecule.class_type.map((type, index) => (
                                 <ClassTypeBadge key={index} classType={type} />
                             ))}
                         </div>
@@ -61,15 +57,15 @@ const MoleculeCard = ({
                             <p className="text-sm text-gray-500">
                                 Molecule Formula
                             </p>
-                            <p>{molecule_formula}</p>
+                            <p>{molecule.molecule_formula}</p>
                         </div>
                         <div className="space-y-2">
                             <p className="text-sm text-gray-500">
                                 Molecular Weight
                             </p>
                             <p>
-                                {molecular_weight !== undefined
-                                    ? molecular_weight.toFixed(3)
+                                {molecule.molecular_weight !== undefined
+                                    ? molecule.molecular_weight.toFixed(3)
                                     : "N/A"}
                             </p>
                         </div>
@@ -78,28 +74,24 @@ const MoleculeCard = ({
                                 3D Structure
                             </p>
                             <div className="h-[200px] rounded-lg">
-                                <Molecule3DViewer casId={cas_id} />
+                                <Molecule3DViewer casId={molecule.cas_id} />
                             </div>
                         </div>
                     </div>
                 </CardContent>
                 <div className="px-4 py-3 bg-gray-50 text-right flex gap-2 justify-between">
                     {/* Download  Button */}
-                    <Button
-                        variant="outline"
-                        color="green"
-                        onClick={handleDownload}
-                    >
-                        Download
-                    </Button>
-
+                    <DownloadButton
+                        molecules={[molecule]}
+                        sdfFiles={sdfFiles}
+                    />
                     {/* View Details Button */}
                     <Button
                         variant="outline"
                         color="blue"
                         onClick={handleClick}
                     >
-                        View
+                        Detail
                     </Button>
                 </div>
             </Card>
