@@ -114,15 +114,9 @@ const MoleculeCard = ({
                             <p className="text-sm text-gray-500">
                                 3D Structure
                             </p>
-                            {/* TODO: some molecules don't have corresponding [cas-id].sdf 
-                                file to generate Molecule3DViewer component, 
-                                so either retrive the pubchem cid and use fallback component 
-                                or simply use Skeleton as placeholder */}
-                            {/* <Skeleton className="h-[200px] rounded-lg" /> */}
                             <div className="h-[200px] rounded-lg">
                                 <Molecule3DViewer casId={cas_id} />
                             </div>
-                            {/* <Molecule3DViewer casId={cas_id} /> */}
                         </div>
                     </div>
                 </CardContent>
