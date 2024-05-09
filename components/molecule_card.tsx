@@ -3,7 +3,11 @@ import { useRouter } from "next/navigation";
 import { MoleculeProps } from "@/types/molecule";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import DownloadButton from "@/components/download_button";
+import {
+    SelectDownloadButton,
+    ZipDownloadButton,
+    BulkMoleculeDownloadButton,
+} from "@/components/download_button";
 import ClassTypeBadge from "./class_type_badge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
@@ -81,7 +85,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                 </CardContent>
                 <div className="px-4 py-3 bg-gray-50 text-right flex gap-2 justify-between">
                     {/* Download  Button */}
-                    <DownloadButton
+                    <ZipDownloadButton
                         molecules={[molecule]}
                         sdfFiles={sdfFiles}
                     />
