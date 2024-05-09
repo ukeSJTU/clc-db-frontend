@@ -8,6 +8,7 @@ import {
     ZipDownloadButton,
     BulkMoleculeDownloadButton,
 } from "@/components/download_button";
+import Image from "next/image";
 import ClassTypeBadge from "./class_type_badge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
@@ -75,11 +76,26 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                         </div>
                         <div className="space-y-2 col-span-2">
                             <p className="text-sm text-gray-500">
-                                3D Structure
+                                2/3D Structure
                             </p>
-                            <div className="h-[200px] rounded-lg">
-                                <Molecule3DViewer casId={molecule.cas_id} />
+
+                            <div
+                                style={{
+                                    width: "230px",
+                                    height: "250px",
+                                    position: "relative",
+                                }}
+                            >
+                                <Image
+                                    alt="2D Image"
+                                    src={`https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${molecule.pubchem_cid}&width=500&height=500`}
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
                             </div>
+                            {/* <div className="h-[200px] rounded-lg">
+                                <Molecule3DViewer casId={molecule.cas_id} />
+                            </div> */}
                         </div>
                     </div>
                 </CardContent>

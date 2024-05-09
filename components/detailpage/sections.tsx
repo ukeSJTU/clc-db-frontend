@@ -1,6 +1,7 @@
 import { MoleculeProps } from "@/types/molecule";
 import Link from "next/link";
 
+import Molecule3DViewer from "@/components/Molecule3DViewer";
 import ClassTypeBadge from "@/components/class_type_badge";
 
 import {
@@ -73,7 +74,7 @@ export const sections = {
         },
         content: (molecule: MoleculeProps) => {
             const moleculeId = molecule.pubchem_url?.split("/")?.pop() ?? null;
-            console.log("Molecule ID:", moleculeId);
+            // console.log("Molecule ID:", moleculeId);
 
             return (
                 <>
@@ -90,6 +91,22 @@ export const sections = {
                 </>
             );
         },
+    },
+    structure: {
+        title: "3D Structure",
+        sidenav: {
+            id: "structure",
+            label: "3D Structure",
+            icon: <ViewIcon className="h-5 w-5" />,
+        },
+        content: (molecule: MoleculeProps) => (
+            <>
+                <h3 className="text-xl font-semibold">3D Structure</h3>
+                <div className="h-[200px] rounded-lg">
+                    <Molecule3DViewer casId={molecule.cas_id} />
+                </div>
+            </>
+        ),
     },
     smile: {
         title: "SMILE",
