@@ -1,14 +1,14 @@
 // app/categories/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import api from "@/utils/api";
-import ClassTypeBadge from "@/components/class_type_badge";
+import { MoleculeProps } from "@/types/molecule";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-interface Category {
-    id: number;
-    name: string;
-}
+type ClassTypeGroup = {
+    class_type: string;
+    molecules: MoleculeProps[];
+};
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -23,6 +23,27 @@ const CategoriesPage = () => {
 
         fetchCategories();
     }, []);
+
+    const handleDownload = async (
+        molecules: MoleculeProps[],
+        class_type: string
+    ): Promise<void> => {
+        // Prepare the molecule data for download
+        const jsonString = JSON.stringify({ class_type, molecules }, null, 2);
+        const blob = new Blob([jsonString], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        // Create and trigger a download action
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${class_type}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Clean up the URL
+        URL.revokeObjectURL(url);
+    };
 
     return (
         <div className="grid grid-cols-2 gap-4">

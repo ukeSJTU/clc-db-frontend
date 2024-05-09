@@ -1,9 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-import {
-    simplifiedMoleculeProps,
-    overviewCardMoleculeProps,
-} from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ClassTypeBadge from "./class_type_badge";
@@ -16,7 +13,7 @@ const MoleculeCard = ({
     class_type,
     molecule_formula,
     molecular_weight,
-}: overviewCardMoleculeProps) => {
+}: MoleculeProps) => {
     const router = useRouter();
 
     const handleClick = () => {
@@ -70,7 +67,11 @@ const MoleculeCard = ({
                             <p className="text-sm text-gray-500">
                                 Molecular Weight
                             </p>
-                            <p>{molecular_weight.toFixed(3)}</p>
+                            <p>
+                                {molecular_weight !== undefined
+                                    ? molecular_weight.toFixed(3)
+                                    : "N/A"}
+                            </p>
                         </div>
                         <div className="space-y-2 col-span-2">
                             <p className="text-sm text-gray-500">

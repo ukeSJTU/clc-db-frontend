@@ -4,11 +4,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { completeMoleculeProps } from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import MoleculeDetailSheet from "@/components/detailpage/detail_molecule";
 
 const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
-    const [molecule, setResults] = useState<completeMoleculeProps[]>([]);
+    const [molecule, setResults] = useState<MoleculeProps[]>([]);
 
     React.useEffect(() => {
         const handleSearch = async () => {

@@ -1,8 +1,8 @@
-import { completeMoleculeProps } from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import DetailPageScrollBar from "@/components/detailpage/detail_scrollbar";
 import { sections } from "./sections";
 
-const MoleculeDetailSheet = (molecule: completeMoleculeProps) => {
+const MoleculeDetailSheet = (molecule: MoleculeProps) => {
     return (
         <div className="grid grid-cols-[min-content_1fr] gap-4 lg:gap-8 p-4 lg:p-8">
             {/* Scroll bar */}
