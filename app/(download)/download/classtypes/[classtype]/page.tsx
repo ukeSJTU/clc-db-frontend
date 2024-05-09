@@ -1,31 +1,18 @@
-// app/categories/[classtype]/page.tsx
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MoleculeCard from "@/components/molecule_card";
 import { PaginationComponent } from "@/components/pagination";
-import { overviewCardMoleculeProps } from "@/types/molecule";
-import ClassTypeBadge from "@/components/class_type_badge";
+import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
-import downloadMolecules from "@/lib/download";
-
-interface Molecule {
-    name: string;
-    cas_id: string;
-    class_type: { name: string }[];
-    molecule_formula: string;
-    molecular_weight: number;
-}
+import { Button } from "@/components/ui/button";
+import downloadFiles from "@/lib/download";
 
 const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
-    const [molecules, setMolecules] = useState<Molecule[]>([]);
+    const [molecules, setMolecules] = useState<MoleculeProps[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
-
-    const router = useRouter();
-    const searchParams = useSearchParams();
 
     useEffect(() => {
         const fetchMolecules = async () => {
@@ -41,10 +28,25 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
         fetchMolecules();
     }, [params.classtype, page, pageSize]);
 
+    const handleDownloadAll = () => {
+        // Generate paths for all SDF files
+        const sdfFiles = molecules.map(
+            (molecule) => `/all_sdfs/${molecule.cas_id}.sdf`
+        );
+
+        // Use the `downloadFiles` function to download all data in a ZIP file
+        downloadFiles("zip", molecules, sdfFiles);
+    };
+
     return (
         <div className="flex flex-col gap-4">
             <div className="mt-4 flex justify-between items-center">
-                {/* Right: Pagination Component */}
+                {/* Download All Button */}
+                <Button onClick={handleDownloadAll} variant="outline">
+                    Download All
+                </Button>
+
+                {/* Pagination Component */}
                 <PaginationComponent
                     page={page}
                     setPage={setPage}
