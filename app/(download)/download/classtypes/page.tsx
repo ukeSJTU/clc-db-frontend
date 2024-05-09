@@ -1,9 +1,9 @@
-// app/categories/page.tsx
 "use client";
 
-import { MoleculeProps } from "@/types/molecule";
+import { Category, MoleculeProps } from "@/types/molecule";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "@/utils/api";
+import ClassTypeBadge from "@/components/class_type_badge";
 
 type ClassTypeGroup = {
     class_type: string;

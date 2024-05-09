@@ -1,8 +1,11 @@
 import { MoleculeProps } from "@/types/molecule";
 import DetailPageScrollBar from "@/components/detailpage/detail_scrollbar";
+import DownloadButton from "@/components/download_button";
 import { sections } from "./sections";
 
 const MoleculeDetailSheet = (molecule: MoleculeProps) => {
+    const sdfFiles = [`/all_sdfs/${molecule.cas_id}.sdf`];
+
     return (
         <div className="grid grid-cols-[min-content_1fr] gap-4 lg:gap-8 p-4 lg:p-8">
             {/* Scroll bar */}
@@ -11,6 +14,14 @@ const MoleculeDetailSheet = (molecule: MoleculeProps) => {
             </div>
             {/* Main content */}
             <div className="overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 lg:p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+                {/* Download Button positioned above the main content */}
+                <div className="mb-4 flex justify-end">
+                    <DownloadButton
+                        molecules={[molecule]}
+                        sdfFiles={sdfFiles}
+                    />
+                </div>
+                {/* Sections displaying molecule details */}
                 <div className="space-y-8">
                     {Object.entries(sections).map(([sectionId, section]) => (
                         <section key={sectionId} id={sectionId}>
