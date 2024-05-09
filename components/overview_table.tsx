@@ -3,8 +3,7 @@ import { useRouter } from "next/navigation";
 import { MoleculeProps } from "@/types/molecule";
 import ClassTypeBadge from "@/components/class_type_badge";
 import { Button } from "@/components/ui/button";
-import DownloadButton from "./download_button";
-import downloadMolecule from "@/lib/download";
+import { ZipDownloadButton } from "./download_button";
 
 type MoleculeTableProps = {
     molecules: MoleculeProps[];
@@ -63,9 +62,9 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                <div className="px-4 py-3 text-right flex gap-2 justify-between">
+                                <div className="flex flex-row justify-start space-x-2">
                                     {/* Download  Button */}
-                                    <DownloadButton
+                                    <ZipDownloadButton
                                         molecules={[molecule]}
                                         sdfFiles={[
                                             `/all_sdfs/${molecule.cas_id}.sdf`,
