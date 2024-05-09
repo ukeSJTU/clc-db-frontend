@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 
 interface ClassTypeBadgeProps {
     classType: { name: string }; // Expecting a single classType object
@@ -32,15 +33,21 @@ const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
     classType,
     abbreviate = true,
 }) => {
+    const router = useRouter();
     const colorClass = dynamicColor(classType.name);
     const displayText = abbreviate
         ? abbreviateName(classType.name)
         : classType.name;
 
+    const handleBadgeClick = (name: string) => {
+        router.push(`/download/categories/${name}`);
+    };
+
     return (
         <Badge
             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass}`}
             title={classType.name}
+            onClick={() => handleBadgeClick(classType.name)}
         >
             {displayText}
         </Badge>
