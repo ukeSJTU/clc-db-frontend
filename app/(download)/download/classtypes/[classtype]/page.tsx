@@ -8,6 +8,7 @@ import { PaginationComponent } from "@/components/pagination";
 import { overviewCardMoleculeProps } from "@/types/molecule";
 import ClassTypeBadge from "@/components/class_type_badge";
 import api from "@/utils/api";
+import downloadMolecules from "@/lib/download";
 
 interface Molecule {
     name: string;
@@ -43,18 +44,6 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
     return (
         <div className="flex flex-col gap-4">
             <div className="mt-4 flex justify-between items-center">
-                <div className="flex flex-row justify-start">
-                    {/* Left: Title or additional information */}
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 px-3">
-                        Searching for Molecules of:
-                    </h2>
-                    <ClassTypeBadge
-                        classType={{
-                            name: decodeURIComponent(params.classtype),
-                        }}
-                        abbreviate={false}
-                    />
-                </div>
                 {/* Right: Pagination Component */}
                 <PaginationComponent
                     page={page}
