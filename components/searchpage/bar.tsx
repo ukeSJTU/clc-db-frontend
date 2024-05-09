@@ -33,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 value={query} // Binds input value to query state
                 onChange={(e) => setQuery(e.target.value)} // Updates state on input change
                 className="flex-1 pr-12 pl-8"
-                placeholder="Search documentation..."
+                placeholder="Search molecules..."
                 type="search"
             />
 

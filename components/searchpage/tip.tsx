@@ -1,7 +1,8 @@
 const SearchTip = () => {
     return (
         <small className="text-xs text-gray-500 dark:text-gray-400">
-            Tip: Tick multiple options to search by multiple fields.
+            Tip: Click the plus button to use kekulejs for drawing and searching
+            by structures.
         </small>
     );
 };
