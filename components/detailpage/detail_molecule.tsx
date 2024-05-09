@@ -1,6 +1,6 @@
 import { MoleculeProps } from "@/types/molecule";
 import DetailPageScrollBar from "@/components/detailpage/detail_scrollbar";
-import DownloadButton from "@/components/download_button";
+import { SelectDownloadButton } from "@/components/download_button";
 import { sections } from "./sections";
 
 const MoleculeDetailSheet = (molecule: MoleculeProps) => {
@@ -16,7 +16,7 @@ const MoleculeDetailSheet = (molecule: MoleculeProps) => {
             <div className="overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 lg:p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
                 {/* Download Button positioned above the main content */}
                 <div className="mb-4 flex justify-end">
-                    <DownloadButton
+                    <SelectDownloadButton
                         molecules={[molecule]}
                         sdfFiles={sdfFiles}
                     />
