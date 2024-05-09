@@ -36,12 +36,13 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
 
     return (
         <div className="max-w-6xl mx-auto p-4">
-            {/* Molecule Table */}
-            <div className="shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-                <MoleculeTable molecules={molecules} />
-            </div>
-            {/* Pagination Component */}
-            <div className="mt-4 flex justify-center">
+            {/* Header with Title and Pagination */}
+            <div className="mt-4 flex justify-between items-center">
+                {/* Left: Title or additional information */}
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                    Molecule Overview
+                </h2>
+                {/* Right: Pagination Component */}
                 <PaginationComponent
                     page={page}
                     setPage={setPage}
@@ -49,6 +50,11 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
                     setPageSize={setPageSize}
                     totalPages={totalPages}
                 />
+            </div>
+
+            {/* Main Content */}
+            <div className="shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+                <MoleculeTable molecules={molecules} />
             </div>
         </div>
     );
