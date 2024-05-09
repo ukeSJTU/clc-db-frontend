@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import MoleculeCard from "@/components/molecule_card";
+import { PaginationComponent } from "@/components/pagination";
 import { overviewCardMoleculeProps } from "@/types/molecule";
 import SearchOptionsGroup from "@/components/searchpage/optionGroup";
 import SearchHeading from "@/components/searchpage/heading";
@@ -31,32 +32,48 @@ const SearchPage = () => {
 
     const [searchOpt, setSearchOpt] = useState(options[0].searchName);
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<overviewCardMoleculeProps[]>([]);
+    const [results, setResults] = useState<overviewCardMoleculeProps[]>([]); // Initialize as an empty array
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10); // Default page size
+    const [totalPages, setTotalPages] = useState(0);
 
     const handleSmilesInput = (smiles: string) => {
         setQuery(smiles);
         setSearchOpt("smiles");
     };
 
-    const handleSearch = async () => {
+    const handleSearch = useCallback(async () => {
         if (query.trim() === "") {
-            return; // Do not search if query is empty
+            return; // Do not search if the query is empty
         }
-
-        console.log(
-            "Searching for:",
-            `/search/molecules?${searchOpt}=${query}`
-        );
 
         try {
             const response = await api.get(
-                `/search/molecules?${searchOpt}=${query}`
+                `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
             );
-            setResults(response.data);
+
+            // Ensure the response is an object and has a "results" property that is an array
+            const { results: fetchedResults = [], count = 0 } =
+                response.data || {};
+            setResults(fetchedResults);
+            setTotalPages(Math.ceil(count / pageSize));
         } catch (error) {
             console.error("Failed to fetch molecules", error);
-            setResults([]);
+            setResults([]); // Fallback to empty results on error
         }
+    }, [query, searchOpt, page, pageSize]);
+
+    // Pagination change handler to update page and trigger the search
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+        handleSearch();
+    };
+
+    // Page size change handler to update the page size and reset to page 1
+    const handlePageSizeChange = (newPageSize: number) => {
+        setPageSize(newPageSize);
+        setPage(1);
+        handleSearch();
     };
 
     return (
@@ -76,6 +93,17 @@ const SearchPage = () => {
                     onSmilesInput={handleSmilesInput}
                 />
             </div>
+            {/* Pagination Controls */}
+            <div className="flex justify-end w-full max-w-6xl px-4">
+                <PaginationComponent
+                    page={page}
+                    setPage={handlePageChange}
+                    pageSize={pageSize}
+                    setPageSize={handlePageSizeChange}
+                    totalPages={totalPages}
+                />
+            </div>
+            {/* Results */}
             <ResultsContainer>
                 {results.map(
                     (molecule: overviewCardMoleculeProps, index: number) => (
