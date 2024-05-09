@@ -12,16 +12,26 @@ import api from "@/utils/api";
 
 const ResultsContainer = ({
     children,
+    isEmpty = false,
 }: Readonly<{
     children: React.ReactNode;
-}>) => (
-    <div
-        id="search-result"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4"
-    >
-        {children}
-    </div>
-);
+    isEmpty?: boolean;
+}>) => {
+    return (
+        <div
+            id="search-result"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4"
+        >
+            {isEmpty ? (
+                <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
+                    No results found.
+                </div>
+            ) : (
+                children
+            )}
+        </div>
+    );
+};
 
 const SearchPage = () => {
     const options = [
@@ -36,6 +46,7 @@ const SearchPage = () => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10); // Default page size
     const [totalPages, setTotalPages] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSmilesInput = (smiles: string) => {
         setQuery(smiles);
@@ -44,9 +55,12 @@ const SearchPage = () => {
 
     const handleSearch = useCallback(async () => {
         if (query.trim() === "") {
-            return; // Do not search if the query is empty
+            setResults([]); // Clear results if the query is empty
+            setTotalPages(0);
+            return;
         }
 
+        setIsLoading(true); // Start loading
         try {
             const response = await api.get(
                 `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
@@ -60,10 +74,13 @@ const SearchPage = () => {
         } catch (error) {
             console.error("Failed to fetch molecules", error);
             setResults([]); // Fallback to empty results on error
+            setTotalPages(0);
+        } finally {
+            setIsLoading(false); // Stop loading
         }
     }, [query, searchOpt, page, pageSize]);
 
-    // Pagination change handler to update page and trigger the search
+    // Pagination change handler to update the page and trigger the search
     const handlePageChange = (newPage: number) => {
         setPage(newPage);
         handleSearch();
@@ -104,11 +121,18 @@ const SearchPage = () => {
                 />
             </div>
             {/* Results */}
-            <ResultsContainer>
-                {results.map(
-                    (molecule: overviewCardMoleculeProps, index: number) => (
-                        <MoleculeCard key={index} {...molecule} />
+            <ResultsContainer isEmpty={!isLoading && results.length === 0}>
+                {!isLoading ? (
+                    results.map(
+                        (
+                            molecule: overviewCardMoleculeProps,
+                            index: number
+                        ) => <MoleculeCard key={index} {...molecule} />
                     )
+                ) : (
+                    <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
+                        Loading results...
+                    </div>
                 )}
             </ResultsContainer>
         </div>
