@@ -1,19 +1,13 @@
 import React from "react";
 import { useRouter } from "next/navigation";
+import { MoleculeProps } from "@/types/molecule";
 import ClassTypeBadge from "@/components/class_type_badge";
 import { Button } from "@/components/ui/button";
+import DownloadButton from "./download_button";
 import downloadMolecule from "@/lib/download";
 
-type Molecule = {
-    name: string;
-    cas_id: string;
-    class_type: { name: string }[];
-    molecule_formula: string;
-    molecular_weight: number;
-};
-
 type MoleculeTableProps = {
-    molecules: Molecule[];
+    molecules: MoleculeProps[];
 };
 
 const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
@@ -21,10 +15,6 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
 
     const handleClick = (cas_id: string) => {
         router.push(`/detail/${cas_id}`);
-    };
-
-    const handleDownload = (molecule: Molecule) => {
-        downloadMolecule(molecule);
     };
 
     return (
@@ -73,16 +63,14 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                <div className="flex gap-2">
-                                    {/* Download Button */}
-                                    <Button
-                                        variant="outline"
-                                        color="green"
-                                        onClick={() => handleDownload(molecule)}
-                                    >
-                                        Download
-                                    </Button>
-
+                                <div className="px-4 py-3 text-right flex gap-2 justify-between">
+                                    {/* Download  Button */}
+                                    <DownloadButton
+                                        molecules={[molecule]}
+                                        sdfFiles={[
+                                            `/all_sdfs/${molecule.cas_id}.sdf`,
+                                        ]}
+                                    />
                                     {/* View Details Button */}
                                     <Button
                                         variant="outline"
@@ -91,7 +79,7 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                                             handleClick(molecule.cas_id)
                                         }
                                     >
-                                        View
+                                        Detail
                                     </Button>
                                 </div>
                             </td>
