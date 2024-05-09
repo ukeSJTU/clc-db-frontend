@@ -49,7 +49,10 @@ const NavbarComponent = () => {
                                     View all the molecules in the database in a
                                     card format.
                                 </ListItem>
-                                <ListItem href="/overview/table" title="Table">
+                                <ListItem
+                                    href="/overview/table/1"
+                                    title="Table"
+                                >
                                     View the table of all the molecules in the
                                     database.
                                 </ListItem>
