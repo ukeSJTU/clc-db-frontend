@@ -1,12 +1,9 @@
 "use client";
 
-import PaginationComponent from "@/components/dynamic_pagination";
+import { PaginationComponent } from "@/components/pagination";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import MoleculeCard from "@/components/molecule_card";
-
 import { overviewCardMoleculeProps } from "@/types/molecule";
-
 import api from "@/utils/api";
 
 const fetchMoleculeData = async (page: number, pageSize: number) => {
@@ -38,36 +35,31 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
         fetchData();
     }, [page, pageSize]);
 
-    // const handlePageSizeChange = (
-    //     event: React.ChangeEvent<HTMLInputElement>
-    // ) => {
-    //     const newSize = parseInt(event.target.value, 10);
-    //     if (!isNaN(newSize) && newSize > 0) {
-    //         setPageSize(newSize);
-    //     } else {
-    //         setPageSize(10); // Default to 10 if the input is invalid or zero
-    //     }
-    // };
-
     return (
-        <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4">
-                {molecules.map(
-                    (molecule: overviewCardMoleculeProps, index: number) => (
-                        <MoleculeCard key={index} {...molecule} />
-                    )
-                )}
-            </div>
-
-            <div className="mt-4 flex justify-center">
+        <div className="max-w-6xl mx-auto p-4">
+            {/* Header with Title and Pagination */}
+            <div className="mt-4 flex justify-between items-center">
+                {/* Left: Title or additional information */}
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                    Molecule Overview
+                </h2>
+                {/* Right: Pagination Component */}
                 <PaginationComponent
                     page={page}
                     setPage={setPage}
                     pageSize={pageSize}
                     setPageSize={setPageSize}
                     totalPages={totalPages}
-                    baseUrl="/overview/card"
                 />
+            </div>
+
+            {/* Main Content */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+                {molecules.map(
+                    (molecule: overviewCardMoleculeProps, index: number) => (
+                        <MoleculeCard key={index} {...molecule} />
+                    )
+                )}
             </div>
         </div>
     );
