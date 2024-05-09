@@ -39,11 +39,16 @@ const generateCsvContent = (molecules: MoleculeProps[]) => {
 
 const downloadCsv = (molecules: MoleculeProps[]) => {
     const csvContent = generateCsvContent(molecules);
+    const defaultFileName =
+        molecules.length === 1 ? molecules[0].cas_id : "molecules";
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    saveAs(blob, "molecules.csv");
+    saveAs(blob, `${defaultFileName}.csv`);
 };
 
-const downloadSdf = async (sdfFiles: string[]) => {
+const downloadSdf = async (
+    sdfFiles: string[],
+    defaultFileName: string = "molecules_sdf"
+) => {
     const zip = new JSZip();
 
     for (const [index, sdfUrl] of sdfFiles.entries()) {
@@ -53,11 +58,15 @@ const downloadSdf = async (sdfFiles: string[]) => {
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
-    saveAs(blob, "molecules_sdf.zip");
+    saveAs(blob, `${defaultFileName}.zip`);
 };
 
 const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
     const zip = new JSZip();
+
+    // Use CAS ID of the first molecule or a generic name if more than one
+    const defaultFileName =
+        molecules.length === 1 ? molecules[0].cas_id : "molecules_data";
 
     // Add CSV file
     const csvContent = generateCsvContent(molecules);
@@ -71,7 +80,7 @@ const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
-    saveAs(blob, "molecules_data.zip");
+    saveAs(blob, `${defaultFileName}.zip`);
 };
 
 const downloadFiles = (
@@ -79,12 +88,15 @@ const downloadFiles = (
     molecules: MoleculeProps[],
     sdfFiles: string[]
 ) => {
+    const defaultFileName =
+        molecules.length === 1 ? molecules[0].cas_id : "molecules";
+
     switch (type) {
         case "csv":
             downloadCsv(molecules);
             break;
         case "sdf":
-            downloadSdf(sdfFiles);
+            downloadSdf(sdfFiles, defaultFileName);
             break;
         case "zip":
             downloadBoth(molecules, sdfFiles);
