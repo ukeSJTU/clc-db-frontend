@@ -1,4 +1,8 @@
+// lib/download.ts
+
 import { MoleculeProps } from "@/types/molecule";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 const escapeCsvField = (field: string): string => {
     if (field.includes(",") || field.includes('"') || field.includes("\n")) {
@@ -7,7 +11,7 @@ const escapeCsvField = (field: string): string => {
     return field;
 };
 
-const downloadMolecule = (molecule: MoleculeProps) => {
+const generateCsvContent = (molecules: MoleculeProps[]) => {
     const csvHeaders = [
         "Name",
         "CAS ID",
@@ -16,28 +20,78 @@ const downloadMolecule = (molecule: MoleculeProps) => {
         "Molecular Weight",
     ];
 
-    const classTypes =
-        molecule.class_type.map((type) => type.name).join(", ") || "";
-    const data = [
-        escapeCsvField(molecule.name || ""),
-        escapeCsvField(molecule.cas_id || ""),
-        escapeCsvField(classTypes),
-        escapeCsvField(molecule.molecule_formula || ""),
-        molecule.molecular_weight ? molecule.molecular_weight.toFixed(3) : "",
-    ];
+    const csvRows = molecules.map((molecule) => {
+        const classTypes =
+            molecule.class_type.map((type) => type.name).join(", ") || "";
+        return [
+            escapeCsvField(molecule.name || ""),
+            escapeCsvField(molecule.cas_id || ""),
+            escapeCsvField(classTypes),
+            escapeCsvField(molecule.molecule_formula || ""),
+            molecule.molecular_weight
+                ? molecule.molecular_weight.toFixed(3)
+                : "",
+        ];
+    });
 
-    const csvContent = [csvHeaders, data]
-        .map((row) => row.join(","))
-        .join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.download = `${molecule.name || "molecule"}.csv`;
-    link.click();
-
-    URL.revokeObjectURL(url);
+    return [csvHeaders, ...csvRows].map((row) => row.join(",")).join("\n");
 };
 
-export default downloadMolecule;
+const downloadCsv = (molecules: MoleculeProps[]) => {
+    const csvContent = generateCsvContent(molecules);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    saveAs(blob, "molecules.csv");
+};
+
+const downloadSdf = async (sdfFiles: string[]) => {
+    const zip = new JSZip();
+
+    for (const [index, sdfUrl] of sdfFiles.entries()) {
+        const response = await fetch(sdfUrl);
+        const text = await response.text();
+        zip.file(`molecule_${index + 1}.sdf`, text);
+    }
+
+    const blob = await zip.generateAsync({ type: "blob" });
+    saveAs(blob, "molecules_sdf.zip");
+};
+
+const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
+    const zip = new JSZip();
+
+    // Add CSV file
+    const csvContent = generateCsvContent(molecules);
+    zip.file("molecules.csv", csvContent);
+
+    // Add SDF files
+    for (const [index, sdfUrl] of sdfFiles.entries()) {
+        const response = await fetch(sdfUrl);
+        const text = await response.text();
+        zip.file(`molecule_${index + 1}.sdf`, text);
+    }
+
+    const blob = await zip.generateAsync({ type: "blob" });
+    saveAs(blob, "molecules_data.zip");
+};
+
+const downloadFiles = (
+    type: string,
+    molecules: MoleculeProps[],
+    sdfFiles: string[]
+) => {
+    switch (type) {
+        case "csv":
+            downloadCsv(molecules);
+            break;
+        case "sdf":
+            downloadSdf(sdfFiles);
+            break;
+        case "zip":
+            downloadBoth(molecules, sdfFiles);
+            break;
+        default:
+            console.error("Unknown download type:", type);
+    }
+};
+
+export default downloadFiles;
