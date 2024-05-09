@@ -2,7 +2,7 @@
 
 // components/MoleculeDetailPage.tsx
 import React, { useState } from "react";
-import axios from "axios";
+import api from "@/utils/api";
 
 import { MoleculeProps } from "@/types/molecule";
 import MoleculeDetailSheet from "@/components/detailpage/detail_molecule";
@@ -13,10 +13,11 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
     React.useEffect(() => {
         const handleSearch = async () => {
             try {
-                const response = await axios.get(
-                    `http://www.ukehome.top/api/search/molecules/?search=${params.casid}`
+                const response = await api.get(
+                    `/search/molecules?cas_id=${params.casid}`
                 );
-                setResults(response.data);
+                // console.log(response.data);
+                setResults(response.data.results);
             } catch (error) {
                 console.error("Failed to fetch molecules", error);
                 setResults([]);
