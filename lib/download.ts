@@ -94,7 +94,7 @@ const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
                 continue;
             }
             const text = await response.text();
-            zip.file(`molecule_${index + 1}.sdf`, text);
+            zip.file(`${molecules[index].cas_id}.sdf`, text);
         } catch {
             missingFiles.push(`Missing SDF: ${sdfUrl}`);
         }
