@@ -1,6 +1,5 @@
 "use client";
 
-// components/MoleculeDetailPage.tsx
 import React, { useState } from "react";
 import api from "@/utils/api";
 
