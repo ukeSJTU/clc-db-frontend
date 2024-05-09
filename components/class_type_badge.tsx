@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 
 interface ClassTypeBadgeProps {
     classType: { name: string }; // Expecting a single classType object
+    abbreviate?: boolean; // Optional prop to control if the name should be abbreviated
 }
 
 const dynamicColor = (typeName: string) => {
@@ -24,19 +25,24 @@ const abbreviateName = (name: string) => {
         .split(/\s+/)
         .map((word) => word[0])
         .join("")
-        .toUpperCase(); // Create an abbreviation by taking first letters of each word
+        .toUpperCase(); // Create an abbreviation by taking the first letter of each word
 };
 
-const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({ classType }) => {
+const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
+    classType,
+    abbreviate = true,
+}) => {
     const colorClass = dynamicColor(classType.name);
-    const abbreviation = abbreviateName(classType.name);
+    const displayText = abbreviate
+        ? abbreviateName(classType.name)
+        : classType.name;
 
     return (
         <Badge
             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass}`}
             title={classType.name}
         >
-            {abbreviation}
+            {displayText}
         </Badge>
     );
 };
