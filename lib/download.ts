@@ -70,13 +70,13 @@ const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
 
     // Add CSV file
     const csvContent = generateCsvContent(molecules);
-    zip.file("molecules.csv", csvContent);
+    zip.file(`${defaultFileName}.csv`, csvContent);
 
     // Add SDF files
     for (const [index, sdfUrl] of sdfFiles.entries()) {
         const response = await fetch(sdfUrl);
         const text = await response.text();
-        zip.file(`molecule_${index + 1}.sdf`, text);
+        zip.file(`${defaultFileName}.sdf`, text);
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
