@@ -1,4 +1,4 @@
-import { completeMoleculeProps } from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import Link from "next/link";
 
 import ClassTypeBadge from "@/components/class_type_badge";
@@ -19,7 +19,7 @@ export const sections = {
             label: "Molecule Name",
             icon: <AtomIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h2 className="text-2xl font-bold">{molecule.name || "N/A"}</h2>
                 <p className="text-gray-500 dark:text-gray-400">
@@ -35,7 +35,7 @@ export const sections = {
             label: "CAS ID",
             icon: <UserIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">CAS ID</h3>
                 <p>{molecule.cas_id || "N/A"}</p>
@@ -49,7 +49,7 @@ export const sections = {
             label: "Class Type",
             icon: <Rows3Icon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">Class Type</h3>
                 <div className="flex flex-wrap">
@@ -67,7 +67,7 @@ export const sections = {
             label: "Image",
             icon: <ViewIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => {
+        content: (molecule: MoleculeProps) => {
             const moleculeId = molecule.pubchem_url?.split("/")?.pop() ?? null;
             console.log("Molecule ID:", moleculeId);
 
@@ -94,7 +94,7 @@ export const sections = {
             label: "SMILE",
             icon: <AtomIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">SMILE</h3>
                 <p>{molecule.smiles || "N/A"}</p>
@@ -108,7 +108,7 @@ export const sections = {
             label: "SMILE Type",
             icon: <AtomIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">SMILE Type</h3>
                 <p>
@@ -126,7 +126,7 @@ export const sections = {
             label: "Description",
             icon: <ViewIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">Description</h3>
                 <p className="text-xl">
@@ -142,7 +142,7 @@ export const sections = {
             label: "URLs",
             icon: <LinkIcon className="h-5 w-5" />,
         },
-        content: (molecule: completeMoleculeProps) => (
+        content: (molecule: MoleculeProps) => (
             <>
                 <h3 className="text-xl font-semibold">URLs</h3>
                 <ul className="space-y-2">

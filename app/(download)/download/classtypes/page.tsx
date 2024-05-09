@@ -1,12 +1,12 @@
 "use client";
 
-import { completeMoleculeProps } from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 type ClassTypeGroup = {
     class_type: string;
-    molecules: completeMoleculeProps[];
+    molecules: MoleculeProps[];
 };
 
 const DownloadTableComponent = () => {
@@ -29,7 +29,7 @@ const DownloadTableComponent = () => {
     }, []);
 
     const handleDownload = async (
-        molecules: completeMoleculeProps[],
+        molecules: MoleculeProps[],
         class_type: string
     ): Promise<void> => {
         // Prepare the molecule data for download

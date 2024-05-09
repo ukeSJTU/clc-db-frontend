@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import MoleculeCard from "@/components/molecule_card";
 import { PaginationComponent } from "@/components/pagination";
-import { overviewCardMoleculeProps } from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 import SearchOptionsGroup from "@/components/searchpage/optionGroup";
 import SearchHeading from "@/components/searchpage/heading";
 import SearchBar from "@/components/searchpage/bar";
@@ -42,7 +42,7 @@ const SearchPage = () => {
 
     const [searchOpt, setSearchOpt] = useState(options[0].searchName);
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<overviewCardMoleculeProps[]>([]); // Initialize as an empty array
+    const [results, setResults] = useState<MoleculeProps[]>([]); // Initialize as an empty array
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10); // Default page size
     const [totalPages, setTotalPages] = useState(0);
@@ -123,12 +123,9 @@ const SearchPage = () => {
             {/* Results */}
             <ResultsContainer isEmpty={!isLoading && results.length === 0}>
                 {!isLoading ? (
-                    results.map(
-                        (
-                            molecule: overviewCardMoleculeProps,
-                            index: number
-                        ) => <MoleculeCard key={index} {...molecule} />
-                    )
+                    results.map((molecule: MoleculeProps, index: number) => (
+                        <MoleculeCard key={index} {...molecule} />
+                    ))
                 ) : (
                     <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
                         Loading results...

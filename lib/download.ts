@@ -1,7 +1,4 @@
-import {
-    simplifiedMoleculeProps,
-    overviewCardMoleculeProps,
-} from "@/types/molecule";
+import { MoleculeProps } from "@/types/molecule";
 
 const escapeCsvField = (field: string): string => {
     if (field.includes(",") || field.includes('"') || field.includes("\n")) {
@@ -10,7 +7,7 @@ const escapeCsvField = (field: string): string => {
     return field;
 };
 
-const downloadMolecule = (molecule: overviewCardMoleculeProps) => {
+const downloadMolecule = (molecule: MoleculeProps) => {
     const csvHeaders = [
         "Name",
         "CAS ID",
