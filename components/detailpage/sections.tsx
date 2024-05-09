@@ -54,7 +54,11 @@ export const sections = {
                 <h3 className="text-xl font-semibold">Class Type</h3>
                 <div className="flex flex-wrap">
                     {(molecule.class_type || []).map((type, index) => (
-                        <ClassTypeBadge key={index} classType={type} />
+                        <ClassTypeBadge
+                            key={index}
+                            classType={type}
+                            abbreviate={false}
+                        />
                     ))}
                 </div>
             </>
