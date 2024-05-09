@@ -1,5 +1,6 @@
 import { MoleculeProps } from "@/types/molecule";
 import Link from "next/link";
+import Image from "next/image";
 
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import ClassTypeBadge from "@/components/class_type_badge";
@@ -80,11 +81,20 @@ export const sections = {
                 <>
                     <h3 className="text-xl font-semibold">Image</h3>
                     {moleculeId ? (
-                        <img
-                            src={`https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${moleculeId}&width=500&height=500`}
-                            alt="Molecule Image"
-                            className="h-[200px] rounded-lg"
-                        />
+                        <div
+                            style={{
+                                width: "230px",
+                                height: "250px",
+                                position: "relative",
+                            }}
+                        >
+                            <Image
+                                alt="2D Image"
+                                src={`https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${molecule.pubchem_cid}&width=500&height=500`}
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
                     ) : (
                         <p>No image available</p>
                     )}
