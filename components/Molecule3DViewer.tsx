@@ -44,15 +44,30 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/all_sdfs/${casId}.sdf`);
-                if (!response.ok)
-                    throw new Error("Network response was not ok.");
+
+                // Check if the response returned a 404 error or any other error
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error(
+                            `.sdf file for CAS ID ${casId} was not found.`
+                        );
+                    } else {
+                        throw new Error(
+                            `Network response was not ok (Status: ${response.status}).`
+                        );
+                    }
+                }
+
                 const textData = await response.text();
                 setData(textData);
                 setError(null); // Clear any previous errors on successful data fetch
             } catch (e) {
                 setData(null);
-                setError("Failed to load .sdf data.");
-                setIsLoading(false);
+                setError(
+                    e instanceof Error ? e.message : "Failed to load .sdf data."
+                );
+            } finally {
+                setIsLoading(false); // Always stop loading regardless of success or failure
             }
         };
 
@@ -60,21 +75,18 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
     }, [casId]);
 
     return (
-        <div>
+        <div style={{ width: "100%", height: "100%", position: "relative" }}>
             {error ? (
-                <div>
-                    <Skeleton className="h-[400px]" />
-                </div>
+                <Skeleton className="h-full" />
             ) : (
                 <div
-                    style={{
-                        position: "relative",
-                        width: "400px",
-                        height: "400px",
-                    }}
                     ref={viewerRef}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                    }}
                 >
-                    {isLoading && <Skeleton className="h-[400px]" />}
+                    {isLoading && <Skeleton className="h-full" />}
                 </div>
             )}
         </div>

@@ -119,7 +119,10 @@ const MoleculeCard = ({
                                 so either retrive the pubchem cid and use fallback component 
                                 or simply use Skeleton as placeholder */}
                             {/* <Skeleton className="h-[200px] rounded-lg" /> */}
-                            <Molecule3DViewer casId={cas_id} />
+                            <div className="h-[200px] rounded-lg">
+                                <Molecule3DViewer casId={cas_id} />
+                            </div>
+                            {/* <Molecule3DViewer casId={cas_id} /> */}
                         </div>
                     </div>
                 </CardContent>
