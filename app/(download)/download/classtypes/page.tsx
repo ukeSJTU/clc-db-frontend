@@ -1,3 +1,5 @@
+// This is the page to display all available class types for download
+
 "use client";
 
 import { Category, MoleculeProps } from "@/types/molecule";
@@ -46,15 +48,17 @@ const CategoriesPage = () => {
     };
 
     return (
-        <div className="grid grid-cols-2 gap-4">
-            {categories.map((category) => (
-                <div key={category.id}>
+        <div className="flex flex-col items-center p-4">
+            <h1 className="text-2xl font-bold mb-6">Available Class Types</h1>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+                {categories.map((category) => (
                     <ClassTypeBadge
+                        key={category.id}
                         classType={{ name: category.name }}
                         abbreviate={false}
                     />
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };
