@@ -1,5 +1,3 @@
-// lib/download.ts
-
 import { MoleculeProps } from "@/types/molecule";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -50,11 +48,25 @@ const downloadSdf = async (
     defaultFileName: string = "molecules_sdf"
 ) => {
     const zip = new JSZip();
+    let missingFiles = [];
 
     for (const [index, sdfUrl] of sdfFiles.entries()) {
-        const response = await fetch(sdfUrl);
-        const text = await response.text();
-        zip.file(`molecule_${index + 1}.sdf`, text);
+        try {
+            const response = await fetch(sdfUrl);
+            if (!response.ok) {
+                missingFiles.push(`Missing SDF: ${sdfUrl}`);
+                continue;
+            }
+            const text = await response.text();
+            zip.file(`molecule_${index + 1}.sdf`, text);
+        } catch {
+            missingFiles.push(`Missing SDF: ${sdfUrl}`);
+        }
+    }
+
+    // Add a missing report if there are any missing files
+    if (missingFiles.length > 0) {
+        zip.file("missing_files.txt", missingFiles.join("\n"));
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
@@ -63,6 +75,7 @@ const downloadSdf = async (
 
 const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
     const zip = new JSZip();
+    let missingFiles = [];
 
     // Use CAS ID of the first molecule or a generic name if more than one
     const defaultFileName =
@@ -74,9 +87,22 @@ const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
 
     // Add SDF files
     for (const [index, sdfUrl] of sdfFiles.entries()) {
-        const response = await fetch(sdfUrl);
-        const text = await response.text();
-        zip.file(`${defaultFileName}.sdf`, text);
+        try {
+            const response = await fetch(sdfUrl);
+            if (!response.ok) {
+                missingFiles.push(`Missing SDF: ${sdfUrl}`);
+                continue;
+            }
+            const text = await response.text();
+            zip.file(`molecule_${index + 1}.sdf`, text);
+        } catch {
+            missingFiles.push(`Missing SDF: ${sdfUrl}`);
+        }
+    }
+
+    // Add a missing report if there are any missing files
+    if (missingFiles.length > 0) {
+        zip.file("missing_files.txt", missingFiles.join("\n"));
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
