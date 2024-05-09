@@ -1,13 +1,19 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import ClassTypeBadge from "@/components/class_type_badge";
+import { Button } from "@/components/ui/button";
+import downloadMolecule from "@/lib/download";
+
+type Molecule = {
+    name: string;
+    cas_id: string;
+    class_type: { name: string }[];
+    molecule_formula: string;
+    molecular_weight: number;
+};
 
 type MoleculeTableProps = {
-    molecules: {
-        name: string;
-        cas_id: string;
-        class_type: { name: string }[];
-    }[];
+    molecules: Molecule[];
 };
 
 const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
@@ -15,6 +21,10 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
 
     const handleClick = (cas_id: string) => {
         router.push(`/detail/${cas_id}`);
+    };
+
+    const handleDownload = (molecule: Molecule) => {
+        downloadMolecule(molecule);
     };
 
     return (
@@ -31,15 +41,14 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Class Type
                         </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Operations
+                        </th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {molecules.map((molecule, index) => (
-                        <tr
-                            key={index}
-                            onClick={() => handleClick(molecule.cas_id)}
-                            className="hover:bg-gray-300/10 cursor-pointer"
-                        >
+                        <tr key={index} className="hover:bg-gray-300/10">
                             {/* Name column with ellipsis if too long */}
                             <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                                 {molecule.name}
@@ -62,6 +71,29 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                                         classType={{ name: "None" }}
                                     />
                                 )}
+                            </td>
+                            <td className="px-6 py-4">
+                                <div className="flex gap-2">
+                                    {/* Download Button */}
+                                    <Button
+                                        variant="outline"
+                                        color="green"
+                                        onClick={() => handleDownload(molecule)}
+                                    >
+                                        Download
+                                    </Button>
+
+                                    {/* View Details Button */}
+                                    <Button
+                                        variant="outline"
+                                        color="blue"
+                                        onClick={() =>
+                                            handleClick(molecule.cas_id)
+                                        }
+                                    >
+                                        View
+                                    </Button>
+                                </div>
                             </td>
                         </tr>
                     ))}
