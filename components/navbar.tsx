@@ -150,6 +150,13 @@ const NavbarComponent = () => {
                                     A pure JavaScript chemical graphics and
                                     cheminformatics library.
                                 </ListItem>
+                                <ListItem
+                                    href="/externalJS/charts"
+                                    title="Charts"
+                                >
+                                    Charts.js: an open-source toolkit to display
+                                    charts on web page.
+                                </ListItem>
                             </ul>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
