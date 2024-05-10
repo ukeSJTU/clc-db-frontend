@@ -48,11 +48,15 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             CAS ID: {molecule.cas_id}
                         </p>
                     </div>
-                    <div className="flex items-center space-x-3">
-                        <p className="font-semibold">Category:</p>
+                    <div className="flex flex-col items-start">
+                        {/* <p className="font-semibold">Category</p> */}
                         <div className="flex flex-wrap">
                             {molecule.class_type.map((type, index) => (
-                                <ClassTypeBadge key={index} classType={type} />
+                                <ClassTypeBadge
+                                    key={index}
+                                    classType={type}
+                                    abbreviate={false}
+                                />
                             ))}
                         </div>
                     </div>
