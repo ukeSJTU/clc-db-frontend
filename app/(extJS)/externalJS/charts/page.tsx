@@ -1,5 +1,6 @@
 import ChartComponent from "@/components/charts/SmileTypeDistributionChart";
 import WeightDistributionChart from "@/components/charts/WeightDistributionChart";
+import ClasstypeDistChart from "@/components/charts/ClassTypeDistributionBarChart";
 
 export default function Page() {
     return (
@@ -8,6 +9,7 @@ export default function Page() {
             <p>This is the Charts page.</p>
             <WeightDistributionChart />
             <ChartComponent />
+            <ClasstypeDistChart />
         </div>
     );
 }
