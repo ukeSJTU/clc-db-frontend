@@ -12,6 +12,7 @@ import Image from "next/image";
 import ClassTypeBadge from "./class_type_badge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
+import MoleculeFormulaSpan from "./MoleculeFormulaText";
 
 const MoleculeCard = (molecule: MoleculeProps) => {
     const router = useRouter();
@@ -62,7 +63,10 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             <p className="text-sm text-gray-500">
                                 Molecule Formula
                             </p>
-                            <p>{molecule.molecule_formula}</p>
+                            <MoleculeFormulaSpan
+                                formula={molecule.molecule_formula}
+                            />
+                            {/* <p>{molecule.molecule_formula}</p> */}
                         </div>
                         <div className="space-y-2">
                             <p className="text-sm text-gray-500">
