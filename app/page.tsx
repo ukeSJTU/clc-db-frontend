@@ -4,6 +4,12 @@ import api from "@/utils/api";
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 
+import {
+    ChartComponent,
+    ClasstypeDistChart,
+    WeightDistributionChart,
+} from "@/components/StatsCharts";
+
 const fetchStatistics = async () => {
     const response = await api.get("/statistics/");
     return response.data;
@@ -50,6 +56,11 @@ const Home: NextPage = () => {
                         <br />
                         Number of categories: {stats.totalCategories}
                     </p>
+                </section>
+                <section className="container mx-auto p-4 mt-8">
+                    <WeightDistributionChart />
+                    <ClasstypeDistChart />
+                    <ChartComponent />
                 </section>
             </main>
         </div>
