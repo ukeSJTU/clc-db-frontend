@@ -103,7 +103,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     className="hover:text-gray-200 transition-colors"
-                                    href="#"
+                                    href="https://3dmol.org/doc/index.htmls"
                                     target="_blank"
                                 >
                                     3Dmol
@@ -112,7 +112,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     className="hover:text-gray-200 transition-colors"
-                                    href="#"
+                                    href="https://partridgejiang.github.io/Kekule.js/"
                                     target="_blank"
                                 >
                                     Kekule.js
