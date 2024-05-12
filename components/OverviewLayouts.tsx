@@ -1,15 +1,24 @@
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MoleculeProps } from "@/types/molecule";
-import CategoryBadge from "@/components/CategoryBadge";
-import { Button } from "@/components/ui/button";
-import { ZipDownloadButton } from "./DownloadButtons";
 
-type MoleculeTableProps = {
+import { MoleculeProps } from "@/types/molecule";
+import downloadMolecule from "@/lib/download";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CategoryBadge from "@/components/CategoryBadge";
+import { ZipDownloadButton } from "@/components/DownloadButtons";
+import MoleculeFormulaSpan from "@/components/MoleculeFormulaSpan";
+import MoleculeCard from "@/components/MoleculeCard";
+
+// A number of molecules to be displayed
+type MoleculesProps = {
     molecules: MoleculeProps[];
 };
 
-const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
+// This component displays the molecules in a table layout
+const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
     const router = useRouter();
 
     const handleClick = (cas_id: string) => {
@@ -90,4 +99,15 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
     );
 };
 
-export default MoleculeTable;
+// This component displays the molecules in a grid layout, each is a card
+const MolecularGridLayout = ({ molecules }: MoleculesProps) => {
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4">
+            {molecules.map((molecule: MoleculeProps, index: number) => (
+                <MoleculeCard key={index} {...molecule} />
+            ))}
+        </div>
+    );
+};
+
+export { MolecularTableLayout, MolecularGridLayout };

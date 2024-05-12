@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import MoleculeCard from "@/components/molecule_card";
+import { MolecularGridLayout } from "@/components/OverviewLayouts";
 import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import SearchOptionsGroup from "@/components/searchpage/optionGroup";
@@ -18,10 +18,7 @@ const ResultsContainer = ({
     isEmpty?: boolean;
 }>) => {
     return (
-        <div
-            id="search-result"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto p-4"
-        >
+        <div id="search-result">
             {isEmpty ? (
                 <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
                     No results found.
@@ -123,9 +120,10 @@ const SearchPage = () => {
             {/* Results */}
             <ResultsContainer isEmpty={!isLoading && results.length === 0}>
                 {!isLoading ? (
-                    results.map((molecule: MoleculeProps, index: number) => (
-                        <MoleculeCard key={index} {...molecule} />
-                    ))
+                    // results.map((molecule: MoleculeProps, index: number) => (
+                    //     <MoleculeCard key={index} {...molecule} />
+                    // ))
+                    <MolecularGridLayout molecules={results} />
                 ) : (
                     <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
                         Loading results...
