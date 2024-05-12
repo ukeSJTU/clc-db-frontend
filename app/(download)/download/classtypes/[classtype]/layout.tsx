@@ -1,4 +1,4 @@
-import ClassTypeBadge from "@/components/class_type_badge";
+import CategoryBadge from "@/components/CategoryBadge";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +22,7 @@ export default function ClassTypeLayout({
                     <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 px-3">
                         Searching for Molecules of:
                     </h2>
-                    <ClassTypeBadge
+                    <CategoryBadge
                         classType={{ name: decodedClassType }}
                         abbreviate={false}
                     />

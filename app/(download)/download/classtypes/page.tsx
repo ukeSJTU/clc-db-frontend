@@ -5,7 +5,7 @@
 import { Category, MoleculeProps } from "@/types/molecule";
 import React, { useEffect, useState } from "react";
 import api from "@/utils/api";
-import ClassTypeBadge from "@/components/class_type_badge";
+import CategoryBadge from "@/components/CategoryBadge";
 
 type ClassTypeGroup = {
     class_type: string;
@@ -52,7 +52,7 @@ const CategoriesPage = () => {
             <h1 className="text-2xl font-bold mb-6">Available Class Types</h1>
             <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
                 {categories.map((category) => (
-                    <ClassTypeBadge
+                    <CategoryBadge
                         key={category.id}
                         classType={{ name: category.name }}
                         abbreviate={false}

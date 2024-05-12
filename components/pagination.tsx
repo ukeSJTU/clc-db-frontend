@@ -1,8 +1,8 @@
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
-    ArrowLeftIcon,
-    ArrowRightIcon,
+    ChevronsLeftIcon,
+    ChevronsRightIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -67,7 +67,7 @@ export function PaginationComponent({
                     onClick={() => setPage(1)}
                     disabled={page <= 1}
                 >
-                    <ArrowLeftIcon className="size-4" aria-hidden="true" />
+                    <ChevronsLeftIcon className="size-4" aria-hidden="true" />
                 </Button>
                 {/* Previous Page */}
                 <Button
@@ -97,7 +97,7 @@ export function PaginationComponent({
                     onClick={() => setPage(totalPages)}
                     disabled={page >= totalPages}
                 >
-                    <ArrowRightIcon className="size-4" aria-hidden="true" />
+                    <ChevronsRightIcon className="size-4" aria-hidden="true" />
                 </Button>
             </div>
         </div>

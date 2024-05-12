@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavbarComponent from "@/components/navbar";
-import FooterComponent from "@/components/footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +20,15 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div className="flex flex-col h-screen justify-between">
-                    <NavbarComponent />
-                    <div className="pt-16 mb-auto">{children}</div>
-                    {/* The pt-16 is explicitly set to move the content below the navbar */}
-                    <div>
-                        <FooterComponent />
+                <div className="flex flex-col min-h-screen justify-between">
+                    <div className="h-18">
+                        <Navbar />
                     </div>
+                    <div className="top-18">
+                        <main className="mb-auto">{children}</main>
+                    </div>
+
+                    <Footer />
                 </div>
             </body>
         </html>

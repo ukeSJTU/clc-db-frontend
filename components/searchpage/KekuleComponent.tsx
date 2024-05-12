@@ -28,7 +28,7 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
     }, []);
 
     // Function to log molecule info
-    const logMoleculeInfo = () => {
+    const onSubmit = () => {
         if (composerRef.current) {
             const chemDoc = composerRef.current.getChemObj();
             const mol = chemDoc.getChildAt(0); // Assuming the molecule is the first child
@@ -45,16 +45,22 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
     };
 
     return (
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-            <div
-                ref={containerRef}
-                style={{ width: "600px", height: "400px" }}
-            ></div>
-            <div className="flex justify-between items-center mt-4">
-                <Button onClick={logMoleculeInfo}>Log Molecule Info</Button>
-                <Button onClick={onClose} className="ml-4">
-                    Close
-                </Button>
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                    <div
+                        ref={containerRef}
+                        style={{ width: "600px", height: "400px" }}
+                    ></div>
+                    <div className="flex justify-between items-center mt-4">
+                        <Button onClick={onSubmit} className="ml-4">
+                            Submit
+                        </Button>
+                        <Button onClick={onClose} className="ml-4">
+                            Close
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     );

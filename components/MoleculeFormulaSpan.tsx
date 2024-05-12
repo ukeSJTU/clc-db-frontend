@@ -1,3 +1,5 @@
+// This is a simple component that displays a molecule formula in a more readable format.
+
 import React from "react";
 
 interface MoleculeFormulaSpanProps {

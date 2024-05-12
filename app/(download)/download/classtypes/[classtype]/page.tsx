@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MoleculeCard from "@/components/molecule_card";
-import { PaginationComponent } from "@/components/pagination";
+import { MolecularGridLayout } from "@/components/OverviewLayouts";
+import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
 import { Button } from "@/components/ui/button";
@@ -104,11 +104,7 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
                     totalPages={totalPages}
                 />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {molecules.map((molecule, index) => (
-                    <MoleculeCard key={index} {...molecule} />
-                ))}
-            </div>
+            <MolecularGridLayout molecules={molecules} />
         </div>
     );
 };

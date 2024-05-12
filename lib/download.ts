@@ -1,3 +1,9 @@
+// This file handles the download functionality for the application.
+// It provides functions to generate and download CSV and SDF files, as well as a combined ZIP file containing both.
+// The `downloadFiles` function takes the type of file to download, an array of molecule objects, and an array of SDF file URLs as arguments.
+// It then calls the appropriate function to generate and download the selected file type.
+// Note that a "missing_files.txt" file is included in the ZIP archive if any SDF files are missing.
+
 import { MoleculeProps } from "@/types/molecule";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";

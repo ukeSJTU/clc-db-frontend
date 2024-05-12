@@ -1,5 +1,8 @@
 "use client";
 
+// This file contains multiple types of download buttons that can be used to download molecules in different formats.
+// Note that, even if user choose to download .sdf file, they will get a .zip file containing the .sdf files.
+
 import { useState } from "react";
 import {
     Select,
@@ -16,7 +19,7 @@ import { FileTextIcon, ArchiveIcon } from "lucide-react";
 
 // BaseDownloadButton is a simpler version of DownloadButton that doesn't include a dropdown
 interface BaseDownloadButtonProps {
-    type: string; // "csv", "sdf", "zip"
+    type: "csv" | "sdf" | "zip"; // The type of file to download
     molecules: MoleculeProps[];
     sdfFiles: string[];
     label?: string;
@@ -70,7 +73,7 @@ const SelectDownloadButton: React.FC<SelectDownloadButtonProps> = ({
                 <SelectContent>
                     <SelectItem value="csv">CSV</SelectItem>
                     <SelectItem value="sdf">SDF</SelectItem>
-                    <SelectItem value="zip">Both (ZIP)</SelectItem>
+                    <SelectItem value="zip">Both</SelectItem>
                 </SelectContent>
             </Select>
             {/* Add a button to manually trigger the download */}
@@ -95,7 +98,7 @@ const SingleMoleculeDownloadButton: React.FC<
             type={type}
             molecules={[molecule]}
             sdfFiles={[sdfFile]}
-            label={`Download ${type.toUpperCase()}`}
+            label={`${type.toUpperCase()}`}
         />
     );
 };

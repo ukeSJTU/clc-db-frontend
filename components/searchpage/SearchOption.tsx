@@ -1,3 +1,5 @@
+// The search option component is a simple checkbox with a label.
+
 import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -28,8 +30,6 @@ const SearchOption: React.FC<SearchOptionProps> = ({
                 onCheckedChange={handleChange}
             />
             <Label htmlFor={searchName}>{displayName}</Label>
-
-            {/* {icon && <img src={icon} alt={name} />} */}
         </div>
     );
 };
