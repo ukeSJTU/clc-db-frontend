@@ -40,7 +40,11 @@ const MoleculeDataRow = ({ molecule }: { molecule: MoleculeProps }) => {
             <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                 {molecule.class_type.length > 0 ? (
                     molecule.class_type.map((type, idx) => (
-                        <CategoryBadge key={idx} classType={type} />
+                        <CategoryBadge
+                            key={idx}
+                            classType={type}
+                            abbreviate={false}
+                        />
                     ))
                 ) : (
                     <CategoryBadge classType={{ name: "None" }} />
