@@ -12,7 +12,7 @@ import Image from "next/image";
 import CategoryBadge from "./CategoryBadge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
-import MoleculeFormulaSpan from "./MoleculeFormulaText";
+import MoleculeFormulaSpan from "./MoleculeFormulaSpan";
 
 const MoleculeCard = (molecule: MoleculeProps) => {
     const router = useRouter();
