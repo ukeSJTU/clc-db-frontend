@@ -47,7 +47,7 @@ const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
 
     return (
         <Badge
-            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass}`}
+            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass} text-nowrap`}
             title={classType.name}
             onClick={() => handleBadgeClick(classType.name)}
         >
