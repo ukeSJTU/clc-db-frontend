@@ -118,6 +118,15 @@ const Footer = () => {
                                     Kekule.js
                                 </Link>
                             </li>
+                            <li>
+                                <Link
+                                    className="hover:text-gray-200 transition-colors"
+                                    href="https://www.chartjs.org/"
+                                    target="_blank"
+                                >
+                                    Chart.js
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
