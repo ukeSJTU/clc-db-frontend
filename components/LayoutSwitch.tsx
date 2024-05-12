@@ -1,4 +1,6 @@
 import React from "react";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 interface LayoutSwitchProps {
     currentLayout: "grid" | "table";
@@ -9,28 +11,20 @@ const LayoutSwitch: React.FC<LayoutSwitchProps> = ({
     currentLayout,
     onToggleLayout,
 }) => {
+    const handleToggle = () => {
+        const newLayout = currentLayout === "grid" ? "table" : "grid";
+        onToggleLayout(newLayout);
+    };
+
     return (
         <div className="flex justify-center items-center gap-2">
-            <button
-                className={`px-4 py-2 ${
-                    currentLayout === "grid"
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200"
-                }`}
-                onClick={() => onToggleLayout("grid")}
-            >
-                Grid Layout
-            </button>
-            <button
-                className={`px-4 py-2 ${
-                    currentLayout === "table"
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200"
-                }`}
-                onClick={() => onToggleLayout("table")}
-            >
-                Table Layout
-            </button>
+            <Label htmlFor="layout-switch">Grid</Label>
+            <Switch
+                id="layout-switch"
+                checked={currentLayout === "grid"}
+                onCheckedChange={handleToggle}
+            />
+            <Label htmlFor="layout-switch">Table</Label>
         </div>
     );
 };
