@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import FooterComponent from "@/components/footer";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
                     <div className="mb-auto">{children}</div>
                     {/* The pt-16 is explicitly set to move the content below the navbar */}
                     <div>
-                        <FooterComponent />
+                        <Footer />
                     </div>
                 </div>
             </body>

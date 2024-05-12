@@ -1,6 +1,8 @@
+// This is the footer component that will be displayed at the bottom of all pages of the website.
+
 import Link from "next/link";
 
-const FooterComponent = () => {
+const Footer = () => {
     return (
         <footer className="bg-gray-900 text-gray-400 py-12 px-4 md:px-6 lg:px-8">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -127,4 +129,4 @@ const FooterComponent = () => {
     );
 };
 
-export default FooterComponent;
+export default Footer;
