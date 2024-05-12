@@ -1,0 +1,111 @@
+// This file contains multiple search components.
+// The KekuleComponent supports drawing the structure of the molecule and extracting the SMILES string.
+
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+
+import KekuleComponent from "@/components/searchpage/KekuleComponent";
+import { LucideIcon, PenIcon, ShuffleIcon, Pen, List } from "lucide-react";
+
+interface CasIdUploaderProps {
+    onSubmit: (casIds: string) => void;
+    onClose: () => void;
+}
+
+const DrawStructureComponent = ({ onSubmit, onClose }) => {
+    const [showKekule, setShowKekule] = useState(false);
+
+    return (
+        <div className="flex ">
+            <Button variant="ghost" onClick={() => setShowKekule(true)}>
+                <div className="relative flex flex-col items-center">
+                    <Pen size={50} />
+                    Draw Structure
+                </div>
+            </Button>
+
+            {showKekule && (
+                <KekuleComponent
+                    onSmilesInput={(smiles: string) => {
+                        onSubmit(smiles, "smiles");
+                        onClose();
+                        setShowKekule(false);
+                    }}
+                    onClose={() => setShowKekule(false)}
+                />
+            )}
+        </div>
+    );
+};
+
+const CasIdUploader: React.FC<CasIdUploaderProps> = ({ onSubmit, onClose }) => {
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files && files[0]) {
+            setFile(files[0]);
+        }
+    };
+
+    const handleUpload = () => {
+        if (!file) {
+            alert("Please select a file first."); //TODO: Replace with a proper alert component
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const text = event.target?.result;
+            if (typeof text === "string") {
+                const casIds = text
+                    .split(/[\s,]+/)
+                    .filter(Boolean)
+                    .join(",");
+                onSubmit(casIds); // Trigger the search callback with the CAS IDs
+                onClose(); // Close the uploader component
+            }
+            console.log(text);
+        };
+        reader.readAsText(file);
+    };
+
+    return (
+        <div>
+            <input type="file" accept=".csv" onChange={handleFileChange} />
+            <button onClick={handleUpload}>Upload and Search</button>
+            <button onClick={onClose}>Close</button>
+        </div>
+    );
+};
+
+const MultiCasIDSearchComponent = ({ onSubmit, onClose }) => {
+    const [showUploader, setShowUploader] = useState(false);
+    return (
+        <div className="flex ">
+            <Button variant="ghost" onClick={() => setShowUploader(true)}>
+                <div className="relative flex flex-col items-center">
+                    <List size={50} />
+                    Multi ID
+                </div>
+            </Button>
+
+            {showUploader && (
+                <CasIdUploader
+                    onSubmit={(casIds) => {
+                        onSubmit(casIds, "cas_id");
+                        setShowUploader(false);
+                    }}
+                    onClose={() => {
+                        setShowUploader(false);
+                        onClose();
+                    }}
+                />
+            )}
+        </div>
+    );
+};
+
+export { DrawStructureComponent, MultiCasIDSearchComponent };

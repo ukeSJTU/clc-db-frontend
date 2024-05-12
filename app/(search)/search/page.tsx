@@ -1,34 +1,17 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { MolecularGridLayout } from "@/components/OverviewLayouts";
-import { PaginationComponent } from "@/components/Pagination";
+import SearchBar from "@/components/searchpage/SearchBar";
 import { MoleculeProps } from "@/types/molecule";
+import { SquarePlus, ShuffleIcon } from "lucide-react";
+import SearchResultsContainer from "@/components/searchpage/SearchResults";
 import SearchOptionsGroup from "@/components/searchpage/optionGroup";
-import SearchHeading from "@/components/searchpage/heading";
-import SearchBar from "@/components/searchpage/bar";
-import SearchTip from "@/components/searchpage/tip";
+import { SearchHeading, SearchTip } from "@/components/searchpage/SearchText";
 import api from "@/utils/api";
-
-const ResultsContainer = ({
-    children,
-    isEmpty = false,
-}: Readonly<{
-    children: React.ReactNode;
-    isEmpty?: boolean;
-}>) => {
-    return (
-        <div id="search-result">
-            {isEmpty ? (
-                <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
-                    No results found.
-                </div>
-            ) : (
-                children
-            )}
-        </div>
-    );
-};
+import {
+    DrawStructureComponent,
+    MultiCasIDSearchComponent,
+} from "@/components/searchpage/SpecialSearch";
 
 const SearchPage = () => {
     const options = [
@@ -37,20 +20,18 @@ const SearchPage = () => {
         { displayName: "SMILES", searchName: "smiles" },
     ];
 
-    const [searchOpt, setSearchOpt] = useState(options[0].searchName);
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState<MoleculeProps[]>([]); // Initialize as an empty array
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10); // Default page size
-    const [totalPages, setTotalPages] = useState(0);
+    const [searchOpt, setSearchOpt] = useState(options[0].searchName); // Initialize as the first option
+    const [query, setQuery] = useState(""); // Initialize as an empty string as the default query
+    const [results, setResults] = useState<MoleculeProps[]>([]); // Initialize as an empty array as the default results
     const [isLoading, setIsLoading] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
-    const handleSmilesInput = (smiles: string) => {
-        setQuery(smiles);
-        setSearchOpt("smiles");
-    };
+    // Default pagination settings
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalPages, setTotalPages] = useState(0);
 
-    const handleSearch = useCallback(async () => {
+    const handleSearch = async () => {
         if (query.trim() === "") {
             setResults([]); // Clear results if the query is empty
             setTotalPages(0);
@@ -58,6 +39,10 @@ const SearchPage = () => {
         }
 
         setIsLoading(true); // Start loading
+        console.log(
+            "Searching:",
+            `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
+        );
         try {
             const response = await api.get(
                 `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
@@ -66,6 +51,8 @@ const SearchPage = () => {
             // Ensure the response is an object and has a "results" property that is an array
             const { results: fetchedResults = [], count = 0 } =
                 response.data || {};
+
+            console.log("fetchedResults", fetchedResults);
             setResults(fetchedResults);
             setTotalPages(Math.ceil(count / pageSize));
         } catch (error) {
@@ -75,61 +62,63 @@ const SearchPage = () => {
         } finally {
             setIsLoading(false); // Stop loading
         }
-    }, [query, searchOpt, page, pageSize]);
-
-    // Pagination change handler to update the page and trigger the search
-    const handlePageChange = (newPage: number) => {
-        setPage(newPage);
-        handleSearch();
     };
 
-    // Page size change handler to update the page size and reset to page 1
-    const handlePageSizeChange = (newPageSize: number) => {
-        setPageSize(newPageSize);
-        setPage(1);
-        handleSearch();
+    const handleSpecialSearchInput = (
+        query_str: string,
+        searchOpt: string,
+        triggerSearch: boolean = true
+    ) => {
+        setQuery(query_str);
+        setSearchOpt(searchOpt);
+        console.log("query_str", query_str);
+        console.log("searchOpt", searchOpt);
+        console.log("triggerSearch", triggerSearch);
+        if (triggerSearch === true) {
+            console.log("triggering search");
+            handleSearch();
+        }
+    };
+
+    const handleSmilesInput = (smiles: string) => {
+        setQuery(smiles);
+        setSearchOpt("smiles");
     };
 
     return (
         <div className="flex flex-col items-center py-12 space-y-4">
-            <SearchHeading />
-            <SearchTip />
+            {/* Search Components */}
             <div className="flex flex-col gap-2 w-full max-w-md sm:max-w-lg md:max-w-2xl">
-                <SearchOptionsGroup
-                    options={options}
-                    setSearchOpt={setSearchOpt}
-                    searchOpt={searchOpt}
-                />
-                <SearchBar
-                    query={query}
-                    setQuery={setQuery}
-                    handleSearch={handleSearch}
-                    onSmilesInput={handleSmilesInput}
-                />
+                <SearchHeading />
+                {/* <SearchTip /> */}
+                <div className="flex flex-col gap-2 w-full max-w-md sm:max-w-lg md:max-w-2xl">
+                    <SearchOptionsGroup
+                        options={options}
+                        setSearchOpt={setSearchOpt}
+                        searchOpt={searchOpt}
+                    />
+                    <SearchBar
+                        query={query}
+                        setQuery={setQuery}
+                        handleSearch={handleSearch}
+                        onSmilesInput={handleSmilesInput}
+                    />
+                </div>
+                <div className="flex md:flex-row items-center justify-start">
+                    <DrawStructureComponent
+                        onSubmit={handleSpecialSearchInput}
+                        onClose={() => setShowDropdown(false)}
+                    />
+                    <MultiCasIDSearchComponent
+                        onSubmit={handleSpecialSearchInput}
+                        onClose={() => setShowDropdown(false)}
+                    />
+                </div>
             </div>
-            {/* Pagination Controls */}
-            <div className="flex justify-end w-full max-w-6xl px-4">
-                <PaginationComponent
-                    page={page}
-                    setPage={handlePageChange}
-                    pageSize={pageSize}
-                    setPageSize={handlePageSizeChange}
-                    totalPages={totalPages}
-                />
+            {/* Result Components */}
+            <div className="flex flex-row ">
+                <SearchResultsContainer molecules={results} />
             </div>
-            {/* Results */}
-            <ResultsContainer isEmpty={!isLoading && results.length === 0}>
-                {!isLoading ? (
-                    // results.map((molecule: MoleculeProps, index: number) => (
-                    //     <MoleculeCard key={index} {...molecule} />
-                    // ))
-                    <MolecularGridLayout molecules={results} />
-                ) : (
-                    <div className="col-span-full text-center text-gray-500 dark:text-gray-300">
-                        Loading results...
-                    </div>
-                )}
-            </ResultsContainer>
         </div>
     );
 };
