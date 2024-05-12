@@ -20,13 +20,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div className="flex flex-col h-screen justify-between">
+                <div className="flex flex-col min-h-screen justify-between">
                     <Navbar />
-                    <div className="mb-auto">{children}</div>
-                    {/* The pt-16 is explicitly set to move the content below the navbar */}
-                    <div>
-                        <Footer />
-                    </div>
+                    <main className="mb-auto">{children}</main>
+                    <Footer />
                 </div>
             </body>
         </html>
