@@ -7,7 +7,7 @@ import {
     SelectDownloadButton,
     ZipDownloadButton,
     BulkMoleculeDownloadButton,
-} from "@/components/download_button";
+} from "@/components/DownloadButtons";
 import Image from "next/image";
 import CategoryBadge from "./CategoryBadge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";

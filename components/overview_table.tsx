@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { MoleculeProps } from "@/types/molecule";
 import CategoryBadge from "@/components/CategoryBadge";
 import { Button } from "@/components/ui/button";
-import { ZipDownloadButton } from "./download_button";
+import { ZipDownloadButton } from "./DownloadButtons";
 
 type MoleculeTableProps = {
     molecules: MoleculeProps[];

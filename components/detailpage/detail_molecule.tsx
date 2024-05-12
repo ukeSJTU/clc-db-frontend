@@ -1,6 +1,6 @@
 import { MoleculeProps } from "@/types/molecule";
 import DetailPageScrollBar from "@/components/detailpage/detail_scrollbar";
-import { SelectDownloadButton } from "@/components/download_button";
+import { SelectDownloadButton } from "@/components/DownloadButtons";
 import { sections } from "./sections";
 
 const MoleculeDetailSheet = (molecule: MoleculeProps) => {
