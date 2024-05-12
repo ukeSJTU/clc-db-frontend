@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import MoleculeCard from "@/components/molecule_card";
-import { PaginationComponent } from "@/components/pagination";
+import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import SearchOptionsGroup from "@/components/searchpage/optionGroup";
 import SearchHeading from "@/components/searchpage/heading";

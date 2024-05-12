@@ -1,6 +1,6 @@
 "use client";
 
-import { PaginationComponent } from "@/components/pagination";
+import { PaginationComponent } from "@/components/Pagination";
 import { useState, useEffect } from "react";
 import MoleculeCard from "@/components/molecule_card";
 import { MoleculeProps } from "@/types/molecule";

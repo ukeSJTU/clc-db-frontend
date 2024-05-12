@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import MoleculeCard from "@/components/molecule_card";
-import { PaginationComponent } from "@/components/pagination";
+import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
 import { Button } from "@/components/ui/button";

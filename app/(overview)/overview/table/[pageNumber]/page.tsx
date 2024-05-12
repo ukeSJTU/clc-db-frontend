@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import api from "@/utils/api";
 
 import MoleculeTable from "@/components/overview_table";
-import { PaginationComponent } from "@/components/pagination";
+import { PaginationComponent } from "@/components/Pagination";
 
 const fetchMoleculeData = async (page: number, pageSize: number) => {
     const response = await api.get(
