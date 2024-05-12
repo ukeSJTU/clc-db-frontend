@@ -11,6 +11,12 @@ const nextConfig = {
                 port: "",
                 pathname: "/image/**",
             },
+            {
+                protocol: "http",
+                hostname: "127.0.0.1",
+                port: "8000",
+                pathname: "/static/2Dimages/**",
+            },
         ],
     },
     compiler: {
