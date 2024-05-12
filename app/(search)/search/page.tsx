@@ -5,7 +5,7 @@ import SearchBar from "@/components/searchpage/SearchBar";
 import { MoleculeProps } from "@/types/molecule";
 import { SquarePlus, ShuffleIcon } from "lucide-react";
 import SearchResultsContainer from "@/components/searchpage/SearchResults";
-import SearchOptionsGroup from "@/components/searchpage/optionGroup";
+import SearchOptionsGroup from "@/components/searchpage/SearchOptionsGroup";
 import { SearchHeading, SearchTip } from "@/components/searchpage/SearchText";
 import api from "@/utils/api";
 import {

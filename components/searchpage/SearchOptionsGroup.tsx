@@ -1,8 +1,11 @@
+// The component that displays the search options group
+// It is used in search page to display the search options
+
 "use client";
 
 import React, { useState, useEffect } from "react";
 
-import SearchOption from "@/components/searchpage/option";
+import SearchOption from "@/components/searchpage/SearchOption";
 
 const SearchOptionsGroup = ({
     options,
@@ -27,7 +30,9 @@ const SearchOptionsGroup = ({
     }, [searchOpt, options]);
 
     const handleOptionChange = (displayName: string, searchName: string) => {
-        console.log("Option changed to:", displayName);
+        console.log(
+            `Option changed. Display name: ${displayName}; Search name: ${searchName}`
+        );
         setCheckedOption(displayName);
         setSearchOpt(searchName);
     };
