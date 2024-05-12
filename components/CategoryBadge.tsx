@@ -1,5 +1,10 @@
 "use client";
 
+// This component is used to display a badge for a class type.
+// The badge will have a background color that is dynamically generated based on the class type name.
+// The badge will display the full name of the class type by default, but can be set to display an abbreviation instead.
+// When clicked, the badge will navigate to the download page for the class type.
+
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
@@ -31,7 +36,7 @@ const abbreviateName = (name: string) => {
         .toUpperCase(); // Create an abbreviation by taking the first letter of each word
 };
 
-const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
+const CategoryBadge: React.FC<ClassTypeBadgeProps> = ({
     classType,
     abbreviate = true,
 }) => {
@@ -42,13 +47,14 @@ const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
         : classType.name;
 
     const handleBadgeClick = (name: string) => {
+        // when clicked, navigate to the download page for this class type
         router.push(`/download/classtypes/${name}`);
     };
 
     return (
         <Badge
             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass} text-nowrap`}
-            title={classType.name}
+            title={classType.name} // Add a title attribute to show the full name on hover
             onClick={() => handleBadgeClick(classType.name)}
         >
             {displayText}
@@ -56,4 +62,4 @@ const ClassTypeBadge: React.FC<ClassTypeBadgeProps> = ({
     );
 };
 
-export default ClassTypeBadge;
+export default CategoryBadge;

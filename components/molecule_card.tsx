@@ -9,7 +9,7 @@ import {
     BulkMoleculeDownloadButton,
 } from "@/components/download_button";
 import Image from "next/image";
-import ClassTypeBadge from "./class_type_badge";
+import CategoryBadge from "./CategoryBadge";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
 import downloadMolecule from "@/lib/download";
 import MoleculeFormulaSpan from "./MoleculeFormulaText";
@@ -52,7 +52,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                         {/* <p className="font-semibold">Category</p> */}
                         <div className="flex flex-wrap">
                             {molecule.class_type.map((type, index) => (
-                                <ClassTypeBadge
+                                <CategoryBadge
                                     key={index}
                                     classType={type}
                                     abbreviate={false}

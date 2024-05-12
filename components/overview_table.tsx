@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { MoleculeProps } from "@/types/molecule";
-import ClassTypeBadge from "@/components/class_type_badge";
+import CategoryBadge from "@/components/CategoryBadge";
 import { Button } from "@/components/ui/button";
 import { ZipDownloadButton } from "./download_button";
 
@@ -50,13 +50,13 @@ const MoleculeTable = ({ molecules }: MoleculeTableProps) => {
                             <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                                 {molecule.class_type.length > 0 ? (
                                     molecule.class_type.map((type, idx) => (
-                                        <ClassTypeBadge
+                                        <CategoryBadge
                                             key={idx}
                                             classType={type}
                                         />
                                     ))
                                 ) : (
-                                    <ClassTypeBadge
+                                    <CategoryBadge
                                         classType={{ name: "None" }}
                                     />
                                 )}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Molecule3DViewer from "@/components/Molecule3DViewer";
-import ClassTypeBadge from "@/components/class_type_badge";
+import CategoryBadge from "@/components/CategoryBadge";
 
 import {
     AtomIcon,
@@ -56,7 +56,7 @@ export const sections = {
                 <h3 className="text-xl font-semibold">Class Type</h3>
                 <div className="flex flex-wrap">
                     {(molecule.class_type || []).map((type, index) => (
-                        <ClassTypeBadge
+                        <CategoryBadge
                             key={index}
                             classType={type}
                             abbreviate={false}
