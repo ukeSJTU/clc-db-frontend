@@ -2,10 +2,8 @@
 
 import { PaginationComponent } from "@/components/Pagination";
 import { useState, useEffect } from "react";
-import MoleculeCard from "@/components/MoleculeCard";
-import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
-import { MolecularGridLayout } from "@/components/OverviewLayouts";
+import OverviewContainer from "@/components/OverviewContainer";
 
 const fetchMoleculeData = async (page: number, pageSize: number) => {
     const response = await api.get(
@@ -54,13 +52,7 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
                 />
             </div>
 
-            {/* Main Content */}
-            {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
-                {molecules.map((molecule: MoleculeProps, index: number) => (
-                    <MoleculeCard key={index} {...molecule} />
-                ))}
-            </div> */}
-            <MolecularGridLayout molecules={molecules} />
+            <OverviewContainer molecules={molecules} />
         </div>
     );
 };

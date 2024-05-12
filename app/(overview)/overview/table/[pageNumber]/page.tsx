@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from "react";
 import api from "@/utils/api";
-
-// import MoleculeTable from "@/components/overview_table";
-import { MolecularTableLayout } from "@/components/OverviewLayouts";
 import { PaginationComponent } from "@/components/Pagination";
+import OverviewContainer from "@/components/OverviewContainer";
 
 const fetchMoleculeData = async (page: number, pageSize: number) => {
     const response = await api.get(
@@ -54,9 +52,7 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
             </div>
 
             {/* Main Content */}
-            <div className="shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-                <MolecularTableLayout molecules={molecules} />
-            </div>
+            <OverviewContainer molecules={molecules} initialLayout="table" />
         </div>
     );
 };

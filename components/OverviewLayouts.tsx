@@ -75,7 +75,7 @@ const MoleculeDataRow = ({ molecule }: { molecule: MoleculeProps }) => {
 // This component displays the molecules in a table layout
 const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
     return (
-        <div className="overflow-auto">
+        <div className="shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
