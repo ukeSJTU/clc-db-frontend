@@ -15,7 +15,7 @@ interface SearchResultsContainerProps {
 
 const SearchResultsContainer: React.FC<SearchResultsContainerProps> = ({
     molecules,
-    initialLayout = "grid", // Default to 'grid' layout
+    initialLayout = "grid",
 }) => {
     const [layout, setLayout] = useState<"grid" | "table">(initialLayout);
 
