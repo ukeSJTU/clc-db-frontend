@@ -1,7 +1,8 @@
-import ChartComponent from "@/components/charts/SmileTypeDistributionChart";
-import WeightDistributionChart from "@/components/charts/WeightDistributionChart";
-import ClasstypeDistChart from "@/components/charts/ClassTypeDistributionBarChart";
-
+import {
+    WeightDistributionChart,
+    ChartComponent,
+    ClasstypeDistChart,
+} from "@/components/StatsCharts";
 export default function Page() {
     return (
         <div>
