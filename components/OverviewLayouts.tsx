@@ -28,7 +28,10 @@ const MoleculeDataRow = ({ molecule }: { molecule: MoleculeProps }) => {
     return (
         <tr className="hover:bg-gray-300/10">
             {/* Name column with ellipsis if too long */}
-            <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+            <td
+                className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap"
+                title={molecule.name}
+            >
                 {molecule.name}
             </td>
             {/* CAS ID column without truncation */}
