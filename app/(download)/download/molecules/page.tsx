@@ -1,5 +1,4 @@
 import React from "react";
-import DownloadTableComponent from "@/components/download_table";
 
 export default function Home() {
     return (

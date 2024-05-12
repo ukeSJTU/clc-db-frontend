@@ -91,11 +91,11 @@ const Navbar = () => {
                                     ID.
                                 </ListItem>
                                 <ListItem
-                                    href="/download/classtypes"
-                                    title="Class Type"
+                                    href="/download/categories"
+                                    title="Category"
                                 >
                                     Download a group of molecules of the same
-                                    class type.
+                                    Category.
                                 </ListItem>
                             </ul>
                         </NavigationMenuContent>

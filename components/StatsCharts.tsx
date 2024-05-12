@@ -60,7 +60,7 @@ const ClasstypeDistChart = () => {
 
     return (
         <div>
-            <h2>Molecule Distribution by Class Type</h2>
+            <h2>Molecule Distribution by Category</h2>
             <Bar
                 data={chartData}
                 options={{
@@ -69,7 +69,7 @@ const ClasstypeDistChart = () => {
                         legend: { position: "top" },
                         title: {
                             display: true,
-                            text: "Class Type Distribution",
+                            text: "Category Distribution",
                         },
                     },
                 }}

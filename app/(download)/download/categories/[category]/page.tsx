@@ -8,7 +8,7 @@ import api from "@/utils/api";
 import { Button } from "@/components/ui/button";
 import downloadFiles from "@/lib/download";
 
-const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
+const ClassTypePage = ({ params }: { params: { category: string } }) => {
     const [molecules, setMolecules] = useState<MoleculeProps[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -18,7 +18,7 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
     useEffect(() => {
         const fetchMolecules = async () => {
             const response = await api.get(
-                `/search/molecules?class_type=${params.classtype}&page=${page}&page_size=${pageSize}`
+                `/search/molecules?category=${params.category}&page=${page}&page_size=${pageSize}`
             );
             const data = response.data;
             setMolecules(data.results);
@@ -26,7 +26,7 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
         };
 
         fetchMolecules();
-    }, [params.classtype, page, pageSize]);
+    }, [params.category, page, pageSize]);
 
     // Download only the current page's molecules
     const handleDownloadPage = () => {
@@ -50,12 +50,12 @@ const ClassTypePage = ({ params }: { params: { classtype: string } }) => {
         // Fetch all molecules belonging to this category in batches
         let hasNext = true;
         while (hasNext) {
-            // console.log(
-            //     `/search/molecules?class_type=${params.classtype}&page=${nextPage}&page_size=${allPageSize}`
-            // );
+            console.log(
+                `/search/molecules?category=${params.category}&page=${nextPage}&page_size=${allPageSize}`
+            );
             try {
                 const response = await api.get(
-                    `/search/molecules?class_type=${params.classtype}&page=${nextPage}&page_size=${allPageSize}`
+                    `/search/molecules?category=${params.category}&page=${nextPage}&page_size=${allPageSize}`
                 );
                 const data = response.data;
                 // console.log("Fetching page", nextPage);

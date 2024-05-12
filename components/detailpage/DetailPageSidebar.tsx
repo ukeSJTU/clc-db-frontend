@@ -25,8 +25,8 @@ const sections: SectionProps[] = [
         icon: <UserIcon className="h-5 w-5" />,
     },
     {
-        id: "class-type",
-        label: "Class Type",
+        id: "category",
+        label: "Category",
         icon: <Rows3Icon className="h-5 w-5" />,
     },
     {

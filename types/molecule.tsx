@@ -1,52 +1,28 @@
-// export type simplifiedMoleculeProps = {
-//     name: string;
-//     cas_id: string;
-//     class_type: { name: string }[];
-// };
-
-// export type MoleculeProps = {
-//     name: string;
-//     cas_id: string;
-//     class_type: { name: string }[];
-
-//     url: string;
-//     pubchem_url: string;
-
-//     smiles: string;
-//     smiles_type: { smile: string }[];
-
-//     remark?: string;
-// };
-
-// export type overviewCardMoleculeProps = {
-//     name: string;
-//     cas_id: string;
-//     class_type: { name: string }[];
-//     molecule_formula: string;
-//     molecular_weight: number;
-// };
-
 export type Category = {
     id: number;
     name: string;
 };
 
-export type Smile = {
+export type Chirality = {
     id: number;
-    smile: string;
+    name: string;
 };
 
 export type MoleculeProps = {
     name: string;
     cas_id: string;
     pubchem_cid?: string; // Optional as it can be empty
-    class_type: Category[]; // Array of related categories
-    url?: string; // Optional external URL field
+    category: Category[]; // Array of related categories
     pubchem_url?: string; // Optional PubChem URL field
     smiles: string;
-    smiles_type: Smile[]; // Array of related smiles types
+    chirality: Chirality[]; // Array of related chirality types
+    description?: string; // Optional description field
     smiles_iupac?: string; // Optional IUPAC name field
     molecule_formula?: string; // Optional molecular formula
     molecular_weight?: number; // Optional molecular weight
-    remark?: string; // Optional remark field
+    heavy_atom_count?: number; // Optional heavy atom count
+    ring_count?: number; // Optional ring count
+    hydrogen_bond_acceptor_count?: number; // Optional hydrogen bond acceptor count
+    hydrogen_bond_donor_count?: number; // Optional hydrogen bond donor count
+    rotatable_bond_count?: number; // Optional rotatable bond count
 };

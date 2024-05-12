@@ -5,14 +5,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 interface ClassTypeLayoutProps {
     children: React.ReactNode;
-    params: { classtype: string };
+    params: { category: string };
 }
 
 export default function ClassTypeLayout({
     children,
     params,
 }: ClassTypeLayoutProps) {
-    const decodedClassType = decodeURIComponent(params.classtype);
+    const decodedClassType = decodeURIComponent(params.category);
 
     return (
         <div className="flex flex-col gap-4 p-4">
@@ -23,7 +23,7 @@ export default function ClassTypeLayout({
                         Searching for Molecules of:
                     </h2>
                     <CategoryBadge
-                        classType={{ name: decodedClassType }}
+                        category={{ name: decodedClassType }}
                         abbreviate={false}
                     />
                 </div>

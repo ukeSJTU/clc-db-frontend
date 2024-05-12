@@ -16,7 +16,7 @@ import MoleculeURLs from "@/components/detailpage/MoleculeURLs";
 const sections = [
     { id: "molecule-name", label: "Molecule Name" },
     { id: "cas-id", label: "CAS ID" },
-    { id: "class-type", label: "Class Type" },
+    { id: "category", label: "Category" },
     { id: "image", label: "Image" },
     { id: "structure", label: "3D Structure" },
     { id: "smile", label: "SMILE" },
@@ -107,7 +107,7 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                         <p className="text-xl font-semibold">CAS ID</p>
                         <p>{molecule.cas_id || "N/A"}</p>
                     </section>
-                    <section id="class-type">
+                    <section id="category">
                         <MoleculeCategory molecule={molecule} />
                     </section>
                     <section id="image">

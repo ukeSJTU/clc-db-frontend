@@ -7,11 +7,6 @@ import React, { useEffect, useState } from "react";
 import api from "@/utils/api";
 import CategoryBadge from "@/components/CategoryBadge";
 
-type ClassTypeGroup = {
-    class_type: string;
-    molecules: MoleculeProps[];
-};
-
 const CategoriesPage = () => {
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -26,27 +21,6 @@ const CategoriesPage = () => {
         fetchCategories();
     }, []);
 
-    const handleDownload = async (
-        molecules: MoleculeProps[],
-        class_type: string
-    ): Promise<void> => {
-        // Prepare the molecule data for download
-        const jsonString = JSON.stringify({ class_type, molecules }, null, 2);
-        const blob = new Blob([jsonString], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-
-        // Create and trigger a download action
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${class_type}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        // Clean up the URL
-        URL.revokeObjectURL(url);
-    };
-
     return (
         <div className="flex flex-col items-center p-4">
             <h1 className="text-2xl font-bold mb-6">Available Class Types</h1>
@@ -54,7 +28,7 @@ const CategoriesPage = () => {
                 {categories.map((category) => (
                     <CategoryBadge
                         key={category.id}
-                        classType={{ name: category.name }}
+                        category={{ name: category.name }}
                         abbreviate={false}
                     />
                 ))}

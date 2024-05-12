@@ -19,18 +19,18 @@ const generateCsvContent = (molecules: MoleculeProps[]) => {
     const csvHeaders = [
         "Name",
         "CAS ID",
-        "Class Type(s)",
+        "Category",
         "Molecule Formula",
         "Molecular Weight",
     ];
 
     const csvRows = molecules.map((molecule) => {
-        const classTypes =
-            molecule.class_type.map((type) => type.name).join(", ") || "";
+        const categories =
+            molecule.category.map((type) => type.name).join(", ") || "";
         return [
             escapeCsvField(molecule.name || ""),
             escapeCsvField(molecule.cas_id || ""),
-            escapeCsvField(classTypes),
+            escapeCsvField(categories),
             escapeCsvField(molecule.molecule_formula || ""),
             molecule.molecular_weight
                 ? molecule.molecular_weight.toFixed(3)

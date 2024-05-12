@@ -4,12 +4,12 @@ import CategoryBadge from "@/components/CategoryBadge";
 const MoleculeCategory = ({ molecule }: { molecule: MoleculeProps }) => {
     return (
         <>
-            <h3 className="text-xl font-semibold">Class Type</h3>
+            <h3 className="text-xl font-semibold">Category</h3>
             <div className="flex flex-wrap">
-                {(molecule.class_type || []).map((type, index) => (
+                {(molecule.category || []).map((type, index) => (
                     <CategoryBadge
                         key={index}
-                        classType={type}
+                        category={type}
                         abbreviate={false}
                     />
                 ))}

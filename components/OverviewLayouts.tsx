@@ -37,18 +37,18 @@ const MoleculeDataRow = ({ molecule }: { molecule: MoleculeProps }) => {
             </td>
             {/* CAS ID column without truncation */}
             <td className="px-6 py-4 whitespace-nowrap">{molecule.cas_id}</td>
-            {/* Class Type column with ellipsis */}
+            {/* Category column with ellipsis */}
             <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
-                {molecule.class_type.length > 0 ? (
-                    molecule.class_type.map((type, idx) => (
+                {molecule.category.length > 0 ? (
+                    molecule.category.map((type, idx) => (
                         <CategoryBadge
                             key={idx}
-                            classType={type}
+                            category={type}
                             abbreviate={false}
                         />
                     ))
                 ) : (
-                    <CategoryBadge classType={{ name: "None" }} />
+                    <CategoryBadge category={{ name: "None" }} />
                 )}
             </td>
             <td className="px-6 py-4">
@@ -86,7 +86,7 @@ const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
                             CAS ID
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Class Type
+                            Category
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Operations
@@ -131,10 +131,10 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                     <div className="flex flex-col items-start">
                         {/* <p className="font-semibold">Category</p> */}
                         <div className="flex flex-wrap">
-                            {molecule.class_type.map((type, index) => (
+                            {molecule.category.map((type, index) => (
                                 <CategoryBadge
                                     key={index}
-                                    classType={type}
+                                    category={type}
                                     abbreviate={false}
                                 />
                             ))}
