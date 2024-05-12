@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import downloadMolecule from "@/lib/download";
 import MoleculeFormulaSpan from "./MoleculeFormulaSpan";
+import api from "@/utils/api";
 
 // A number of molecules to be displayed
 type MoleculesProps = {
@@ -175,7 +176,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             >
                                 <Image
                                     alt="2D Image"
-                                    src={`https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${molecule.pubchem_cid}&width=500&height=500`}
+                                    src={`${process.env.NEXT_PUBLIC_DOMAIN}/static/2Dimages/${molecule.cas_id}.sdf.png`}
                                     layout="fill"
                                     objectFit="contain"
                                 />
