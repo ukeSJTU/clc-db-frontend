@@ -1,15 +1,11 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { MoleculeProps } from "@/types/molecule";
-import downloadMolecule from "@/lib/download";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CategoryBadge from "@/components/CategoryBadge";
 import { ZipDownloadButton } from "@/components/DownloadButtons";
-import MoleculeFormulaSpan from "@/components/MoleculeFormulaSpan";
 import MoleculeCard from "@/components/MoleculeCard";
 
 // A number of molecules to be displayed
@@ -17,14 +13,62 @@ type MoleculesProps = {
     molecules: MoleculeProps[];
 };
 
-// This component displays the molecules in a table layout
-const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
+// This component displays a single row of molecule data
+// Modify this component to fit your data structure and desired ui
+const MoleculeDataRow = ({
+    molecule,
+    index,
+}: {
+    molecule: MoleculeProps;
+    index: number;
+}) => {
     const router = useRouter();
 
-    const handleClick = (cas_id: string) => {
+    const handleDetail = (cas_id: string) => {
         router.push(`/detail/${cas_id}`);
     };
 
+    return (
+        <tr key={index} className="hover:bg-gray-300/10">
+            {/* Name column with ellipsis if too long */}
+            <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+                {molecule.name}
+            </td>
+            {/* CAS ID column without truncation */}
+            <td className="px-6 py-4 whitespace-nowrap">{molecule.cas_id}</td>
+            {/* Class Type column with ellipsis */}
+            <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+                {molecule.class_type.length > 0 ? (
+                    molecule.class_type.map((type, idx) => (
+                        <CategoryBadge key={idx} classType={type} />
+                    ))
+                ) : (
+                    <CategoryBadge classType={{ name: "None" }} />
+                )}
+            </td>
+            <td className="px-6 py-4">
+                <div className="flex flex-row justify-start space-x-2">
+                    {/* Download  Button */}
+                    <ZipDownloadButton
+                        molecules={[molecule]}
+                        sdfFiles={[`/all_sdfs/${molecule.cas_id}.sdf`]}
+                    />
+                    {/* View Details Button */}
+                    <Button
+                        variant="outline"
+                        color="blue"
+                        onClick={() => handleDetail(molecule.cas_id)}
+                    >
+                        Detail
+                    </Button>
+                </div>
+            </td>
+        </tr>
+    );
+};
+
+// This component displays the molecules in a table layout
+const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
     return (
         <div className="overflow-auto">
             <table className="min-w-full divide-y divide-gray-200">
@@ -46,52 +90,11 @@ const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {molecules.map((molecule, index) => (
-                        <tr key={index} className="hover:bg-gray-300/10">
-                            {/* Name column with ellipsis if too long */}
-                            <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
-                                {molecule.name}
-                            </td>
-                            {/* CAS ID column without truncation */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                {molecule.cas_id}
-                            </td>
-                            {/* Class Type column with ellipsis */}
-                            <td className="px-6 py-4 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
-                                {molecule.class_type.length > 0 ? (
-                                    molecule.class_type.map((type, idx) => (
-                                        <CategoryBadge
-                                            key={idx}
-                                            classType={type}
-                                        />
-                                    ))
-                                ) : (
-                                    <CategoryBadge
-                                        classType={{ name: "None" }}
-                                    />
-                                )}
-                            </td>
-                            <td className="px-6 py-4">
-                                <div className="flex flex-row justify-start space-x-2">
-                                    {/* Download  Button */}
-                                    <ZipDownloadButton
-                                        molecules={[molecule]}
-                                        sdfFiles={[
-                                            `/all_sdfs/${molecule.cas_id}.sdf`,
-                                        ]}
-                                    />
-                                    {/* View Details Button */}
-                                    <Button
-                                        variant="outline"
-                                        color="blue"
-                                        onClick={() =>
-                                            handleClick(molecule.cas_id)
-                                        }
-                                    >
-                                        Detail
-                                    </Button>
-                                </div>
-                            </td>
-                        </tr>
+                        <MoleculeDataRow
+                            molecule={molecule}
+                            index={index}
+                            key={index}
+                        />
                     ))}
                 </tbody>
             </table>
