@@ -1,6 +1,6 @@
 "use client";
 
-// components/Navbar.tsx
+// This is the main navigation bar component that displays the main menu items.
 import Link from "next/link";
 import * as React from "react";
 
@@ -17,9 +17,9 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-const NavbarComponent = () => {
+const Navbar = () => {
     return (
-        <div className="flex justify-between flex-row w-full top-0 p-4 z-10 fixed bg-white">
+        <div className="flex justify-between flex-row w-full top-0 p-4 z-10 sticky bg-white">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
@@ -170,7 +170,7 @@ const NavbarComponent = () => {
     );
 };
 
-export default NavbarComponent;
+export default Navbar;
 
 const ListItem = React.forwardRef<
     React.ElementRef<"a">,
