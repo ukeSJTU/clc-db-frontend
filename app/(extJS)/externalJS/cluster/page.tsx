@@ -11,6 +11,7 @@ import DescriptorParameters from "@/components/clusterpage/DescriptorParams";
 import ClusteringOptions from "@/components/clusterpage/ClusteringOptions";
 
 import api from "@/utils/api";
+import { Separator } from "@/components/ui/separator";
 
 const FormSchema = z.object({
     selectedFiles: z.array(z.instanceof(File)),
@@ -86,45 +87,54 @@ const ClusterPage: React.FC = () => {
     };
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(handleSubmit)}
-                className="space-y-6"
-            >
-                <FileUploadComponent
-                    control={form.control}
-                    name="selectedFiles"
-                />
-                <DescriptorSelector control={form.control} name="descriptor" />
-                <DescriptorParameters
-                    control={form.control}
-                    descriptor={form.watch("descriptor")}
-                />
-                <ClusteringOptions
-                    control={form.control}
-                    fileListLength={form.watch("selectedFiles").length}
-                    bits={form.watch("bits")}
-                    clusterMethod={form.watch("clusterMethod")}
-                />
+        <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(handleSubmit)}
+                    className="space-y-6"
+                >
+                    <FileUploadComponent
+                        control={form.control}
+                        name="selectedFiles"
+                    />
+                    <Separator className="h-1" />
+                    <DescriptorSelector
+                        control={form.control}
+                        name="descriptor"
+                    />
+                    <Separator className="h-1" />
+                    <DescriptorParameters
+                        control={form.control}
+                        descriptor={form.watch("descriptor")}
+                    />
+                    <Separator className="h-1" />
+                    <ClusteringOptions
+                        control={form.control}
+                        fileListLength={form.watch("selectedFiles").length}
+                        bits={form.watch("bits")}
+                        clusterMethod={form.watch("clusterMethod")}
+                    />
 
-                <Button type="submit">Submit</Button>
-            </form>
+                    <Button type="submit">Submit</Button>
+                </form>
 
-            {clusteringResults && (
-                <div>
-                    <h2>Clustering Results</h2>
-                    <p>
-                        Coordinates:{" "}
-                        {JSON.stringify(clusteringResults.coordinates)}
-                    </p>
-                    <p>
-                        Class Numbers:{" "}
-                        {JSON.stringify(clusteringResults.class_numbers)}
-                    </p>
-                    <p>IDs: {JSON.stringify(clusteringResults.ids)}</p>
-                </div>
-            )}
-        </Form>
+                <Separator className="h-1" />
+                {clusteringResults && (
+                    <div>
+                        <h2>Clustering Results</h2>
+                        <p>
+                            Coordinates:{" "}
+                            {JSON.stringify(clusteringResults.coordinates)}
+                        </p>
+                        <p>
+                            Class Numbers:{" "}
+                            {JSON.stringify(clusteringResults.class_numbers)}
+                        </p>
+                        <p>IDs: {JSON.stringify(clusteringResults.ids)}</p>
+                    </div>
+                )}
+            </Form>
+        </div>
     );
 };
 
