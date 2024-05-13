@@ -26,7 +26,7 @@ ChartJS.register(
     ArcElement
 );
 
-const ClasstypeDistChart = () => {
+const CategoryDistChart = () => {
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
@@ -60,7 +60,6 @@ const ClasstypeDistChart = () => {
 
     return (
         <div>
-            <h2>Molecule Distribution by Category</h2>
             <Bar
                 data={chartData}
                 options={{
@@ -68,7 +67,7 @@ const ClasstypeDistChart = () => {
                     plugins: {
                         legend: { position: "top" },
                         title: {
-                            display: true,
+                            display: false,
                             text: "Category Distribution",
                         },
                     },
@@ -78,7 +77,7 @@ const ClasstypeDistChart = () => {
     );
 };
 
-const ChartComponent = () => {
+const ChiralityDistChart = () => {
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
@@ -117,7 +116,6 @@ const ChartComponent = () => {
 
     return (
         <div>
-            <h2>Molecule Distribution</h2>
             <Pie
                 data={chartData}
                 options={{
@@ -125,8 +123,8 @@ const ChartComponent = () => {
                     plugins: {
                         legend: { position: "top" },
                         title: {
-                            display: true,
-                            text: "Smile Type Distribution",
+                            display: false,
+                            text: "Chirality Distribution",
                         },
                     },
                 }}
@@ -166,17 +164,14 @@ const WeightDistributionChart = () => {
 
     return (
         <div className="bg-white shadow-lg rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">
-                Molecule Weight Distribution
-            </h2>
             <Bar
                 data={chartData}
                 options={{
                     responsive: true,
                     plugins: {
-                        legend: { position: "top" },
+                        legend: { position: "chartArea" },
                         title: {
-                            display: true,
+                            display: false,
                             text: "Molecule Weight Distribution",
                         },
                     },
@@ -186,4 +181,4 @@ const WeightDistributionChart = () => {
     );
 };
 
-export { ChartComponent, ClasstypeDistChart, WeightDistributionChart };
+export { ChiralityDistChart, CategoryDistChart, WeightDistributionChart };
