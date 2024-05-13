@@ -1,5 +1,6 @@
 import React from "react";
 import { MoleculeProps } from "@/types/molecule";
+import CategoryBadge from "../CategoryBadge";
 
 const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
     return (
@@ -20,9 +21,15 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                     <tr>
                         <td className="py-2 pr-4 font-semibold">Category</td>
                         <td className="py-2">
-                            {molecule.category
-                                .map((category) => category.name)
-                                .join(", ")}
+                            <div className="flex flex-wrap">
+                                {molecule.category.map((type, index) => (
+                                    <CategoryBadge
+                                        key={index}
+                                        category={type}
+                                        abbreviate={false}
+                                    />
+                                ))}
+                            </div>
                         </td>
                     </tr>
                     <tr>
