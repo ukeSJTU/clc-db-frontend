@@ -7,10 +7,8 @@ import { Button } from "@/components/ui/button";
 import CategoryBadge from "@/components/CategoryBadge";
 import { ZipDownloadButton } from "@/components/DownloadButtons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
-import downloadMolecule from "@/lib/download";
 import MoleculeFormulaSpan from "./MoleculeFormulaSpan";
-import api from "@/utils/api";
+import Molecule2DViewer from "./Molecule2DViewer";
 
 // A number of molecules to be displayed
 type MoleculesProps = {
@@ -129,7 +127,6 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                         </p>
                     </div>
                     <div className="flex flex-col items-start">
-                        {/* <p className="font-semibold">Category</p> */}
                         <div className="flex flex-wrap">
                             {molecule.category.map((type, index) => (
                                 <CategoryBadge
@@ -150,7 +147,6 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             <MoleculeFormulaSpan
                                 formula={molecule.molecule_formula}
                             />
-                            {/* <p>{molecule.molecule_formula}</p> */}
                         </div>
                         <div className="space-y-2">
                             <p className="text-sm text-gray-500">
@@ -167,20 +163,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                                 2/3D Structure
                             </p>
 
-                            <div
-                                style={{
-                                    width: "230px",
-                                    height: "250px",
-                                    position: "relative",
-                                }}
-                            >
-                                <Image
-                                    alt="2D Image"
-                                    src={`${process.env.NEXT_PUBLIC_DOMAIN}/static/2Dimages/${molecule.cas_id}.sdf.png`}
-                                    layout="fill"
-                                    objectFit="contain"
-                                />
-                            </div>
+                            <Molecule2DViewer molecule={molecule} />
                         </div>
                     </div>
                 </CardContent>
