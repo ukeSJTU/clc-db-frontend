@@ -103,7 +103,7 @@ const SearchPage = () => {
                         onSmilesInput={handleSmilesInput}
                     />
                 </div>
-                <div className="flex md:flex-row items-center justify-start">
+                <div className="flex flex-row items-center justify-center px-4">
                     <DrawStructureComponent
                         onSubmit={handleSpecialSearchInput}
                         onClose={() => setShowDropdown(false)}

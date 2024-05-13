@@ -32,12 +32,15 @@ const DrawStructureComponent: React.FC<DrawStructureProps> = ({
 
     return (
         <div className="flex ">
-            <Button variant="ghost" onClick={() => setShowKekule(true)}>
-                <div className="relative flex flex-col items-center">
+            <div
+                onClick={() => setShowKekule(true)}
+                className="hover:bg-gray-200 hover:border-gray-400rounded-md p-4 cursor-pointer"
+            >
+                <div className="flex flex-col items-center">
                     <Pen size={50} />
                     Draw Structure
                 </div>
-            </Button>
+            </div>
 
             {showKekule && (
                 <KekuleComponent
@@ -101,12 +104,15 @@ const MultiCasIDSearchComponent: React.FC<MultiCasIDSearchProps> = ({
     const [showUploader, setShowUploader] = useState(false);
     return (
         <div className="flex ">
-            <Button variant="ghost" onClick={() => setShowUploader(true)}>
+            <div
+                onClick={() => setShowUploader(true)}
+                className="hover:bg-gray-200 hover:border-gray-400 rounded-md p-4 cursor-pointer"
+            >
                 <div className="relative flex flex-col items-center">
                     <List size={50} />
                     Multi ID
                 </div>
-            </Button>
+            </div>
 
             {showUploader && (
                 <CasIdUploader
