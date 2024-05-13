@@ -3,18 +3,31 @@
 
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import KekuleComponent from "@/components/searchpage/KekuleComponent";
-import { LucideIcon, PenIcon, ShuffleIcon, Pen, List } from "lucide-react";
+import { Pen, List } from "lucide-react";
+
+interface DrawStructureProps {
+    onSubmit: (smiles: string, type: string) => void;
+    onClose: () => void;
+}
 
 interface CasIdUploaderProps {
     onSubmit: (casIds: string) => void;
     onClose: () => void;
 }
 
-const DrawStructureComponent = ({ onSubmit, onClose }) => {
+interface MultiCasIDSearchProps {
+    onSubmit: (casIds: string, type: string) => void;
+    onClose: () => void;
+}
+
+const DrawStructureComponent: React.FC<DrawStructureProps> = ({
+    onSubmit,
+    onClose,
+}) => {
     const [showKekule, setShowKekule] = useState(false);
 
     return (
@@ -81,7 +94,10 @@ const CasIdUploader: React.FC<CasIdUploaderProps> = ({ onSubmit, onClose }) => {
     );
 };
 
-const MultiCasIDSearchComponent = ({ onSubmit, onClose }) => {
+const MultiCasIDSearchComponent: React.FC<MultiCasIDSearchProps> = ({
+    onSubmit,
+    onClose,
+}) => {
     const [showUploader, setShowUploader] = useState(false);
     return (
         <div className="flex ">
