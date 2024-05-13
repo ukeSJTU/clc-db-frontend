@@ -1,28 +1,23 @@
 "use client";
+
 import React, { useState, useEffect, useRef } from "react";
-import api from "@/utils/api";
-import { MoleculeProps } from "@/types/molecule";
 import { SelectDownloadButton } from "@/components/DownloadButtons";
 import TableOfContentsNav from "@/components/detailpage/TableOfContentsNav";
 import MoleculeHeader from "@/components/detailpage/MoleculeHeader";
-import MoleculeImageViewer from "@/components/detailpage/MoleculeImageViewer";
+import Molecule2DViewer from "@/components/Molecule2DViewer";
 import Molecule3DViewer from "@/components/Molecule3DViewer";
-import MoleculeCategory from "@/components/detailpage/MoleculeCategory";
-import MoleculeSmiles from "@/components/detailpage/MoleculeSmiles";
-import MoleculeSmileTypes from "@/components/detailpage/MoleculeSmileTypes";
-import MoleculeDescription from "@/components/detailpage/MoleculeDescription";
-import MoleculeURLs from "@/components/detailpage/MoleculeURLs";
+import MoleculeBasicInfoTable from "@/components/detailpage/BasicInfoTable";
+import MoleculePropertiesTable from "@/components/detailpage/PropertiesTable";
+
+import api from "@/utils/api";
+import { MoleculeProps } from "@/types/molecule";
 
 const sections = [
     { id: "molecule-name", label: "Molecule Name" },
-    { id: "cas-id", label: "CAS ID" },
-    { id: "category", label: "Category" },
+    { id: "basic-info", label: "Basic Information" },
     { id: "image", label: "Image" },
     { id: "structure", label: "3D Structure" },
-    { id: "smile", label: "SMILE" },
-    { id: "smile-type", label: "SMILE Type" },
-    { id: "description", label: "Description" },
-    { id: "urls", label: "URLs" },
+    { id: "properties", label: "Properties" },
 ];
 
 const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
@@ -103,15 +98,11 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                     <section id="molecule-name">
                         <MoleculeHeader molecule={molecule} />
                     </section>
-                    <section id="cas-id">
-                        <p className="text-xl font-semibold">CAS ID</p>
-                        <p>{molecule.cas_id || "N/A"}</p>
-                    </section>
-                    <section id="category">
-                        <MoleculeCategory molecule={molecule} />
+                    <section id="basic-info">
+                        <MoleculeBasicInfoTable molecule={molecule} />
                     </section>
                     <section id="image">
-                        <MoleculeImageViewer molecule={molecule} />
+                        <Molecule2DViewer molecule={molecule} />
                     </section>
                     <section id="structure">
                         <h3 className="text-xl font-semibold">3D Structure</h3>
@@ -119,17 +110,8 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                             <Molecule3DViewer casId={molecule.cas_id} />
                         </div>
                     </section>
-                    <section id="smile">
-                        <MoleculeSmiles molecule={molecule} />
-                    </section>
-                    <section id="smile-type">
-                        <MoleculeSmileTypes molecule={molecule} />
-                    </section>
-                    <section id="description">
-                        <MoleculeDescription molecule={molecule} />
-                    </section>
-                    <section id="urls">
-                        <MoleculeURLs molecule={molecule} />
+                    <section id="properties">
+                        <MoleculePropertiesTable molecule={molecule} />
                     </section>
                 </div>
             </div>
