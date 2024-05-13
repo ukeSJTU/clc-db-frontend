@@ -29,6 +29,12 @@ const FormSchema = z.object({
 
 const ClusterPage: React.FC = () => {
     const [clusteringResults, setClusteringResults] = React.useState<any>(null);
+    const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([]);
+
+    const handleFileChange = (files: File[]) => {
+        setUploadedFiles(files);
+        form.setValue("selectedFiles", files);
+    };
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -74,6 +80,9 @@ const ClusterPage: React.FC = () => {
                 minSamples: data.minSamples.toString(),
             };
 
+            // Log the request data
+            console.log("Request Data:", requestData);
+
             const clusteringResponse = await api.post(
                 "/cluster/process/",
                 requestData
@@ -87,7 +96,7 @@ const ClusterPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
+        <div className="w-full max-w-6xl mx-auto items-center">
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(handleSubmit)}
@@ -96,6 +105,7 @@ const ClusterPage: React.FC = () => {
                     <FileUploadComponent
                         control={form.control}
                         name="selectedFiles"
+                        onFileChange={handleFileChange}
                     />
                     <Separator className="h-1" />
                     <DescriptorSelector
