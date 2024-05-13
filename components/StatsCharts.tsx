@@ -32,12 +32,12 @@ const ClasstypeDistChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get("/stats/classes");
+                const response = await api.get("/stats/category");
                 const data = response.data;
 
                 console.log(data);
 
-                const labels = data.map((item) => item.class_type__name);
+                const labels = data.map((item) => item.category__name);
                 const counts = data.map((item) => item.count);
 
                 setChartData({
@@ -84,12 +84,12 @@ const ChartComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get("/stats/smiles");
+                const response = await api.get("/stats/chirality");
                 const data = response.data;
 
                 console.log(data);
 
-                const labels = data.map((item) => item.smiles_type__smile);
+                const labels = data.map((item) => item.chirality__name);
                 const counts = data.map((item) => item.count);
 
                 setChartData({
