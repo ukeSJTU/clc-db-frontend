@@ -11,11 +11,13 @@ import LayoutSwitch from "@/components/LayoutSwitch";
 interface SearchResultsContainerProps {
     molecules: MoleculeProps[];
     initialLayout?: "grid" | "table"; // Optional prop to set initial layout
+    useLayoutSwitch?: boolean; // Optional prop to enable layout switch
 }
 
 const OverviewContainer: React.FC<SearchResultsContainerProps> = ({
     molecules,
     initialLayout = "grid",
+    useLayoutSwitch = true,
 }) => {
     const [layout, setLayout] = useState<"grid" | "table">(initialLayout);
 
@@ -35,10 +37,12 @@ const OverviewContainer: React.FC<SearchResultsContainerProps> = ({
                 <MolecularTableLayout molecules={molecules} />
             )}
             <div className="pt-2">
-                <LayoutSwitch
-                    currentLayout={layout}
-                    onToggleLayout={setLayout}
-                />
+                {useLayoutSwitch && (
+                    <LayoutSwitch
+                        currentLayout={layout}
+                        onToggleLayout={setLayout}
+                    />
+                )}
             </div>
         </div>
     );

@@ -52,7 +52,11 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
             </div>
 
             {/* Main Content */}
-            <OverviewContainer molecules={molecules} initialLayout="table" />
+            <OverviewContainer
+                molecules={molecules}
+                initialLayout="table"
+                useLayoutSwitch={false}
+            />
         </div>
     );
 };
