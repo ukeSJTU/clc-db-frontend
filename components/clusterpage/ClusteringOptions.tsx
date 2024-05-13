@@ -130,7 +130,12 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                                                 ? 10
                                                 : fileListLength - 1
                                         }
-                                        {...field}
+                                        value={field.value}
+                                        onChange={(e) =>
+                                            field.onChange(
+                                                Number(e.target.value)
+                                            )
+                                        }
                                     />
                                 </FormControl>
                                 <FormMessage />
