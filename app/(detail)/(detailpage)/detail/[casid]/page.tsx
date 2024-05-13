@@ -76,43 +76,47 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
     const sdfFiles = [`/all_sdfs/${molecule.cas_id}.sdf`];
 
     return (
-        <div className="grid grid-cols-[250px_1fr] gap-4 lg:gap-8 p-4 lg:p-8 relative">
-            {/* Table of Contents */}
-            <TableOfContentsNav sections={sections} />
+        <div className="max-w-7xl mx-auto p-4">
+            <div className="grid grid-cols-[250px_1fr] gap-4 lg:gap-8 p-4 lg:p-8 relative">
+                {/* Table of Contents */}
+                <TableOfContentsNav sections={sections} />
 
-            {/* Main content */}
-            <div
-                ref={contentRef}
-                className="overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 lg:p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950"
-            >
-                {/* Download Button positioned above the main content */}
-                <div className="mb-4 flex justify-end">
-                    <SelectDownloadButton
-                        molecules={[molecule]}
-                        sdfFiles={sdfFiles}
-                    />
-                </div>
+                {/* Main content */}
+                <div
+                    ref={contentRef}
+                    className="overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 lg:p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950"
+                >
+                    {/* Download Button positioned above the main content */}
+                    <div className="mb-4 flex justify-end">
+                        <SelectDownloadButton
+                            molecules={[molecule]}
+                            sdfFiles={sdfFiles}
+                        />
+                    </div>
 
-                {/* Sections displaying molecule details */}
-                <div className="space-y-8">
-                    <section id="molecule-name">
-                        <MoleculeHeader molecule={molecule} />
-                    </section>
-                    <section id="basic-info">
-                        <MoleculeBasicInfoTable molecule={molecule} />
-                    </section>
-                    <section id="image">
-                        <Molecule2DViewer molecule={molecule} />
-                    </section>
-                    <section id="structure">
-                        <h3 className="text-xl font-semibold">3D Structure</h3>
-                        <div className="h-[200px] rounded-lg">
-                            <Molecule3DViewer casId={molecule.cas_id} />
-                        </div>
-                    </section>
-                    <section id="properties">
-                        <MoleculePropertiesTable molecule={molecule} />
-                    </section>
+                    {/* Sections displaying molecule details */}
+                    <div className="space-y-8">
+                        <section id="molecule-name">
+                            <MoleculeHeader molecule={molecule} />
+                        </section>
+                        <section id="basic-info">
+                            <MoleculeBasicInfoTable molecule={molecule} />
+                        </section>
+                        <section id="image">
+                            <Molecule2DViewer molecule={molecule} />
+                        </section>
+                        <section id="structure">
+                            <h3 className="text-xl font-semibold">
+                                3D Structure
+                            </h3>
+                            <div className="h-[200px] rounded-lg">
+                                <Molecule3DViewer casId={molecule.cas_id} />
+                            </div>
+                        </section>
+                        <section id="properties">
+                            <MoleculePropertiesTable molecule={molecule} />
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
