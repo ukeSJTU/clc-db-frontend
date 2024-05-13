@@ -103,6 +103,7 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                             <MoleculeBasicInfoTable molecule={molecule} />
                         </section>
                         <section id="image">
+                            <h3 className="text-xl font-semibold">Image</h3>
                             <Molecule2DViewer molecule={molecule} />
                         </section>
                         <section id="structure">

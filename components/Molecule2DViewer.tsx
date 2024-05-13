@@ -4,7 +4,6 @@ import Image from "next/image";
 const Molecule2DViewer = ({ molecule }: { molecule: MoleculeProps }) => {
     return (
         <>
-            <h3 className="text-xl font-semibold">Image</h3>
             {molecule.pubchem_cid ? (
                 <div
                     style={{
