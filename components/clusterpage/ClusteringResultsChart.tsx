@@ -1,10 +1,12 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
 
 interface ClusteringResultsChartProps {
     results: {
-        coordinates: number[][];
-        classNumbers: number[];
+        coordinates: string[][][];
+        class_numbers: number[];
         ids: string[];
     };
 }
@@ -13,6 +15,7 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
     results,
 }) => {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
+    const chartInstanceRef = useRef<Chart | null>(null);
 
     useEffect(() => {
         if (chartRef.current) {
@@ -21,13 +24,16 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
                 Chart.register(...registerables);
 
                 const data: ChartData = {
-                    datasets: results.classNumbers.map((classNumber) => ({
+                    datasets: results.class_numbers.map((classNumber) => ({
                         label: `Class ${classNumber}`,
                         data: results.coordinates[classNumber].map(
-                            (coords, index) => ({
-                                x: coords[0],
-                                y: coords[1],
-                                label: results.ids[index],
+                            (_, index) => ({
+                                x: parseFloat(
+                                    results.coordinates[classNumber][index][0]
+                                ),
+                                y: parseFloat(
+                                    results.coordinates[classNumber][index][1]
+                                ),
                             })
                         ),
                         backgroundColor: `rgba(${Math.floor(
@@ -65,7 +71,13 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
                     },
                 };
 
-                new Chart(ctx, {
+                // Destroy the previous chart instance if it exists
+                if (chartInstanceRef.current) {
+                    chartInstanceRef.current.destroy();
+                }
+
+                // Create a new chart instance
+                chartInstanceRef.current = new Chart(ctx, {
                     type: "scatter",
                     data,
                     options,
