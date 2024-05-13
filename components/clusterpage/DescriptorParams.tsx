@@ -32,14 +32,16 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                 name="bits"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Bits of E3FP</FormLabel>
+                        <FormLabel>nBits of RDKit</FormLabel>
                         <FormControl>
                             <Input
                                 type="number"
-                                min={0}
+                                // min={0}
                                 step={24}
-                                defaultValue={1024}
-                                {...field}
+                                value={field.value}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => field.onChange(Number(e.target.value))}
                             />
                         </FormControl>
                         <FormMessage />
@@ -67,7 +69,9 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                         <FormLabel>Feature</FormLabel>
                         <FormControl>
                             <RadioGroup
-                                onValueChange={field.onChange}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => field.onChange(Boolean(e.target.value))}
                                 defaultValue={field.value}
                             >
                                 <RadioGroupItem value="Yes">Yes</RadioGroupItem>
@@ -94,10 +98,12 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                         <FormControl>
                             <Input
                                 type="number"
-                                min={0}
+                                // min={0}
                                 step={24}
-                                defaultValue={1024}
-                                {...field}
+                                value={field.value}
+                                onChange={(e) =>
+                                    field.onChange(Number(e.target.value))
+                                }
                             />
                         </FormControl>
                         <FormMessage />
