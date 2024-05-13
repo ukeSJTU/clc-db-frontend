@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MolecularGridLayout } from "@/components/OverviewLayouts";
+// import { MolecularGridLayout } from "@/components/OverviewLayouts";
+import OverviewContainer from "@/components/OverviewContainer";
 import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
@@ -104,7 +105,8 @@ const ClassTypePage = ({ params }: { params: { category: string } }) => {
                     totalPages={totalPages}
                 />
             </div>
-            <MolecularGridLayout molecules={molecules} />
+            <OverviewContainer molecules={molecules} />
+            {/* <MolecularGridLayout molecules={molecules} /> */}
         </div>
     );
 };
