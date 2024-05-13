@@ -17,6 +17,12 @@ const nextConfig = {
                 port: "8000",
                 pathname: "/static/2Dimages/**",
             },
+            {
+                protocol: "http",
+                hostname: "www.ukehome.top",
+                port: "",
+                pathname: "/static/**",
+            },
         ],
     },
     compiler: {

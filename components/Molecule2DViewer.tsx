@@ -14,7 +14,7 @@ const Molecule2DViewer = ({ molecule }: { molecule: MoleculeProps }) => {
                 >
                     <Image
                         alt="2D Image"
-                        src={`${process.env.NEXT_PUBLIC_DOMAIN}/static/2Dimages/${molecule.cas_id}.sdf.png`}
+                        src={`${process.env.NEXT_PUBLIC_STATIC}/2Dimages/${molecule.cas_id}.sdf.png`}
                         layout="fill"
                         objectFit="contain"
                     />
