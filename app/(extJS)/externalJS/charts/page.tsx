@@ -1,7 +1,7 @@
 import {
     WeightDistributionChart,
-    ChartComponent,
-    ClasstypeDistChart,
+    CategoryDistChart,
+    ChiralityDistChart,
 } from "@/components/StatsCharts";
 export default function Page() {
     return (
@@ -9,8 +9,8 @@ export default function Page() {
             <h1>Charts</h1>
             <p>This is the Charts page.</p>
             <WeightDistributionChart />
-            <ChartComponent />
-            <ClasstypeDistChart />
+            <CategoryDistChart />
+            <ChiralityDistChart />
         </div>
     );
 }
