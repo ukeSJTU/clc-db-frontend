@@ -9,6 +9,7 @@ import FileUploadComponent from "@/components/clusterpage/SDFUploader";
 import DescriptorSelector from "@/components/clusterpage/DescriptorSelector";
 import DescriptorParameters from "@/components/clusterpage/DescriptorParams";
 import ClusteringOptions from "@/components/clusterpage/ClusteringOptions";
+import ClusteringResultsChart from "@/components/clusterpage/ClusteringResultsChart";
 
 import api from "@/utils/api";
 import { Separator } from "@/components/ui/separator";
@@ -132,7 +133,9 @@ const ClusterPage: React.FC = () => {
                 {clusteringResults && (
                     <div>
                         <h2>Clustering Results</h2>
-                        <p>
+                        <ClusteringResultsChart results={clusteringResults} />
+
+                        {/* <p>
                             Coordinates:{" "}
                             {JSON.stringify(clusteringResults.coordinates)}
                         </p>
@@ -140,7 +143,7 @@ const ClusterPage: React.FC = () => {
                             Class Numbers:{" "}
                             {JSON.stringify(clusteringResults.class_numbers)}
                         </p>
-                        <p>IDs: {JSON.stringify(clusteringResults.ids)}</p>
+                        <p>IDs: {JSON.stringify(clusteringResults.ids)}</p> */}
                     </div>
                 )}
             </Form>
