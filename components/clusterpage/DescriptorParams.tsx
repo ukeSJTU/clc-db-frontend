@@ -92,7 +92,13 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                     <FormItem>
                         <FormLabel>nBits of RDKit</FormLabel>
                         <FormControl>
-                            <Input type="number" min={0} step={24} {...field} />
+                            <Input
+                                type="number"
+                                min={0}
+                                step={24}
+                                defaultValue={1024}
+                                {...field}
+                            />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
