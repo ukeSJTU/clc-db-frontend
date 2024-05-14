@@ -134,7 +134,7 @@ const ClusterPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full max-w-6xl mx-auto items-center">
+        <div className="w-full max-w-6xl mx-auto items-center space-y-6">
             <FormProvider {...form}>
                 <FileUploadComponent
                     control={form.control}
@@ -172,26 +172,28 @@ const ClusterPage: React.FC = () => {
 
                 <Separator className="h-1" />
 
-                {isLoading && (
-                    <p>Sending request and waiting for response...</p>
-                )}
-                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                {clusteringResults && (
-                    <div>
-                        <h2>Clustering Results</h2>
-                        <ClusteringResultsChart results={clusteringResults} />
-                    </div>
-                )}
-
-                {/* <p>
-                            Coordinates:{" "}
-                            {JSON.stringify(clusteringResults.coordinates)}
-                        </p>
-                        <p>
-                            Class Numbers:{" "}
-                            {JSON.stringify(clusteringResults.class_numbers)}
-                        </p>
-                        <p>IDs: {JSON.stringify(clusteringResults.ids)}</p> */}
+                <div className="mt-8 flex flex-col items-center justify-center">
+                    {isLoading && (
+                        <div className="flex items-center space-x-2">
+                            <p>Sending request and waiting for response...</p>
+                        </div>
+                    )}
+                    {errorMessage && (
+                        <div className="flex items-center space-x-2">
+                            <p className="text-red-500">{errorMessage}</p>
+                        </div>
+                    )}
+                    {clusteringResults && (
+                        <div className="mt-4">
+                            <h2 className="text-xl font-semibold">
+                                Clustering Results
+                            </h2>
+                            <ClusteringResultsChart
+                                results={clusteringResults}
+                            />
+                        </div>
+                    )}
+                </div>
             </Form>
         </div>
     );
