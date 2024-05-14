@@ -80,25 +80,32 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                         control={control}
                         name="rdkitInv"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="space-y-3">
                                 <FormLabel>Feature</FormLabel>
                                 <FormControl>
                                     <RadioGroup
-                                        onChange={(
-                                            e: React.ChangeEvent<HTMLInputElement>
-                                        ) =>
-                                            field.onChange(
-                                                Boolean(e.target.value)
-                                            )
+                                        onValueChange={field.onChange}
+                                        defaultValue={
+                                            field.value ? "Yes" : "No"
                                         }
-                                        defaultValue={field.value}
+                                        className="flex flex-col space-y-1"
                                     >
-                                        <RadioGroupItem value="Yes">
-                                            Yes
-                                        </RadioGroupItem>
-                                        <RadioGroupItem value="No">
-                                            No
-                                        </RadioGroupItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Yes" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                Yes
+                                            </FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="No" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                No
+                                            </FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
@@ -119,57 +126,6 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
             </CardHeader>
             <CardContent>
                 <div className="flex flex-col space-y-4">
-                    <FormField
-                        control={control}
-                        name="bits"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>nBits of RDKit</FormLabel>
-                                {/* ... (Input component) */}
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={control}
-                        name="rdkitRadius"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Radius</FormLabel>
-                                {/* ... (Slider component) */}
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={control}
-                        name="rdkitUseFeatures"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>useFeatures</FormLabel>
-                                {/* ... (RadioGroup component) */}
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={control}
-                        name="rdkitUseBondTypes"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>useBondTypes</FormLabel>
-                                {/* ... (RadioGroup component) */}
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={control}
-                        name="rdkitUseChirality"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>useChirality</FormLabel>
-                                {/* ... (RadioGroup component) */}
-                            </FormItem>
-                        )}
-                    />
-
                     <FormField
                         control={control}
                         name="bits"
@@ -215,7 +171,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                         control={control}
                         name="rdkitUseFeatures"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="space-y-3">
                                 <FormLabel>useFeatures</FormLabel>
                                 <FormControl>
                                     <RadioGroup
@@ -223,13 +179,24 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
+                                        className="flex flex-col space-y-1"
                                     >
-                                        <RadioGroupItem value="Yes">
-                                            Yes
-                                        </RadioGroupItem>
-                                        <RadioGroupItem value="No">
-                                            No
-                                        </RadioGroupItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Yes" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                Yes
+                                            </FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="No" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                No
+                                            </FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
@@ -240,7 +207,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                         control={control}
                         name="rdkitUseBondTypes"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="space-y-3">
                                 <FormLabel>useBondTypes</FormLabel>
                                 <FormControl>
                                     <RadioGroup
@@ -248,13 +215,24 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
+                                        className="flex flex-col space-y-1"
                                     >
-                                        <RadioGroupItem value="Yes">
-                                            Yes
-                                        </RadioGroupItem>
-                                        <RadioGroupItem value="No">
-                                            No
-                                        </RadioGroupItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Yes" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                Yes
+                                            </FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="No" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                No
+                                            </FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
@@ -265,7 +243,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                         control={control}
                         name="rdkitUseChirality"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="space-y-3">
                                 <FormLabel>useChirality</FormLabel>
                                 <FormControl>
                                     <RadioGroup
@@ -274,12 +252,22 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                             field.value ? "Yes" : "No"
                                         }
                                     >
-                                        <RadioGroupItem value="Yes">
-                                            Yes
-                                        </RadioGroupItem>
-                                        <RadioGroupItem value="No">
-                                            No
-                                        </RadioGroupItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Yes" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                Yes
+                                            </FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="No" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">
+                                                No
+                                            </FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
