@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import KekuleComponent from "@/components/searchpage/KekuleComponent";
-import { Pen, List } from "lucide-react";
+import { Pen, List, FilePlus2 } from "lucide-react";
 
 interface DrawStructureProps {
     onSubmit: (smiles: string, type: string) => void;
@@ -34,7 +34,7 @@ const DrawStructureComponent: React.FC<DrawStructureProps> = ({
         <div className="flex ">
             <div
                 onClick={() => setShowKekule(true)}
-                className="hover:bg-gray-200 hover:border-gray-400rounded-md p-4 cursor-pointer"
+                className="hover:bg-gray-200 hover:border-gray-400 rounded-md p-4 cursor-pointer"
             >
                 <div className="flex flex-col items-center">
                     <Pen size={50} />
@@ -109,7 +109,7 @@ const MultiCasIDSearchComponent: React.FC<MultiCasIDSearchProps> = ({
                 className="hover:bg-gray-200 hover:border-gray-400 rounded-md p-4 cursor-pointer"
             >
                 <div className="relative flex flex-col items-center">
-                    <List size={50} />
+                    <FilePlus2 size={50} />
                     Multi ID
                 </div>
             </div>

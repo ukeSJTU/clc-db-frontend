@@ -120,14 +120,18 @@ const SearchPage = () => {
                     />
                 </div>
                 <div className="flex flex-row items-center justify-center px-4">
-                    <DrawStructureComponent
-                        onSubmit={handleSpecialSearchInput}
-                        onClose={() => setShowDropdown(false)}
-                    />
-                    <MultiCasIDSearchComponent
-                        onSubmit={handleSpecialSearchInput}
-                        onClose={() => setShowDropdown(false)}
-                    />
+                    <div className="flex justify-end mr-2 w-1/2">
+                        <DrawStructureComponent
+                            onSubmit={handleSpecialSearchInput}
+                            onClose={() => setShowDropdown(false)}
+                        />
+                    </div>
+                    <div className="flex justify-start ml-2 w-1/2">
+                        <MultiCasIDSearchComponent
+                            onSubmit={handleSpecialSearchInput}
+                            onClose={() => setShowDropdown(false)}
+                        />
+                    </div>
                 </div>
             </div>
             {/* Result Components */}
