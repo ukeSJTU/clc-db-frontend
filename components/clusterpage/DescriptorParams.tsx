@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Control, Controller } from "react-hook-form";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import SliderWithValue from "../SliderWithValue";
 
 interface E3FPParametersProps {
     control: Control<any>;
@@ -64,11 +65,12 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                             <FormItem>
                                 <FormLabel>Radius multiplier</FormLabel>
                                 <FormControl>
-                                    <Slider
+                                    <SliderWithValue
+                                        value={field.value}
                                         min={0}
                                         max={10}
                                         step={0.1}
-                                        {...field}
+                                        onChange={field.onChange}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -83,7 +85,9 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                                 <FormLabel>Feature</FormLabel>
                                 <FormControl>
                                     <RadioGroup
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "Yes")
+                                        }
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
@@ -134,7 +138,6 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                 <FormControl>
                                     <Input
                                         type="number"
-                                        // min={0}
                                         step={24}
                                         value={field.value}
                                         onChange={(e) =>
@@ -155,11 +158,12 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                             <FormItem>
                                 <FormLabel>Radius</FormLabel>
                                 <FormControl>
-                                    <Slider
+                                    <SliderWithValue
+                                        value={field.value}
                                         min={0}
                                         max={10}
                                         step={1}
-                                        {...field}
+                                        onChange={field.onChange}
                                     />
                                 </FormControl>
                                 <FormMessage />
