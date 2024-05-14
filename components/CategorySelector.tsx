@@ -36,7 +36,10 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 
     return (
         <div className="space-x-4 space-y-2 flex flex-row items-center justify-center">
-            <Label htmlFor="category" className="text-xl font-semibold">
+            <Label
+                htmlFor="category"
+                className="text-xl font-semibold text-nowrap"
+            >
                 Select a category:
             </Label>
             <Select
