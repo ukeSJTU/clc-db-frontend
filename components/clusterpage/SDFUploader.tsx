@@ -8,7 +8,8 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Control, Controller } from "react-hook-form";
-import UploadedFile from "./UploadedFile";
+import UploadedFile from "@/components/clusterpage/UploadedFile";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface FileUploadComponentProps {
     control: Control<any>;
@@ -25,15 +26,15 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-            const files = Array.from(event.target.files);
-            setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
-            onFileChange(files);
+            const newFiles = Array.from(event.target.files);
+            const updatedFiles = [...uploadedFiles, ...newFiles];
+            setUploadedFiles(updatedFiles);
+            onFileChange(updatedFiles);
         }
     };
 
     const handleFileDelete = (index: number) => {
-        const updatedFiles = [...uploadedFiles];
-        updatedFiles.splice(index, 1);
+        const updatedFiles = uploadedFiles.filter((_, i) => i !== index);
         setUploadedFiles(updatedFiles);
         onFileChange(updatedFiles);
     };
@@ -44,26 +45,41 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
             name={name}
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Select Files</FormLabel>
-                    <FormControl>
-                        <Input
-                            type="file"
-                            accept=".sdf"
-                            multiple
-                            onChange={handleFileChange}
-                            className="w-full"
-                        />
-                    </FormControl>
-                    <FormMessage />
-                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {uploadedFiles.map((file, index) => (
-                            <UploadedFile
-                                key={file.name}
-                                file={file}
-                                onDelete={() => handleFileDelete(index)}
-                            />
-                        ))}
-                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Select Files</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <FormControl>
+                                <Input
+                                    type="file"
+                                    accept=".sdf"
+                                    multiple
+                                    onChange={handleFileChange}
+                                    className="w-full"
+                                />
+                            </FormControl>
+                            <FormMessage />
+                            {uploadedFiles.length > 0 && (
+                                <div className="mt-4">
+                                    <p className="text-sm text-gray-500">
+                                        Uploaded Files: {uploadedFiles.length}
+                                    </p>
+                                    <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                        {uploadedFiles.map((file, index) => (
+                                            <UploadedFile
+                                                key={file.name}
+                                                file={file}
+                                                onDelete={() =>
+                                                    handleFileDelete(index)
+                                                }
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
                 </FormItem>
             )}
         />

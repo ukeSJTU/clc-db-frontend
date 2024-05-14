@@ -13,6 +13,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Control, Controller } from "react-hook-form";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface DescriptorSelectorProps {
     control: Control<any>;
@@ -29,22 +30,29 @@ const DescriptorSelector: React.FC<DescriptorSelectorProps> = ({
             name={name}
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Descriptor</FormLabel>
-                    <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                    >
-                        <FormControl>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select a descriptor" />
-                            </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                            <SelectItem value="E3FP">E3FP</SelectItem>
-                            <SelectItem value="RDKit">RDKit</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <FormMessage />
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Select Descriptor</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <FormLabel>Descriptor</FormLabel>
+                            <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                            >
+                                <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select a descriptor" />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="E3FP">E3FP</SelectItem>
+                                    <SelectItem value="RDKit">RDKit</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                        </CardContent>
+                    </Card>
                 </FormItem>
             )}
         />
