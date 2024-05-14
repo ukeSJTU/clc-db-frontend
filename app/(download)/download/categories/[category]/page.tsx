@@ -155,7 +155,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     };
 
     return (
-        <div className="flex flex-col max-w-6xl mx-auto gap-4 p-4">
+        <div className="flex flex-col mx-auto gap-4 p-4">
             <div className="flex flex-row justify-center items-center">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 px-3">
                     Download Page for Molecules of:
