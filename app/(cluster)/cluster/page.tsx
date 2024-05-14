@@ -23,7 +23,7 @@ const FormSchema = z.object({
     reductionMethod: z.enum(["PCA"]),
     clusterMethod: z.enum(["KNN"]),
     clusters: z.number().min(1).default(5),
-    knnAlgro: z.enum(["lloyd"]),
+    knnAlgro: z.enum(["lloyd", "elkan", "auto", "full"]),
     eps: z.number().min(0).default(0.25),
     minSamples: z.number().min(1).default(5),
 });
@@ -31,6 +31,8 @@ const FormSchema = z.object({
 const ClusterPage: React.FC = () => {
     const [clusteringResults, setClusteringResults] = React.useState<any>(null);
     const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     const handleFileChange = (files: File[]) => {
         setUploadedFiles(files);
@@ -92,7 +94,9 @@ const ClusterPage: React.FC = () => {
             console.log("Clustering completed:", clusteringResponse.data);
         } catch (error) {
             console.error("Error clustering files:", error);
-            // Handle error, e.g., show an error message
+            setErrorMessage("An error occurred while clustering the files.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -126,16 +130,25 @@ const ClusterPage: React.FC = () => {
                         clusterMethod={form.watch("clusterMethod")}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" disabled={isLoading}>
+                        {isLoading ? "Submitting..." : "Submit"}
+                    </Button>
                 </form>
 
                 <Separator className="h-1" />
+
+                {isLoading && (
+                    <p>Sending request and waiting for response...</p>
+                )}
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                 {clusteringResults && (
                     <div>
                         <h2>Clustering Results</h2>
                         <ClusteringResultsChart results={clusteringResults} />
+                    </div>
+                )}
 
-                        {/* <p>
+                {/* <p>
                             Coordinates:{" "}
                             {JSON.stringify(clusteringResults.coordinates)}
                         </p>
@@ -144,8 +157,6 @@ const ClusterPage: React.FC = () => {
                             {JSON.stringify(clusteringResults.class_numbers)}
                         </p>
                         <p>IDs: {JSON.stringify(clusteringResults.ids)}</p> */}
-                    </div>
-                )}
             </Form>
         </div>
     );
