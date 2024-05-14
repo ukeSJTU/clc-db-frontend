@@ -32,7 +32,7 @@ const DescriptorSelector: React.FC<DescriptorSelectorProps> = ({
                 <FormItem>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Select Descriptor</CardTitle>
+                            <CardTitle>Step 2. Select Descriptor</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <FormLabel>Descriptor</FormLabel>

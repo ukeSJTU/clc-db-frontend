@@ -34,7 +34,7 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
     return (
         <Card className="mb-4">
             <CardHeader>
-                <CardTitle>Clustering Options</CardTitle>
+                <CardTitle>Step 4. Clustering Options</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="mb-4">
@@ -183,12 +183,6 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                                                 </SelectItem>
                                                 <SelectItem value="elkan">
                                                     elkan
-                                                </SelectItem>
-                                                <SelectItem value="auto">
-                                                    auto
-                                                </SelectItem>
-                                                <SelectItem value="full">
-                                                    full
                                                 </SelectItem>
                                             </SelectContent>
                                         </Select>

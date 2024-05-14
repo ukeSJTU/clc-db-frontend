@@ -21,10 +21,10 @@ const FormSchema = z.object({
     bits: z.number().min(0).default(1024),
     radius: z.number().min(0).default(1.5),
     rdkitInv: z.boolean().default(true),
-    reductionMethod: z.enum(["PCA"]),
-    clusterMethod: z.enum(["KNN"]),
+    reductionMethod: z.enum(["PCA", "TSNE"]),
+    clusterMethod: z.enum(["KNN", "DBSCAN"]),
     clusters: z.number().min(1).default(5),
-    knnAlgro: z.enum(["lloyd", "elkan", "auto", "full"]),
+    knnAlgro: z.enum(["lloyd", "elkan"]), // "auto", "full" are deprecated in sklearn.KMeans after version1.1
     eps: z.number().min(0).default(0.25),
     minSamples: z.number().min(1).default(5),
 });
@@ -46,8 +46,10 @@ const ClusterPage: React.FC = () => {
         defaultValues: {
             selectedFiles: [],
             descriptor: "E3FP",
+            bits: 1024,
             reductionMethod: "PCA",
             clusterMethod: "KNN",
+            clusters: 2,
             knnAlgro: "lloyd",
         },
     });

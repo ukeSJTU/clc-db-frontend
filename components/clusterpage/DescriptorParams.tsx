@@ -29,7 +29,7 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>E3FP Parameters</CardTitle>
+                <CardTitle>Step 3. E3FP Parameters</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="flex flex-col space-y-4">
@@ -42,7 +42,6 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                                 <FormControl>
                                     <Input
                                         type="number"
-                                        // min={0}
                                         step={24}
                                         value={field.value}
                                         onChange={(
@@ -122,7 +121,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>RDKit Parameters</CardTitle>
+                <CardTitle>Step 3. RDKit Parameters</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="flex flex-col space-y-4">
