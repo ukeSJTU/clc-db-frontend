@@ -86,7 +86,11 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
         }
     }, [results]);
 
-    return <canvas ref={chartRef} />;
+    return (
+        <div className="w-full h-96">
+            <canvas ref={chartRef} className="w-full h-full" />
+        </div>
+    );
 };
 
 export default ClusteringResultsChart;
