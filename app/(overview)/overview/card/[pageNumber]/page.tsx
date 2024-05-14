@@ -28,7 +28,7 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [paginationState, setPaginationState] = useState({
         page: pageNumber,
-        pageSize: 10,
+        pageSize: 12,
         totalPages: 0,
     });
 

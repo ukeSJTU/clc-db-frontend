@@ -13,7 +13,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     const [molecules, setMolecules] = useState<MoleculeProps[]>([]);
     const [paginationState, setPaginationState] = useState({
         page: 1,
-        pageSize: 10,
+        pageSize: 12,
         totalPages: 0,
     });
     const { toast } = useToast();

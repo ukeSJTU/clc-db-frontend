@@ -28,7 +28,7 @@ const SearchPage = () => {
     // Pagination settings
     const [paginationState, setPaginationState] = useState({
         page: 1,
-        pageSize: 10,
+        pageSize: 12,
         totalPages: 0,
     });
 

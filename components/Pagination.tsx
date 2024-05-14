@@ -28,7 +28,7 @@ export function PaginationComponent({
     pageSize,
     setPageSize,
     totalPages,
-    pageSizeOptions = [10, 20, 30, 40, 50],
+    pageSizeOptions = [12, 24, 36],
 }: PaginationComponentProps) {
     return (
         <div className="flex flex-col-reverse items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
