@@ -13,7 +13,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-interface PaginationComponentProps {
+export interface PaginationComponentProps {
     page: number;
     setPage: (page: number) => void;
     pageSize: number;
