@@ -13,6 +13,7 @@ import ClusteringResultsChart from "@/components/clusterpage/ClusteringResultsCh
 
 import api from "@/utils/api";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
     selectedFiles: z.array(z.instanceof(File)),
@@ -33,6 +34,7 @@ const ClusterPage: React.FC = () => {
     const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const { toast } = useToast();
 
     const handleFileChange = (files: File[]) => {
         setUploadedFiles(files);
@@ -52,9 +54,16 @@ const ClusterPage: React.FC = () => {
 
     const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
         if (data.selectedFiles.length === 0) {
-            alert("Please select at least one file.");
+            // alert("Please select at least one file.");
+            toast({
+                title: "No files selected",
+                description: "Please select at least one file.",
+            });
             return;
         }
+
+        setIsLoading(true);
+        setErrorMessage("");
 
         const formData = new FormData();
         data.selectedFiles.forEach((file) => {
@@ -91,10 +100,20 @@ const ClusterPage: React.FC = () => {
                 requestData
             );
             setClusteringResults(clusteringResponse.data);
+            toast({
+                title: "Clustering completed",
+                description:
+                    "The clustering process has been successfully completed.",
+            });
             console.log("Clustering completed:", clusteringResponse.data);
         } catch (error) {
             console.error("Error clustering files:", error);
             setErrorMessage("An error occurred while clustering the files.");
+
+            toast({
+                title: "Error",
+                description: "An error occurred while clustering the files.",
+            });
         } finally {
             setIsLoading(false);
         }
