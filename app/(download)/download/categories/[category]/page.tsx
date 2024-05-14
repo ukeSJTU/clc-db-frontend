@@ -7,6 +7,7 @@ import api from "@/utils/api";
 import { Button } from "@/components/ui/button";
 import downloadFiles from "@/lib/download";
 import CategoryBadge from "@/components/CategoryBadge";
+import { useToast } from "@/components/ui/use-toast";
 
 const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     const [molecules, setMolecules] = useState<MoleculeProps[]>([]);
@@ -15,7 +16,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
         pageSize: 10,
         totalPages: 0,
     });
-
+    const { toast } = useToast();
     const decodedClassType = decodeURIComponent(params.category);
 
     // Fetch molecules for the current page
@@ -36,13 +37,49 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     }, [params.category, paginationState.page, paginationState.pageSize]);
 
     // Download only the current page's molecules
-    const handleDownloadPage = () => {
+    const handleDownloadPage = async () => {
         // Generate paths for all SDF files in the current page
         const sdfFiles = molecules.map(
             (molecule) => `/all_sdfs/${molecule.cas_id}.sdf`
         );
 
-        downloadFiles("zip", molecules, sdfFiles);
+        try {
+            const { success, missingFiles } = await downloadFiles(
+                "zip",
+                molecules,
+                sdfFiles
+            );
+            if (success) {
+                toast({
+                    variant: "default",
+                    title: "Download Successful",
+                    description:
+                        "The current page's molecules have been downloaded.",
+                });
+            } else if (missingFiles.length > 0) {
+                toast({
+                    variant: "warning",
+                    title: "Missing SDF Files",
+                    description: `The following SDF files were missing: ${missingFiles.join(
+                        ", "
+                    )}`,
+                });
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Download Failed",
+                    description:
+                        "An error occurred while downloading the current page's molecules.",
+                });
+            }
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Download Failed",
+                description:
+                    "An error occurred while downloading the current page's molecules.",
+            });
+        }
     };
 
     // Download all molecules belonging to this category
@@ -50,22 +87,16 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
         const allMolecules: MoleculeProps[] = [];
         const sdfFiles: string[] = [];
         let nextPage = 1;
-        // Set a reasonable page size for fetching all data in batches
-        // If it often stucks, decrease the page size for lower band width usage
         const allPageSize = 30;
 
-        // Fetch all molecules belonging to this category in batches
-        let hasNext = true;
-        while (hasNext) {
-            console.log(
-                `/search/molecules?category=${params.category}&page=${nextPage}&page_size=${allPageSize}`
-            );
-            try {
+        try {
+            let hasNext = true;
+            while (hasNext) {
                 const response = await api.get(
                     `/search/molecules?category=${params.category}&page=${nextPage}&page_size=${allPageSize}`
                 );
                 const data = response.data;
-                if (data.results.length === 0) {
+                if (data.next === null) {
                     hasNext = false;
                 } else {
                     allMolecules.push(...data.results);
@@ -77,13 +108,44 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
                     );
                     nextPage++;
                 }
-            } catch (error) {
-                hasNext = false;
             }
-        }
 
-        // Download everything in one ZIP
-        downloadFiles("zip", allMolecules, sdfFiles);
+            const { success, missingFiles } = await downloadFiles(
+                "zip",
+                allMolecules,
+                sdfFiles
+            );
+            if (success) {
+                toast({
+                    variant: "default",
+                    title: "Download Successful",
+                    description:
+                        "All molecules belonging to this category have been downloaded.",
+                });
+            } else if (missingFiles.length > 0) {
+                toast({
+                    variant: "warning",
+                    title: "Missing SDF Files",
+                    description: `The following SDF files were missing: ${missingFiles.join(
+                        ", "
+                    )}`,
+                });
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Download Failed",
+                    description:
+                        "An error occurred while downloading all molecules.",
+                });
+            }
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Download Failed",
+                description:
+                    "An error occurred while downloading all molecules.",
+            });
+        }
     };
 
     const handlePaginationChange = (
