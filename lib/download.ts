@@ -37,9 +37,9 @@ const generateCsvContent = (molecules: MoleculeProps[]) => {
 
     const csvRows = molecules.map((molecule) => {
         const categories =
-            molecule.category.map((type) => type.name).join(", ") || "";
+            molecule.category?.map((type) => type.name).join(", ") || "";
         const chiralities =
-            molecule.chirality.map((type) => type.name).join(", ") || "";
+            molecule.chirality?.map((type) => type.name).join(", ") || "";
         return [
             escapeCsvField(molecule.name || ""),
             escapeCsvField(molecule.cas_id || ""),
@@ -51,24 +51,12 @@ const generateCsvContent = (molecules: MoleculeProps[]) => {
             escapeCsvField(molecule.description || ""),
             escapeCsvField(molecule.smiles_iupac || ""),
             escapeCsvField(molecule.molecule_formula || ""),
-            molecule.molecular_weight !== undefined
-                ? molecule.molecular_weight.toFixed(3)
-                : "",
-            molecule.heavy_atom_count !== undefined
-                ? molecule.heavy_atom_count.toString()
-                : "",
-            molecule.ring_count !== undefined
-                ? molecule.ring_count.toString()
-                : "",
-            molecule.hydrogen_bond_acceptor_count !== undefined
-                ? molecule.hydrogen_bond_acceptor_count.toString()
-                : "",
-            molecule.hydrogen_bond_donor_count !== undefined
-                ? molecule.hydrogen_bond_donor_count.toString()
-                : "",
-            molecule.rotatable_bond_count !== undefined
-                ? molecule.rotatable_bond_count.toString()
-                : "",
+            molecule.molecular_weight?.toFixed(3) || "",
+            molecule.heavy_atom_count?.toString() || "",
+            molecule.ring_count?.toString() || "",
+            molecule.hydrogen_bond_acceptor_count?.toString() || "",
+            molecule.hydrogen_bond_donor_count?.toString() || "",
+            molecule.rotatable_bond_count?.toString() || "",
         ];
     });
 
@@ -86,7 +74,7 @@ const downloadCsv = (molecules: MoleculeProps[]) => {
 const downloadSdf = async (
     sdfFiles: string[],
     defaultFileName: string = "molecules_sdf"
-) => {
+): Promise<{ success: boolean; missingFiles: string[] }> => {
     const zip = new JSZip();
     let missingFiles = [];
 
@@ -111,9 +99,14 @@ const downloadSdf = async (
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(blob, `${defaultFileName}.zip`);
+
+    return { success: missingFiles.length === 0, missingFiles };
 };
 
-const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
+const downloadBoth = async (
+    molecules: MoleculeProps[],
+    sdfFiles: string[]
+): Promise<{ success: boolean; missingFiles: string[] }> => {
     const zip = new JSZip();
     let missingFiles = [];
 
@@ -147,29 +140,39 @@ const downloadBoth = async (molecules: MoleculeProps[], sdfFiles: string[]) => {
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(blob, `${defaultFileName}.zip`);
+
+    return { success: missingFiles.length === 0, missingFiles };
 };
 
-const downloadFiles = (
+const downloadFiles = async (
     type: string,
     molecules: MoleculeProps[],
     sdfFiles: string[]
-) => {
+): Promise<{ success: boolean; missingFiles: string[] }> => {
     const defaultFileName =
         molecules.length === 1 ? molecules[0].cas_id : "molecules";
 
-    switch (type) {
-        case "csv":
-            downloadCsv(molecules);
-            break;
-        case "sdf":
-            downloadSdf(sdfFiles, defaultFileName);
-            break;
-        case "zip":
-            downloadBoth(molecules, sdfFiles);
-            break;
-        default:
-            console.error("Unknown download type:", type);
+    try {
+        switch (type) {
+            case "csv":
+                await downloadCsv(molecules);
+                return { success: true, missingFiles: [] };
+            case "sdf":
+                const { success, missingFiles } = await downloadSdf(
+                    sdfFiles,
+                    defaultFileName
+                );
+                return { success, missingFiles };
+            case "zip":
+                const result = await downloadBoth(molecules, sdfFiles);
+                return result;
+            default:
+                console.error("Unknown download type:", type);
+                return { success: false, missingFiles: [] };
+        }
+    } catch (error) {
+        console.error("Download error:", error);
+        return { success: false, missingFiles: [] };
     }
 };
-
 export default downloadFiles;
