@@ -16,6 +16,7 @@ import downloadFiles from "@/lib/download";
 import { MoleculeProps } from "@/types/molecule";
 import { DownloadIcon } from "lucide-react";
 import { FileTextIcon, ArchiveIcon } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 // BaseDownloadButton is a simpler version of DownloadButton that doesn't include a dropdown
 interface BaseDownloadButtonProps {
@@ -25,6 +26,7 @@ interface BaseDownloadButtonProps {
     label?: string;
     icon?: React.ReactNode;
 }
+
 const BaseDownloadButton: React.FC<BaseDownloadButtonProps> = ({
     type,
     molecules,
@@ -32,8 +34,22 @@ const BaseDownloadButton: React.FC<BaseDownloadButtonProps> = ({
     label = "Download",
     icon = <DownloadIcon />,
 }) => {
-    const handleDownload = () => {
-        downloadFiles(type, molecules, sdfFiles);
+    const { toast } = useToast();
+
+    const handleDownload = async () => {
+        try {
+            await downloadFiles(type, molecules, sdfFiles);
+            toast({
+                title: "Download Successful",
+                description: `Your ${type.toUpperCase()} file(s) have been downloaded.`,
+            });
+        } catch (error) {
+            toast({
+                title: "Download Failed",
+                description: "An error occurred while downloading the file(s).",
+                variant: "destructive",
+            });
+        }
     };
 
     return (
