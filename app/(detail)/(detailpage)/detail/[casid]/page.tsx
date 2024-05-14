@@ -106,11 +106,11 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                             <h3 className="text-xl font-semibold">Image</h3>
                             <Molecule2DViewer molecule={molecule} />
                         </section>
-                        <section id="structure">
+                        <section id="structure" className="mt-6">
                             <h3 className="text-xl font-semibold">
                                 3D Structure
                             </h3>
-                            <div className="h-[200px] rounded-lg">
+                            <div className="w-full lg:w-3/4 h-[300px] lg:h-[400px] rounded-lg">
                                 <Molecule3DViewer casId={molecule.cas_id} />
                             </div>
                         </section>
