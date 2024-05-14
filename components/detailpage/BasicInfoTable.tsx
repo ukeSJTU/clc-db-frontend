@@ -33,6 +33,21 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         </td>
                     </tr>
                     <tr>
+                        <td className="py-2 pr-4 font-semibold">Chirality</td>
+                        <td className="py-2">
+                            <div className="flex flex-wrap">
+                                {molecule.chirality?.map((type, index) => (
+                                    <span key={index}>
+                                        {type.name}
+                                        {index <
+                                            molecule.chirality.length - 1 &&
+                                            ", "}
+                                    </span>
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td className="py-2 pr-4 font-semibold">PubChem URL</td>
                         <td className="py-2">
                             {molecule.pubchem_url !== "nan" ? (
