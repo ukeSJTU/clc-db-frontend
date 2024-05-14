@@ -96,7 +96,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
         <div className="flex flex-col max-w-6xl mx-auto gap-4 p-4">
             <div className="flex flex-row justify-center items-center">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 px-3">
-                    Searching for Molecules of:
+                    Download Page for Molecules of:
                 </h2>
                 <CategoryBadge
                     category={{ name: decodedClassType }}

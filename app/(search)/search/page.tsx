@@ -19,47 +19,58 @@ const SearchPage = () => {
         { displayName: "SMILES", searchName: "smiles" },
     ];
 
-    const [searchOpt, setSearchOpt] = useState(options[0].searchName); // Initialize as the first option
-    const [query, setQuery] = useState(""); // Initialize as an empty string as the default query
-    const [results, setResults] = useState<MoleculeProps[]>([]); // Initialize as an empty array as the default results
+    const [searchOpt, setSearchOpt] = useState(options[0].searchName);
+    const [query, setQuery] = useState("");
+    const [results, setResults] = useState<MoleculeProps[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
 
-    // Default pagination settings
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [totalPages, setTotalPages] = useState(0);
+    // Pagination settings
+    const [paginationState, setPaginationState] = useState({
+        page: 1,
+        pageSize: 10,
+        totalPages: 0,
+    });
 
     const handleSearch = async () => {
         if (query.trim() === "") {
-            setResults([]); // Clear results if the query is empty
-            setTotalPages(0);
+            setResults([]);
+            setPaginationState((prevState) => ({
+                ...prevState,
+                totalPages: 0,
+            }));
             return;
         }
 
-        setIsLoading(true); // Start loading
+        setIsLoading(true);
         console.log(
             "Searching:",
-            `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
+            `/search/molecules?${searchOpt}=${query}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
         );
+
         try {
             const response = await api.get(
-                `/search/molecules?${searchOpt}=${query}&page=${page}&page_size=${pageSize}`
+                `/search/molecules?${searchOpt}=${query}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
             );
 
-            // Ensure the response is an object and has a "results" property that is an array
             const { results: fetchedResults = [], count = 0 } =
                 response.data || {};
 
             console.log("fetchedResults", fetchedResults);
             setResults(fetchedResults);
-            setTotalPages(Math.ceil(count / pageSize));
+            setPaginationState((prevState) => ({
+                ...prevState,
+                totalPages: Math.ceil(count / paginationState.pageSize),
+            }));
         } catch (error) {
             console.error("Failed to fetch molecules", error);
-            setResults([]); // Fallback to empty results on error
-            setTotalPages(0);
+            setResults([]);
+            setPaginationState((prevState) => ({
+                ...prevState,
+                totalPages: 0,
+            }));
         } finally {
-            setIsLoading(false); // Stop loading
+            setIsLoading(false);
         }
     };
 
@@ -84,12 +95,17 @@ const SearchPage = () => {
         setSearchOpt("smiles");
     };
 
+    const handlePaginationChange = (
+        newPaginationState: typeof paginationState
+    ) => {
+        setPaginationState(newPaginationState);
+    };
+
     return (
         <div className="flex flex-col items-center py-12 space-y-4">
             {/* Search Components */}
             <div className="flex flex-col gap-2 w-full max-w-md sm:max-w-lg md:max-w-2xl">
                 <SearchHeading />
-                {/* <SearchTip /> */}
                 <div className="flex flex-col gap-2 w-full max-w-md sm:max-w-lg md:max-w-2xl">
                     <SearchOptionsGroup
                         options={options}
@@ -115,7 +131,21 @@ const SearchPage = () => {
                 </div>
             </div>
             {/* Result Components */}
-            <OverviewContainer molecules={results} />
+            <OverviewContainer
+                molecules={results}
+                paginationProps={{
+                    page: paginationState.page,
+                    setPage: (page) =>
+                        handlePaginationChange({ ...paginationState, page }),
+                    pageSize: paginationState.pageSize,
+                    setPageSize: (pageSize) =>
+                        handlePaginationChange({
+                            ...paginationState,
+                            pageSize,
+                        }),
+                    totalPages: paginationState.totalPages,
+                }}
+            />
         </div>
     );
 };
