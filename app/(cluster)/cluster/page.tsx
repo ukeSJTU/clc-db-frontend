@@ -137,6 +137,15 @@ const ClusterPage: React.FC = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto items-center space-y-6">
+            <div className="flex flex-col items-center mb-8 space-y-2">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 text-center">
+                    Cluster analysis
+                </h2>
+                <p className="max-w-[600px] text-gray-500 dark:text-gray-400">
+                    Upload your .sdf files to perform cluster analysis.
+                </p>
+            </div>
+
             <Accordion type="single" collapsible>
                 <Form {...form}>
                     <form
