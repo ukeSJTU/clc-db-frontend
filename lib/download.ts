@@ -19,21 +19,55 @@ const generateCsvContent = (molecules: MoleculeProps[]) => {
     const csvHeaders = [
         "Name",
         "CAS ID",
+        "PubChem CID",
         "Category",
+        "PubChem URL",
+        "SMILES",
+        "Chirality",
+        "Description",
+        "SMILES IUPAC",
         "Molecule Formula",
         "Molecular Weight",
+        "Heavy Atom Count",
+        "Ring Count",
+        "Hydrogen Bond Acceptor Count",
+        "Hydrogen Bond Donor Count",
+        "Rotatable Bond Count",
     ];
 
     const csvRows = molecules.map((molecule) => {
         const categories =
             molecule.category.map((type) => type.name).join(", ") || "";
+        const chiralities =
+            molecule.chirality.map((type) => type.name).join(", ") || "";
         return [
             escapeCsvField(molecule.name || ""),
             escapeCsvField(molecule.cas_id || ""),
+            escapeCsvField(molecule.pubchem_cid || ""),
             escapeCsvField(categories),
+            escapeCsvField(molecule.pubchem_url || ""),
+            escapeCsvField(molecule.smiles || ""),
+            escapeCsvField(chiralities),
+            escapeCsvField(molecule.description || ""),
+            escapeCsvField(molecule.smiles_iupac || ""),
             escapeCsvField(molecule.molecule_formula || ""),
-            molecule.molecular_weight
+            molecule.molecular_weight !== undefined
                 ? molecule.molecular_weight.toFixed(3)
+                : "",
+            molecule.heavy_atom_count !== undefined
+                ? molecule.heavy_atom_count.toString()
+                : "",
+            molecule.ring_count !== undefined
+                ? molecule.ring_count.toString()
+                : "",
+            molecule.hydrogen_bond_acceptor_count !== undefined
+                ? molecule.hydrogen_bond_acceptor_count.toString()
+                : "",
+            molecule.hydrogen_bond_donor_count !== undefined
+                ? molecule.hydrogen_bond_donor_count.toString()
+                : "",
+            molecule.rotatable_bond_count !== undefined
+                ? molecule.rotatable_bond_count.toString()
                 : "",
         ];
     });
