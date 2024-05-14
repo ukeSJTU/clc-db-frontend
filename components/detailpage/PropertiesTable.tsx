@@ -3,6 +3,14 @@ import { MoleculeProps } from "@/types/molecule";
 import MoleculeFormulaSpan from "@/components/MoleculeFormulaSpan";
 
 const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
+    const formatCount = (count: number | null | undefined) => {
+        if (count === null || count === undefined || count === -1) {
+            return "N/A";
+        } else {
+            return count;
+        }
+    };
+
     return (
         <div className="overflow-x-auto">
             <h3 className="text-xl font-semibold mb-4">Properties</h3>
@@ -37,19 +45,21 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
                             Heavy Atom Count
                         </td>
                         <td className="py-2">
-                            {molecule.heavy_atom_count || "N/A"}
+                            {formatCount(molecule.heavy_atom_count)}
                         </td>
                     </tr>
                     <tr>
                         <td className="py-2 pr-4 font-semibold">Ring Count</td>
-                        <td className="py-2">{molecule.ring_count || "N/A"}</td>
+                        <td className="py-2">
+                            {formatCount(molecule.ring_count)}
+                        </td>
                     </tr>
                     <tr>
                         <td className="py-2 pr-4 font-semibold">
                             H-Bond Acceptor Count
                         </td>
                         <td className="py-2">
-                            {molecule.hydrogen_bond_acceptor_count || "N/A"}
+                            {formatCount(molecule.hydrogen_bond_acceptor_count)}
                         </td>
                     </tr>
                     <tr>
@@ -57,7 +67,7 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
                             H-Bond Donor Count
                         </td>
                         <td className="py-2">
-                            {molecule.hydrogen_bond_donor_count || "N/A"}
+                            {formatCount(molecule.hydrogen_bond_donor_count)}
                         </td>
                     </tr>
                     <tr>
@@ -65,7 +75,7 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
                             Rotatable Bond Count
                         </td>
                         <td className="py-2">
-                            {molecule.rotatable_bond_count || "N/A"}
+                            {formatCount(molecule.rotatable_bond_count)}
                         </td>
                     </tr>
                 </tbody>
