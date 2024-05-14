@@ -1,23 +1,31 @@
 "use client";
-
 import React, { useState } from "react";
 import { MoleculeProps } from "@/types/molecule";
 import {
     MolecularGridLayout,
     MolecularTableLayout,
 } from "@/components/OverviewLayouts";
-import LayoutSwitch from "@/components/LayoutSwitch";
+import {
+    PaginationComponent,
+    PaginationComponentProps,
+} from "@/components/Pagination";
 
 interface SearchResultsContainerProps {
     molecules: MoleculeProps[];
     initialLayout?: "grid" | "table"; // Optional prop to set initial layout
     useLayoutSwitch?: boolean; // Optional prop to enable layout switch
+    paginationProps: PaginationComponentProps;
+    topLeftComponent?: React.ReactNode; // Optional component for top left corner
+    children?: React.ReactNode;
 }
 
 const OverviewContainer: React.FC<SearchResultsContainerProps> = ({
     molecules,
     initialLayout = "grid",
     useLayoutSwitch = true,
+    paginationProps,
+    topLeftComponent,
+    children,
 }) => {
     const [layout, setLayout] = useState<"grid" | "table">(initialLayout);
 
@@ -30,20 +38,38 @@ const OverviewContainer: React.FC<SearchResultsContainerProps> = ({
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+                {/* Top Left Component */}
+                <div>{topLeftComponent}</div>
+                {/* Layout Switch */}
+                {useLayoutSwitch && (
+                    <div>
+                        <button
+                            onClick={() =>
+                                setLayout(layout === "grid" ? "table" : "grid")
+                            }
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                        >
+                            {layout === "grid"
+                                ? "Switch to Table"
+                                : "Switch to Grid"}
+                        </button>
+                    </div>
+                )}
+            </div>
+            {/* Molecule Layout */}
             {layout === "grid" ? (
                 <MolecularGridLayout molecules={molecules} />
             ) : (
                 <MolecularTableLayout molecules={molecules} />
             )}
-            <div className="pt-2">
-                {useLayoutSwitch && (
-                    <LayoutSwitch
-                        currentLayout={layout}
-                        onToggleLayout={setLayout}
-                    />
-                )}
+            {/* Pagination Component */}
+            <div className="mt-6 flex justify-center">
+                <PaginationComponent {...paginationProps} />
             </div>
+            {/* Additional Content */}
+            {children}
         </div>
     );
 };
