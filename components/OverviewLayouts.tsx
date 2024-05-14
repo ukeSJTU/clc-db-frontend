@@ -112,30 +112,25 @@ const MoleculeCard = (molecule: MoleculeProps) => {
     };
 
     return (
-        <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-            <Card className="w-full h-full flex flex-col flex-grow">
-                <CardHeader
-                    className="flex justify-between items-start p-4 border-b"
-                    style={{ height: "40%" }}
-                >
+        <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-64">
+            <Card className="h-full flex flex-col flex-grow">
+                <CardHeader className="flex flex-col justify-between items-start p-4 border-b">
                     <div className="space-y-1">
-                        <CardTitle className="text-lg font-semibold">
+                        <CardTitle className="text-lg font-semibold line-clamp-4">
                             {molecule.name}
                         </CardTitle>
                         <p className="text-sm text-gray-500">
                             CAS ID: {molecule.cas_id}
                         </p>
                     </div>
-                    <div className="flex flex-col items-start">
-                        <div className="flex flex-wrap">
-                            {molecule.category.map((type, index) => (
-                                <CategoryBadge
-                                    key={index}
-                                    category={type}
-                                    abbreviate={false}
-                                />
-                            ))}
-                        </div>
+                    <div className="flex flex-wrap mt-2 space-y-1">
+                        {molecule.category.map((type, index) => (
+                            <CategoryBadge
+                                key={index}
+                                category={type}
+                                abbreviate={false}
+                            />
+                        ))}
                     </div>
                 </CardHeader>
                 <CardContent className="p-4 flex-grow">
@@ -158,13 +153,15 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                         </div>
                         <div className="space-y-2 col-span-2">
                             <p className="text-sm text-gray-500">
-                                2/3D Structure
+                                2D Structure
                             </p>
-                            <Molecule2DViewer molecule={molecule} />
+                            <div className="aspect-w-1 aspect-h-1">
+                                <Molecule2DViewer molecule={molecule} />
+                            </div>
                         </div>
                     </div>
                 </CardContent>
-                <div className="px-4 py-3 bg-gray-50 text-right flex gap-2 justify-between">
+                <div className="px-4 py-3 bg-gray-50 text-right sm:flex gap-2 justify-between">
                     {/* Download Button */}
                     <ZipDownloadButton
                         molecules={[molecule]}
