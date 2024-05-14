@@ -9,6 +9,7 @@ import {
     PaginationComponent,
     PaginationComponentProps,
 } from "@/components/Pagination";
+import LayoutSwitch from "./LayoutSwitch";
 
 interface SearchResultsContainerProps {
     molecules: MoleculeProps[];
@@ -45,16 +46,10 @@ const OverviewContainer: React.FC<SearchResultsContainerProps> = ({
                 {/* Layout Switch */}
                 {useLayoutSwitch && (
                     <div>
-                        <button
-                            onClick={() =>
-                                setLayout(layout === "grid" ? "table" : "grid")
-                            }
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                        >
-                            {layout === "grid"
-                                ? "Switch to Table"
-                                : "Switch to Grid"}
-                        </button>
+                        <LayoutSwitch
+                            currentLayout={layout}
+                            onToggleLayout={setLayout}
+                        />
                     </div>
                 )}
             </div>
