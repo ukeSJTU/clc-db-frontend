@@ -1,13 +1,27 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
+import {
+    Chart,
+    ChartData,
+    ChartOptions,
+    registerables,
+    TooltipItem,
+} from "chart.js";
 
 interface ClusteringResultsChartProps {
     results: {
         coordinates: string[][][];
         class_numbers: number[];
         ids: string[];
+    };
+}
+
+interface CustomTooltipItem extends TooltipItem<"scatter"> {
+    raw: {
+        x: number;
+        y: number;
+        label: string;
     };
 }
 
@@ -23,7 +37,7 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
             if (ctx) {
                 Chart.register(...registerables);
 
-                const data: ChartData = {
+                const data: ChartData<"scatter"> = {
                     datasets: results.class_numbers.map((classNumber) => ({
                         label: `Class ${classNumber}`,
                         data: results.coordinates[classNumber].map(
@@ -46,12 +60,13 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
                     })),
                 };
 
-                const options: ChartOptions = {
+                const options: ChartOptions<"scatter"> = {
                     responsive: true,
                     plugins: {
                         tooltip: {
                             callbacks: {
-                                label: (context) => context.raw.label,
+                                label: (context: CustomTooltipItem) =>
+                                    context.raw.label,
                             },
                         },
                     },
