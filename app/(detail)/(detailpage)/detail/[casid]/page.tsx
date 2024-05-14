@@ -14,11 +14,11 @@ import { MoleculeProps } from "@/types/molecule";
 
 const sections = [
     { id: "molecule-name", label: "Molecule Name" },
-    { id: "description", label: "Description" }, // Add the new section
     { id: "basic-info", label: "Basic Information" },
     { id: "image", label: "Image" },
     { id: "structure", label: "3D Structure" },
     { id: "properties", label: "Properties" },
+    { id: "description", label: "Description" },
 ];
 
 const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
@@ -100,15 +100,6 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                         <section id="molecule-name">
                             <MoleculeHeader molecule={molecule} />
                         </section>
-                        {/* Add the new section for description */}
-                        <section id="description">
-                            <h3 className="text-xl font-semibold">
-                                Description
-                            </h3>
-                            <p className="text-gray-700">
-                                {molecule.description}
-                            </p>
-                        </section>
                         <section id="basic-info">
                             <MoleculeBasicInfoTable molecule={molecule} />
                         </section>
@@ -126,6 +117,14 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                         </section>
                         <section id="properties">
                             <MoleculePropertiesTable molecule={molecule} />
+                        </section>
+                        <section id="description">
+                            <h3 className="text-xl font-semibold">
+                                Description
+                            </h3>
+                            <p className="text-gray-700">
+                                {molecule.description}
+                            </p>
                         </section>
                     </div>
                 </div>

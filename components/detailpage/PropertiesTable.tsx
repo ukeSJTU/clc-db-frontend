@@ -13,7 +13,12 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
 
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-xl font-semibold mb-4">Properties</h3>
+            <div className="mb-4">
+                <h3 className="text-xl font-semibold">Properties</h3>
+                <small className="text-xs text-gray-500 dark:text-gray-400">
+                    Note: the properties below are calculated by rdkit.
+                </small>
+            </div>
             <table className="w-full table-auto">
                 <tbody>
                     <tr>
