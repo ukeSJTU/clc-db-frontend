@@ -1,8 +1,6 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import api from "@/utils/api";
-import { PaginationComponent } from "@/components/Pagination";
 import OverviewContainer from "@/components/OverviewContainer";
 import CategorySelector from "@/components/CategorySelector";
 
@@ -27,27 +25,35 @@ const fetchMoleculeData = async (
 const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
     const pageNumber = parseInt(params.pageNumber, 10);
     const [molecules, setMolecules] = useState([]);
-    const [page, setPage] = useState(pageNumber || 1);
-    const [pageSize, setPageSize] = useState(10); // Default page size
-    const [totalPages, setTotalPages] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [paginationState, setPaginationState] = useState({
+        page: pageNumber || 1,
+        pageSize: 10,
+        totalPages: 0,
+    });
 
     useEffect(() => {
         const fetchData = async () => {
             const { results, totalPages } = await fetchMoleculeData(
-                page,
-                pageSize,
+                paginationState.page,
+                paginationState.pageSize,
                 selectedCategory
             );
             setMolecules(results);
-            setTotalPages(totalPages);
+            setPaginationState((prevState) => ({ ...prevState, totalPages }));
         };
         fetchData();
-    }, [page, pageSize, selectedCategory]);
+    }, [paginationState.page, paginationState.pageSize, selectedCategory]);
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
-        setPage(1); // Reset to the first page when changing the category
+        setPaginationState((prevState) => ({ ...prevState, page: 1 })); // Reset to the first page when changing the category
+    };
+
+    const handlePaginationChange = (
+        newPaginationState: typeof paginationState
+    ) => {
+        setPaginationState(newPaginationState);
     };
 
     return (
@@ -56,33 +62,29 @@ const IndexPage = ({ params }: { params: { pageNumber: string } }) => {
             <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4">
                 Molecule Overview
             </h2>
-
-            <div className="flex justify-between items-center mb-4">
-                {/* Left: Category Selector */}
-                <div className="flex-1 pr-8">
-                    <CategorySelector
-                        selectedCategory={selectedCategory}
-                        onCategoryChange={handleCategoryChange}
-                    />
-                </div>
-
-                {/* Right: Pagination Component */}
-                <div className="flex-1 pl-8">
-                    <PaginationComponent
-                        page={page}
-                        setPage={setPage}
-                        pageSize={pageSize}
-                        setPageSize={setPageSize}
-                        totalPages={totalPages}
-                    />
-                </div>
-            </div>
-
             {/* Overview Container for results */}
             <OverviewContainer
                 molecules={molecules}
                 initialLayout="table"
                 useLayoutSwitch={false}
+                paginationProps={{
+                    page: paginationState.page,
+                    setPage: (page) =>
+                        handlePaginationChange({ ...paginationState, page }),
+                    pageSize: paginationState.pageSize,
+                    setPageSize: (pageSize) =>
+                        handlePaginationChange({
+                            ...paginationState,
+                            pageSize,
+                        }),
+                    totalPages: paginationState.totalPages,
+                }}
+                topLeftComponent={
+                    <CategorySelector
+                        selectedCategory={selectedCategory}
+                        onCategoryChange={handleCategoryChange}
+                    />
+                }
             />
         </div>
     );
