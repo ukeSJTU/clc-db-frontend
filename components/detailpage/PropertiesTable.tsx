@@ -1,5 +1,6 @@
 import React from "react";
 import { MoleculeProps } from "@/types/molecule";
+import MoleculeFormulaSpan from "@/components/MoleculeFormulaSpan";
 
 const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
     return (
@@ -18,7 +19,9 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
                             Molecular Formula
                         </td>
                         <td className="py-2">
-                            {molecule.molecule_formula || "N/A"}
+                            <MoleculeFormulaSpan
+                                formula={molecule.molecule_formula}
+                            />
                         </td>
                     </tr>
                     <tr>

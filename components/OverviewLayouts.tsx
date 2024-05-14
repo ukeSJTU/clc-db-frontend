@@ -119,7 +119,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                     style={{ height: "40%" }}
                 >
                     <div className="space-y-1">
-                        <CardTitle className="text-lg font-semibold ">
+                        <CardTitle className="text-lg font-semibold">
                             {molecule.name}
                         </CardTitle>
                         <p className="text-sm text-gray-500">
@@ -140,35 +140,32 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                 </CardHeader>
                 <CardContent className="p-4 flex-grow">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <p className="text-sm text-gray-500">
-                                Molecule Formula
-                            </p>
-                            <MoleculeFormulaSpan
-                                formula={molecule.molecule_formula}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <p className="text-sm text-gray-500">
-                                Molecular Weight
-                            </p>
-                            <p>
-                                {molecule.molecular_weight !== undefined
-                                    ? molecule.molecular_weight.toFixed(3)
-                                    : "N/A"}
-                            </p>
+                        <div className="col-span-2 flex justify-between">
+                            <div className="space-y-2">
+                                <p className="text-sm text-gray-500">Formula</p>
+                                <MoleculeFormulaSpan
+                                    formula={molecule.molecule_formula}
+                                />
+                            </div>
+                            <div className="space-y-2 text-right">
+                                <p className="text-sm text-gray-500">Weight</p>
+                                <p>
+                                    {molecule.molecular_weight !== undefined
+                                        ? molecule.molecular_weight.toFixed(3)
+                                        : "N/A"}
+                                </p>
+                            </div>
                         </div>
                         <div className="space-y-2 col-span-2">
                             <p className="text-sm text-gray-500">
                                 2/3D Structure
                             </p>
-
                             <Molecule2DViewer molecule={molecule} />
                         </div>
                     </div>
                 </CardContent>
                 <div className="px-4 py-3 bg-gray-50 text-right flex gap-2 justify-between">
-                    {/* Download  Button */}
+                    {/* Download Button */}
                     <ZipDownloadButton
                         molecules={[molecule]}
                         sdfFiles={sdfFiles}
