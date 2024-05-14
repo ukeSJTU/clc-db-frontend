@@ -178,7 +178,9 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                 <FormLabel>useFeatures</FormLabel>
                                 <FormControl>
                                     <RadioGroup
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "Yes")
+                                        }
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
@@ -214,7 +216,9 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                 <FormLabel>useBondTypes</FormLabel>
                                 <FormControl>
                                     <RadioGroup
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "Yes")
+                                        }
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
@@ -250,7 +254,9 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                                 <FormLabel>useChirality</FormLabel>
                                 <FormControl>
                                     <RadioGroup
-                                        onValueChange={field.onChange}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "Yes")
+                                        }
                                         defaultValue={
                                             field.value ? "Yes" : "No"
                                         }
