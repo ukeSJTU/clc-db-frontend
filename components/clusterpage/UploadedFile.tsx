@@ -8,7 +8,7 @@ interface UploadedFileProps {
 
 const UploadedFile: React.FC<UploadedFileProps> = ({ file, onDelete }) => {
     return (
-        <div className="flex items-center justify-between p-2 border rounded">
+        <div className="flex items-center justify-between p-2 border rounded shadow-sm">
             <div>
                 <p className="font-semibold">{file.name}</p>
                 <p className="text-sm text-gray-500">
