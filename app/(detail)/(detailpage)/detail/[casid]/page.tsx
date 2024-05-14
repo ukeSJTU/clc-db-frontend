@@ -14,6 +14,7 @@ import { MoleculeProps } from "@/types/molecule";
 
 const sections = [
     { id: "molecule-name", label: "Molecule Name" },
+    { id: "description", label: "Description" }, // Add the new section
     { id: "basic-info", label: "Basic Information" },
     { id: "image", label: "Image" },
     { id: "structure", label: "3D Structure" },
@@ -98,6 +99,15 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
                     <div className="space-y-8">
                         <section id="molecule-name">
                             <MoleculeHeader molecule={molecule} />
+                        </section>
+                        {/* Add the new section for description */}
+                        <section id="description">
+                            <h3 className="text-xl font-semibold">
+                                Description
+                            </h3>
+                            <p className="text-gray-700">
+                                {molecule.description}
+                            </p>
                         </section>
                         <section id="basic-info">
                             <MoleculeBasicInfoTable molecule={molecule} />
