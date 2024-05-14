@@ -9,7 +9,7 @@ interface MoleculeFormulaSpanProps {
 const MoleculeFormulaSpan: React.FC<MoleculeFormulaSpanProps> = ({
     formula,
 }) => {
-    if (!formula || formula.trim() === "") {
+    if (!formula || formula.trim() === "" || formula === "N/A") {
         return <span>N/A</span>; // Return "N/A" for empty or invalid formula
     }
 
