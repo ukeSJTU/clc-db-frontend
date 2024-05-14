@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -135,17 +135,19 @@ const ClusterPage: React.FC = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto items-center">
+            <FormProvider {...form}>
+                <FileUploadComponent
+                    control={form.control}
+                    name="selectedFiles"
+                    onFileChange={handleFileChange}
+                />
+            </FormProvider>
+            <Separator className="h-1" />
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(handleSubmit)}
                     className="space-y-6"
                 >
-                    <FileUploadComponent
-                        control={form.control}
-                        name="selectedFiles"
-                        onFileChange={handleFileChange}
-                    />
-                    <Separator className="h-1" />
                     <DescriptorSelector
                         control={form.control}
                         name="descriptor"
