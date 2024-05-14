@@ -1,33 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { MolecularGridLayout } from "@/components/OverviewLayouts";
 import OverviewContainer from "@/components/OverviewContainer";
-import { PaginationComponent } from "@/components/Pagination";
 import { MoleculeProps } from "@/types/molecule";
 import api from "@/utils/api";
 import { Button } from "@/components/ui/button";
 import downloadFiles from "@/lib/download";
+import CategoryBadge from "@/components/CategoryBadge";
 
-const ClassTypePage = ({ params }: { params: { category: string } }) => {
+const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     const [molecules, setMolecules] = useState<MoleculeProps[]>([]);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [totalPages, setTotalPages] = useState(0);
+    const [paginationState, setPaginationState] = useState({
+        page: 1,
+        pageSize: 10,
+        totalPages: 0,
+    });
+
+    const decodedClassType = decodeURIComponent(params.category);
 
     // Fetch molecules for the current page
     useEffect(() => {
         const fetchMolecules = async () => {
             const response = await api.get(
-                `/search/molecules?category=${params.category}&page=${page}&page_size=${pageSize}`
+                `/search/molecules?category=${params.category}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
             );
             const data = response.data;
             setMolecules(data.results);
-            setTotalPages(Math.ceil(data.count / pageSize));
+            setPaginationState((prevState) => ({
+                ...prevState,
+                totalPages: Math.ceil(data.count / paginationState.pageSize),
+            }));
         };
 
         fetchMolecules();
-    }, [params.category, page, pageSize]);
+    }, [params.category, paginationState.page, paginationState.pageSize]);
 
     // Download only the current page's molecules
     const handleDownloadPage = () => {
@@ -59,8 +65,6 @@ const ClassTypePage = ({ params }: { params: { category: string } }) => {
                     `/search/molecules?category=${params.category}&page=${nextPage}&page_size=${allPageSize}`
                 );
                 const data = response.data;
-                // console.log("Fetching page", nextPage);
-                // console.log("Data:", data.results.length);
                 if (data.results.length === 0) {
                     hasNext = false;
                 } else {
@@ -82,33 +86,60 @@ const ClassTypePage = ({ params }: { params: { category: string } }) => {
         downloadFiles("zip", allMolecules, sdfFiles);
     };
 
-    return (
-        <div className="flex flex-col gap-4 p-4">
-            <div className="mt-4 flex justify-between items-center">
-                <div className="flex flex-row space-x-4">
-                    {/* Download Page Button */}
-                    <Button onClick={handleDownloadPage} variant="secondary">
-                        Download Page
-                    </Button>
-                    {/* Download All Button */}
-                    <Button onClick={handleDownloadAll} variant="secondary">
-                        Download All
-                    </Button>
-                </div>
+    const handlePaginationChange = (
+        newPaginationState: typeof paginationState
+    ) => {
+        setPaginationState(newPaginationState);
+    };
 
-                {/* Pagination Component */}
-                <PaginationComponent
-                    page={page}
-                    setPage={setPage}
-                    pageSize={pageSize}
-                    setPageSize={setPageSize}
-                    totalPages={totalPages}
+    return (
+        <div className="flex flex-col max-w-6xl mx-auto gap-4 p-4">
+            <div className="flex flex-row justify-center items-center">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 px-3">
+                    Searching for Molecules of:
+                </h2>
+                <CategoryBadge
+                    category={{ name: decodedClassType }}
+                    abbreviate={false}
                 />
             </div>
-            <OverviewContainer molecules={molecules} />
-            {/* <MolecularGridLayout molecules={molecules} /> */}
+            <OverviewContainer
+                molecules={molecules}
+                paginationProps={{
+                    page: paginationState.page,
+                    setPage: (page) =>
+                        handlePaginationChange({ ...paginationState, page }),
+                    pageSize: paginationState.pageSize,
+                    setPageSize: (pageSize) =>
+                        handlePaginationChange({
+                            ...paginationState,
+                            pageSize,
+                        }),
+                    totalPages: paginationState.totalPages,
+                }}
+                topLeftComponent={
+                    <div className="mt-4 flex justify-between items-center">
+                        <div className="flex flex-row space-x-4">
+                            {/* Download Page Button */}
+                            <Button
+                                onClick={handleDownloadPage}
+                                variant="secondary"
+                            >
+                                Download Page
+                            </Button>
+                            {/* Download All Button */}
+                            <Button
+                                onClick={handleDownloadAll}
+                                variant="secondary"
+                            >
+                                Download All
+                            </Button>
+                        </div>
+                    </div>
+                }
+            ></OverviewContainer>
         </div>
     );
 };
 
-export default ClassTypePage;
+export default CategoryDownloadPage;
