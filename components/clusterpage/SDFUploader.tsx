@@ -47,7 +47,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
                 <FormItem>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Select Files</CardTitle>
+                            <CardTitle>Step 1. Select Files</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <FormControl>
@@ -68,7 +68,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
                                     <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                         {uploadedFiles.map((file, index) => (
                                             <UploadedFile
-                                                key={file.name}
+                                                key={index}
                                                 file={file}
                                                 onDelete={() =>
                                                     handleFileDelete(index)
