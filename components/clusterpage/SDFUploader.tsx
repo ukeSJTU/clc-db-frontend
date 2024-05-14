@@ -12,6 +12,8 @@ import UploadedFile from "@/components/clusterpage/UploadedFile";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
+
 interface FileUploadComponentProps {
     control: Control<any>;
     name: string;
@@ -52,73 +54,80 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = ({
             render={({ field }) => (
                 <FormItem>
                     <Card className="shadow-md">
-                        <CardHeader>
-                            <CardTitle>Step 1. Select Files</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <FormControl>
-                                <div className="flex items-center space-x-4">
-                                    <Input
-                                        type="file"
-                                        accept=".sdf"
-                                        multiple
-                                        onChange={handleFileChange}
-                                        className="w-full"
-                                    />
-                                    {uploadedFiles.length > 0 && (
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            onClick={() => setUploadedFiles([])}
-                                        >
-                                            Clear
-                                        </Button>
-                                    )}
-                                </div>
-                            </FormControl>
-                            <FormMessage />
-                            {uploadedFiles.length > 0 && (
-                                <div className="mt-4">
-                                    <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                        {uploadedFiles
-                                            .slice(
-                                                currentPage * filesPerPage,
-                                                (currentPage + 1) * filesPerPage
-                                            )
-                                            .map((file, index) => (
-                                                <UploadedFile
-                                                    key={index}
-                                                    file={file}
-                                                    onDelete={() =>
-                                                        handleFileDelete(
-                                                            currentPage *
-                                                                filesPerPage +
-                                                                index
-                                                        )
-                                                    }
-                                                />
-                                            ))}
+                        <AccordionTrigger>
+                            <CardHeader>
+                                <CardTitle>Step 1. Select Files</CardTitle>
+                            </CardHeader>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <CardContent>
+                                <FormControl>
+                                    <div className="flex items-center space-x-4">
+                                        <Input
+                                            type="file"
+                                            accept=".sdf"
+                                            multiple
+                                            onChange={handleFileChange}
+                                            className="w-full"
+                                        />
+                                        {uploadedFiles.length > 0 && (
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={() =>
+                                                    setUploadedFiles([])
+                                                }
+                                            >
+                                                Clear
+                                            </Button>
+                                        )}
                                     </div>
-                                    {totalPages > 1 && (
-                                        <div className="mt-4 flex justify-center space-x-2">
-                                            {paginationDots.map((page) => (
-                                                <button
-                                                    key={page}
-                                                    onClick={() =>
-                                                        setCurrentPage(page)
-                                                    }
-                                                    className={`w-3 h-3 rounded-full ${
-                                                        currentPage === page
-                                                            ? "bg-gray-700"
-                                                            : "bg-gray-300"
-                                                    }`}
-                                                />
-                                            ))}
+                                </FormControl>
+                                <FormMessage />
+                                {uploadedFiles.length > 0 && (
+                                    <div className="mt-4">
+                                        <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                            {uploadedFiles
+                                                .slice(
+                                                    currentPage * filesPerPage,
+                                                    (currentPage + 1) *
+                                                        filesPerPage
+                                                )
+                                                .map((file, index) => (
+                                                    <UploadedFile
+                                                        key={index}
+                                                        file={file}
+                                                        onDelete={() =>
+                                                            handleFileDelete(
+                                                                currentPage *
+                                                                    filesPerPage +
+                                                                    index
+                                                            )
+                                                        }
+                                                    />
+                                                ))}
                                         </div>
-                                    )}
-                                </div>
-                            )}
-                        </CardContent>
+                                        {totalPages > 1 && (
+                                            <div className="mt-4 flex justify-center space-x-2">
+                                                {paginationDots.map((page) => (
+                                                    <button
+                                                        key={page}
+                                                        onClick={() =>
+                                                            setCurrentPage(page)
+                                                        }
+                                                        className={`w-3 h-3 rounded-full ${
+                                                            currentPage === page
+                                                                ? "bg-gray-700"
+                                                                : "bg-gray-300"
+                                                        }`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </CardContent>
+                        </AccordionContent>
                     </Card>
                 </FormItem>
             )}

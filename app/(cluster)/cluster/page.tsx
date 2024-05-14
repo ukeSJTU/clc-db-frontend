@@ -15,6 +15,8 @@ import api from "@/utils/api";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+
 const FormSchema = z.object({
     selectedFiles: z.array(z.instanceof(File)),
     descriptor: z.enum(["E3FP", "RDKit"]),
@@ -135,66 +137,75 @@ const ClusterPage: React.FC = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto items-center space-y-6">
-            <FormProvider {...form}>
-                <FileUploadComponent
-                    control={form.control}
-                    name="selectedFiles"
-                    onFileChange={handleFileChange}
-                />
-            </FormProvider>
-            <Separator className="h-1" />
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(handleSubmit)}
-                    className="space-y-6"
-                >
-                    <DescriptorSelector
-                        control={form.control}
-                        name="descriptor"
-                    />
-                    <Separator className="h-1" />
-                    <DescriptorParameters
-                        control={form.control}
-                        descriptor={form.watch("descriptor")}
-                    />
-                    <Separator className="h-1" />
-                    <ClusteringOptions
-                        control={form.control}
-                        fileListLength={form.watch("selectedFiles").length}
-                        bits={form.watch("bits")}
-                        clusterMethod={form.watch("clusterMethod")}
-                    />
-
-                    <Button type="submit" disabled={isLoading}>
-                        {isLoading ? "Submitting..." : "Submit"}
-                    </Button>
-                </form>
-
-                <Separator className="h-1" />
-
-                <div className="mt-8 flex flex-col items-center justify-center">
-                    {isLoading && (
-                        <div className="flex items-center space-x-2">
-                            <p>Sending request and waiting for response...</p>
-                        </div>
-                    )}
-                    {errorMessage && (
-                        <div className="flex items-center space-x-2">
-                            <p className="text-red-500">{errorMessage}</p>
-                        </div>
-                    )}
-                    {clusteringResults && (
-                        <div className="mt-4">
-                            <h2 className="text-xl font-semibold">
-                                Clustering Results
-                            </h2>
-                            <ClusteringResultsChart
-                                results={clusteringResults}
+            <Accordion type="single" collapsible>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(handleSubmit)}
+                        className="space-y-6"
+                    >
+                        <AccordionItem value="item-1">
+                            <FileUploadComponent
+                                control={form.control}
+                                name="selectedFiles"
+                                onFileChange={handleFileChange}
                             />
-                        </div>
-                    )}
-                </div>
-            </Form>
+                        </AccordionItem>
+                        <AccordionItem value="item-2">
+                            <DescriptorSelector
+                                control={form.control}
+                                name="descriptor"
+                            />
+                        </AccordionItem>
+                        <AccordionItem value="item-3">
+                            <DescriptorParameters
+                                control={form.control}
+                                descriptor={form.watch("descriptor")}
+                            />
+                        </AccordionItem>
+                        <AccordionItem value="item-4">
+                            <ClusteringOptions
+                                control={form.control}
+                                fileListLength={
+                                    form.watch("selectedFiles").length
+                                }
+                                bits={form.watch("bits")}
+                                clusterMethod={form.watch("clusterMethod")}
+                            />
+                        </AccordionItem>
+
+                        <Button type="submit" disabled={isLoading}>
+                            {isLoading ? "Submitting..." : "Submit"}
+                        </Button>
+                    </form>
+
+                    <Separator className="mt-4 h-1"></Separator>
+
+                    <div className="mt-8 flex flex-col items-center justify-center">
+                        {isLoading && (
+                            <div className="flex items-center space-x-2">
+                                <p>
+                                    Sending request and waiting for response...
+                                </p>
+                            </div>
+                        )}
+                        {errorMessage && (
+                            <div className="flex items-center space-x-2">
+                                <p className="text-red-500">{errorMessage}</p>
+                            </div>
+                        )}
+                        {clusteringResults && (
+                            <div className="my-4 flex flex-col items-center space-y-2">
+                                <h2 className="text-2xl font-semibold">
+                                    Clustering Results
+                                </h2>
+                                <ClusteringResultsChart
+                                    results={clusteringResults}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </Form>
+            </Accordion>
         </div>
     );
 };
