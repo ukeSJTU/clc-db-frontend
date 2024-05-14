@@ -37,13 +37,25 @@ const BaseDownloadButton: React.FC<BaseDownloadButtonProps> = ({
     const { toast } = useToast();
 
     const handleDownload = async () => {
-        try {
-            await downloadFiles(type, molecules, sdfFiles);
+        const { success, missingFiles } = await downloadFiles(
+            type,
+            molecules,
+            sdfFiles
+        );
+        if (success) {
             toast({
                 title: "Download Successful",
                 description: `Your ${type.toUpperCase()} file(s) have been downloaded.`,
             });
-        } catch (error) {
+        } else if (missingFiles.length > 0) {
+            toast({
+                title: "Missing Files",
+                description: `The following SDF files were missing: ${missingFiles.join(
+                    ", "
+                )}`,
+                variant: "warning",
+            });
+        } else {
             toast({
                 title: "Download Failed",
                 description: "An error occurred while downloading the file(s).",
@@ -73,8 +85,34 @@ const SelectDownloadButton: React.FC<SelectDownloadButtonProps> = ({
 }) => {
     const [downloadOption, setDownloadOption] = useState("zip");
 
-    const handleDownload = () => {
-        downloadFiles(downloadOption, molecules, sdfFiles);
+    const { toast } = useToast();
+
+    const handleDownload = async () => {
+        const { success, missingFiles } = await downloadFiles(
+            downloadOption,
+            molecules,
+            sdfFiles
+        );
+        if (success) {
+            toast({
+                title: "Download Successful",
+                description: `Your ${downloadOption.toUpperCase()} file(s) have been downloaded.`,
+            });
+        } else if (missingFiles.length > 0) {
+            toast({
+                title: "Missing Files",
+                description: `The following SDF files were missing: ${missingFiles.join(
+                    ", "
+                )}`,
+                variant: "warning",
+            });
+        } else {
+            toast({
+                title: "Download Failed",
+                description: "An error occurred while downloading the file(s).",
+                variant: "destructive",
+            });
+        }
     };
 
     return (
