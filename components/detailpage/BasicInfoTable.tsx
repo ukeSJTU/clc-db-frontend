@@ -19,6 +19,15 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         <td className="py-2">{molecule.cas_id}</td>
                     </tr>
                     <tr>
+                        <td className="py-2 pr-4 font-semibold">PubChem CID</td>
+                        <td className="py-2">
+                            {molecule.pubchem_cid === undefined ||
+                            molecule.pubchem_cid === "0"
+                                ? "N/A"
+                                : molecule.pubchem_cid}
+                        </td>
+                    </tr>
+                    <tr>
                         <td className="py-2 pr-4 font-semibold">Category</td>
                         <td className="py-2">
                             <div className="flex flex-wrap">
