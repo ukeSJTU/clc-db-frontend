@@ -9,6 +9,8 @@ import { ZipDownloadButton } from "@/components/DownloadButtons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import MoleculeFormulaSpan from "./MoleculeFormulaSpan";
 import Molecule2DViewer from "./Molecule2DViewer";
+import Image from "next/image";
+import { Skeleton } from "./ui/skeleton";
 
 // A number of molecules to be displayed
 type MoleculesProps = {
@@ -155,8 +157,28 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             <p className="text-sm text-gray-500">
                                 2D Structure
                             </p>
-                            <div className="aspect-w-1 aspect-h-1">
-                                <Molecule2DViewer molecule={molecule} />
+                            <div className="w-full h-64 relative">
+                                {molecule.pubchem_cid !== "0" ? (
+                                    <div className="relative w-full h-full bg-white">
+                                        (
+                                        <Image
+                                            alt="2D Image"
+                                            src={`${process.env.NEXT_PUBLIC_STATIC}/2Dimages/${molecule.cas_id}.sdf.png`}
+                                            layout="fill"
+                                            objectFit="contain"
+                                            className="bg-white"
+                                        />
+                                        )
+                                    </div>
+                                ) : (
+                                    <div className="relative w-full h-full bg-gray-100 flex justify-center items-center text-gray-400 rounded-3xl">
+                                        <Skeleton className="relative w-full h-full flex items-center align-middle">
+                                            <p className="text-xl text-center text-gray-700">
+                                                No 2D image available
+                                            </p>
+                                        </Skeleton>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
