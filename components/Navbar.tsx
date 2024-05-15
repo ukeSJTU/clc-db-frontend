@@ -111,7 +111,7 @@ const Navbar = () => {
                         </Link>
                     </NavigationMenuItem>
 
-                    <NavigationMenuItem>
+                    {/* <NavigationMenuItem>
                         <NavigationMenuTrigger>
                             External JS
                         </NavigationMenuTrigger>
@@ -159,7 +159,7 @@ const Navbar = () => {
                                 </ListItem>
                             </ul>
                         </NavigationMenuContent>
-                    </NavigationMenuItem>
+                    </NavigationMenuItem> */}
 
                     <NavigationMenuItem>
                         <Link href="/cluster" legacyBehavior passHref>
