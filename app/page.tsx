@@ -4,11 +4,7 @@ import api from "@/utils/api";
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 
-import {
-    ChiralityDistChart,
-    CategoryDistChart,
-    WeightDistributionChart,
-} from "@/components/StatsCharts";
+
 
 const fetchStatistics = async () => {
     const response = await api.get("/statistics/");
@@ -56,21 +52,6 @@ const Home: NextPage = () => {
                         <br />
                         Number of categories: {stats.totalCategories}
                     </p>
-                </section>
-                <section className="container mx-auto p-4 mt-8 space-y-6">
-                    <h2 className="text-2xl font-semibold">Charts</h2>
-                    <h3 className="text-xl font-semibold">
-                        Molecule Distribution by Weight
-                    </h3>
-                    <WeightDistributionChart />
-                    <h3 className="text-xl font-semibold">
-                        Molecule Distribution by Category
-                    </h3>
-                    <CategoryDistChart />
-                    <h3 className="text-xl font-semibold">
-                        Molecule Distribution by Chirality
-                    </h3>
-                    <ChiralityDistChart />
                 </section>
             </main>
         </div>
