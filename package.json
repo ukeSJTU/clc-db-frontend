@@ -26,6 +26,8 @@
         "chart.js": "^4.4.2",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
+        "echarts": "^5.5.0",
+        "echarts-for-react": "^3.0.2",
         "file-saver": "^2.0.5",
         "jszip": "^3.10.1",
         "kekule": "^1.0.0",

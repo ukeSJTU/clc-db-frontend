@@ -1,3 +1,4 @@
+import ClusterDemoChart from "@/components/clusterpage/ClusterResultExample";
 import {
     ChiralityDistChart,
     CategoryDistChart,
@@ -20,6 +21,10 @@ const StatisticsPage = () => {
                 Molecule Distribution by Chirality
             </h3>
             <ChiralityDistChart />
+            <h3 className="text-xl font-semibold">
+                Example Result for Cluster
+            </h3>
+            <ClusterDemoChart />
         </div>
     );
 };
