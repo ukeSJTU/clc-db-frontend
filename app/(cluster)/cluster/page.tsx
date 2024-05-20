@@ -136,85 +136,89 @@ const ClusterPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full mx-auto items-center space-y-6">
-            <div className="flex flex-col items-center mb-8 space-y-2">
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 text-center">
-                    Cluster analysis
+        <div className="container mx-auto px-4 py-8">
+            <div className="mb-8 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                    Cluster Analysis
                 </h2>
-                <p className="max-w-[600px] text-gray-500 dark:text-gray-400">
+                <p className="text-gray-600">
                     Upload your .sdf files to perform cluster analysis.
                 </p>
             </div>
 
-            <Accordion type="single" collapsible>
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(handleSubmit)}
-                        className="space-y-6"
-                    >
-                        <AccordionItem value="item-1">
-                            <FileUploadComponent
-                                control={form.control}
-                                name="selectedFiles"
-                                onFileChange={handleFileChange}
-                            />
-                        </AccordionItem>
-                        <AccordionItem value="item-2">
-                            <DescriptorSelector
-                                control={form.control}
-                                name="descriptor"
-                            />
-                        </AccordionItem>
-                        <AccordionItem value="item-3">
-                            <DescriptorParameters
-                                control={form.control}
-                                descriptor={form.watch("descriptor")}
-                            />
-                        </AccordionItem>
-                        <AccordionItem value="item-4">
-                            <ClusteringOptions
-                                control={form.control}
-                                fileListLength={
-                                    form.watch("selectedFiles").length
-                                }
-                                bits={form.watch("bits")}
-                                clusterMethod={form.watch("clusterMethod")}
-                            />
-                        </AccordionItem>
+            <div className="bg-white shadow-md rounded-lg p-6">
+                <Accordion type="single" collapsible>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(handleSubmit)}
+                            className="space-y-6"
+                        >
+                            <AccordionItem value="item-1">
+                                <FileUploadComponent
+                                    control={form.control}
+                                    name="selectedFiles"
+                                    onFileChange={handleFileChange}
+                                />
+                            </AccordionItem>
+                            <AccordionItem value="item-2">
+                                <DescriptorSelector
+                                    control={form.control}
+                                    name="descriptor"
+                                />
+                            </AccordionItem>
+                            <AccordionItem value="item-3">
+                                <DescriptorParameters
+                                    control={form.control}
+                                    descriptor={form.watch("descriptor")}
+                                />
+                            </AccordionItem>
+                            <AccordionItem value="item-4">
+                                <ClusteringOptions
+                                    control={form.control}
+                                    fileListLength={
+                                        form.watch("selectedFiles").length
+                                    }
+                                    bits={form.watch("bits")}
+                                    clusterMethod={form.watch("clusterMethod")}
+                                />
+                            </AccordionItem>
 
-                        <Button type="submit" disabled={isLoading}>
-                            {isLoading ? "Submitting..." : "Submit"}
-                        </Button>
-                    </form>
+                            <Button
+                                type="submit"
+                                disabled={isLoading}
+                                className="w-full"
+                            >
+                                {isLoading ? "Submitting..." : "Submit"}
+                            </Button>
+                        </form>
+                    </Form>
+                </Accordion>
 
-                    <Separator className="mt-4 h-1"></Separator>
+                <Separator className="my-6" />
 
-                    <div className="mt-8 flex flex-col items-center justify-center">
-                        {isLoading && (
-                            <div className="flex items-center space-x-2">
-                                <p>
-                                    Sending request and waiting for response...
-                                </p>
-                            </div>
-                        )}
-                        {errorMessage && (
-                            <div className="flex items-center space-x-2">
-                                <p className="text-red-500">{errorMessage}</p>
-                            </div>
-                        )}
-                        {clusteringResults && (
-                            <div className="my-4 flex flex-col items-center space-y-2">
-                                <h2 className="text-2xl font-semibold">
-                                    Clustering Results
-                                </h2>
+                <div className="mt-8 text-center">
+                    {isLoading && (
+                        <div className="text-gray-600">
+                            Sending request and waiting for response...
+                        </div>
+                    )}
+                    {errorMessage && (
+                        <div className="text-red-500">{errorMessage}</div>
+                    )}
+                    {clusteringResults && (
+                        <div className="mt-8">
+                            <h2 className="text-2xl font-semibold mb-4">
+                                Clustering Results
+                            </h2>
+                            <div className="flex justify-center">
                                 <ClusteringResultsChart
                                     results={clusteringResults}
                                 />
                             </div>
-                        )}
-                    </div>
-                </Form>
-            </Accordion>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
