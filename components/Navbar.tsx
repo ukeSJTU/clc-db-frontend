@@ -194,7 +194,7 @@ const Navbar = () => {
             </NavigationMenu>
 
             <div className="text-lg font-bold">
-                <Link href="/">ChemNexus</Link>
+                <Link href="/">CLC-DB</Link>
             </div>
         </div>
     );

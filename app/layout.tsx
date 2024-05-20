@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "ChemNexus",
+    title: "CLC-DB",
     description:
         "A collection of chemical resources for students and educators.",
 };
