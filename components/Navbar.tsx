@@ -61,6 +61,20 @@ const Navbar = () => {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
+                        <Link
+                            href="/download/categories"
+                            legacyBehavior
+                            passHref
+                        >
+                            <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                            >
+                                Download
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+
+                    {/* <NavigationMenuItem>
                         <NavigationMenuTrigger>Download</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -99,7 +113,7 @@ const Navbar = () => {
                                 </ListItem>
                             </ul>
                         </NavigationMenuContent>
-                    </NavigationMenuItem>
+                    </NavigationMenuItem> */}
 
                     <NavigationMenuItem>
                         <Link href="/search" legacyBehavior passHref>
