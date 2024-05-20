@@ -51,6 +51,7 @@ const SearchPage = () => {
     const [results, setResults] = useState<MoleculeProps[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [searchInitiated, setSearchInitiated] = useState(false);
 
     // Pagination settings
     const [paginationState, setPaginationState] = useState({
@@ -59,8 +60,11 @@ const SearchPage = () => {
         totalPages: 0,
     });
 
-    const handleSearch = async () => {
-        if (query.trim() === "") {
+    const handleSearch = async (
+        searchQuery = query,
+        searchOption = searchOpt
+    ) => {
+        if (searchQuery.trim() === "") {
             setResults([]);
             setPaginationState((prevState) => ({
                 ...prevState,
@@ -72,12 +76,12 @@ const SearchPage = () => {
         setIsLoading(true);
         console.log(
             "Searching:",
-            `/search/molecules?${searchOpt}=${query}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
+            `/search/molecules?${searchOption}=${searchQuery}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
         );
 
         try {
             const response = await api.get(
-                `/search/molecules?${searchOpt}=${query}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
+                `/search/molecules?${searchOption}=${searchQuery}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
             );
 
             const { results: fetchedResults = [], count = 0 } =
@@ -89,6 +93,7 @@ const SearchPage = () => {
                 ...prevState,
                 totalPages: Math.ceil(count / paginationState.pageSize),
             }));
+            setSearchInitiated(true);
         } catch (error) {
             console.error("Failed to fetch molecules", error);
             setResults([]);
@@ -113,7 +118,7 @@ const SearchPage = () => {
         console.log("triggerSearch", triggerSearch);
         if (triggerSearch === true) {
             console.log("triggering search");
-            handleSearch();
+            handleSearch(query_str, searchOpt);
         }
     };
 
@@ -142,7 +147,7 @@ const SearchPage = () => {
                     <SearchBar
                         query={query}
                         setQuery={setQuery}
-                        handleSearch={handleSearch}
+                        handleSearch={() => handleSearch(query, searchOpt)}
                         onSmilesInput={handleSmilesInput}
                     />
                 </div>
@@ -177,11 +182,13 @@ const SearchPage = () => {
                     totalPages: paginationState.totalPages,
                 }}
                 topLeftComponent={
-                    <SearchInfoComponent
-                        query={query}
-                        searchOpt={searchOpt}
-                        resultsCount={results.length}
-                    />
+                    searchInitiated && (
+                        <SearchInfoComponent
+                            query={query}
+                            searchOpt={searchOpt}
+                            resultsCount={results.length}
+                        />
+                    )
                 }
             />
         </div>

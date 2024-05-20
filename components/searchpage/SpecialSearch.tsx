@@ -50,6 +50,7 @@ const DrawStructureComponent: React.FC<DrawStructureProps> = ({
                         setShowKekule(false);
                     }}
                     onClose={() => setShowKekule(false)}
+                    onSubmit={onSubmit}
                 />
             )}
         </div>

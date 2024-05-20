@@ -8,11 +8,13 @@ import React, { useEffect, useRef, useState } from "react";
 interface KekuleComponentProps {
     onSmilesInput: (smiles: string) => void;
     onClose: () => void;
+    onSubmit: (smiles: string, type: string) => void;
 }
 
 const KekuleComponent: React.FC<KekuleComponentProps> = ({
     onSmilesInput,
     onClose,
+    onSubmit,
 }) => {
     const containerRef = useRef(null); // DOM container for the composer
     const composerRef = useRef(null); // Ref to store the composer instance
@@ -28,7 +30,7 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
     }, []);
 
     // Function to log molecule info
-    const onSubmit = () => {
+    const handleSmilesSubmit = () => {
         if (composerRef.current) {
             const chemDoc = composerRef.current.getChemObj();
             const mol = chemDoc.getChildAt(0); // Assuming the molecule is the first child
@@ -36,7 +38,7 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
             console.log("SMILES: ", newSmiles);
             setSmiles(newSmiles); // Update state
             onSmilesInput(newSmiles); // Call the onSmilesInput prop with the SMILES string
-
+            onSubmit(newSmiles, "smiles");
             // close the dropdown
             onClose();
         } else {
@@ -53,7 +55,7 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
                         style={{ width: "600px", height: "400px" }}
                     ></div>
                     <div className="flex justify-between items-center mt-4">
-                        <Button onClick={onSubmit} className="ml-4">
+                        <Button onClick={handleSmilesSubmit} className="ml-4">
                             Submit
                         </Button>
                         <Button onClick={onClose} className="ml-4">
