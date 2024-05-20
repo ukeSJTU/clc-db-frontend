@@ -12,6 +12,33 @@ import {
     MultiCasIDSearchComponent,
 } from "@/components/searchpage/SpecialSearch";
 
+type SearchOption = {
+    displayName: string;
+    searchName: string;
+};
+
+interface SearchInfoComponentProps {
+    query: string;
+    searchOpt: SearchOption["searchName"];
+    resultsCount: number;
+}
+
+const SearchInfoComponent: React.FC<SearchInfoComponentProps> = ({
+    query,
+    searchOpt,
+    resultsCount,
+}) => {
+    const escapedQuery = query.replace(/"/g, "&#34;");
+
+    return resultsCount > 0 ? (
+        <div className="text-xl font-semibold text-nowrap">
+            <p className="text-gray-600 dark:text-gray-400">
+                Searching for {searchOpt} = {escapedQuery}
+            </p>
+        </div>
+    ) : null;
+};
+
 const SearchPage = () => {
     const options = [
         { displayName: "CAS ID", searchName: "cas_id" },
@@ -149,6 +176,13 @@ const SearchPage = () => {
                         }),
                     totalPages: paginationState.totalPages,
                 }}
+                topLeftComponent={
+                    <SearchInfoComponent
+                        query={query}
+                        searchOpt={searchOpt}
+                        resultsCount={results.length}
+                    />
+                }
             />
         </div>
     );
