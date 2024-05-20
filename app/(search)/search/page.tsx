@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchBar from "@/components/searchpage/SearchBar";
 import { MoleculeProps } from "@/types/molecule";
 import OverviewContainer from "@/components/OverviewContainer";
@@ -60,51 +60,56 @@ const SearchPage = () => {
         totalPages: 0,
     });
 
-    const handleSearch = async (
-        searchQuery = query,
-        searchOption = searchOpt
-    ) => {
-        if (searchQuery.trim() === "") {
-            setResults([]);
-            setPaginationState((prevState) => ({
-                ...prevState,
-                totalPages: 0,
-            }));
-            return;
-        }
+    const handleSearch = useCallback(
+        async (
+            searchQuery = query,
+            searchOption = searchOpt,
+            page = paginationState.page,
+            pageSize = paginationState.pageSize
+        ) => {
+            if (searchQuery.trim() === "") {
+                setResults([]);
+                setPaginationState((prevState) => ({
+                    ...prevState,
+                    totalPages: 0,
+                }));
+                return;
+            }
 
-        setIsLoading(true);
-        console.log(
-            "Searching:",
-            `/search/molecules?${searchOption}=${searchQuery}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
-        );
-
-        try {
-            const response = await api.get(
-                `/search/molecules?${searchOption}=${searchQuery}&page=${paginationState.page}&page_size=${paginationState.pageSize}`
+            setIsLoading(true);
+            console.log(
+                "Searching:",
+                `/search/molecules?${searchOption}=${searchQuery}&page=${page}&page_size=${pageSize}`
             );
 
-            const { results: fetchedResults = [], count = 0 } =
-                response.data || {};
+            try {
+                const response = await api.get(
+                    `/search/molecules?${searchOption}=${searchQuery}&page=${page}&page_size=${pageSize}`
+                );
 
-            console.log("fetchedResults", fetchedResults);
-            setResults(fetchedResults);
-            setPaginationState((prevState) => ({
-                ...prevState,
-                totalPages: Math.ceil(count / paginationState.pageSize),
-            }));
-            setSearchInitiated(true);
-        } catch (error) {
-            console.error("Failed to fetch molecules", error);
-            setResults([]);
-            setPaginationState((prevState) => ({
-                ...prevState,
-                totalPages: 0,
-            }));
-        } finally {
-            setIsLoading(false);
-        }
-    };
+                const { results: fetchedResults = [], count = 0 } =
+                    response.data || {};
+
+                console.log("fetchedResults", fetchedResults);
+                setResults(fetchedResults);
+                setPaginationState((prevState) => ({
+                    ...prevState,
+                    totalPages: Math.ceil(count / pageSize),
+                }));
+                setSearchInitiated(true);
+            } catch (error) {
+                console.error("Failed to fetch molecules", error);
+                setResults([]);
+                setPaginationState((prevState) => ({
+                    ...prevState,
+                    totalPages: 0,
+                }));
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [query, searchOpt, paginationState.page, paginationState.pageSize]
+    );
 
     const handleSpecialSearchInput = (
         query_str: string,
@@ -118,7 +123,7 @@ const SearchPage = () => {
         console.log("triggerSearch", triggerSearch);
         if (triggerSearch === true) {
             console.log("triggering search");
-            handleSearch(query_str, searchOpt);
+            handleSearch(query_str, searchOpt, 1, paginationState.pageSize);
         }
     };
 
@@ -132,6 +137,12 @@ const SearchPage = () => {
     ) => {
         setPaginationState(newPaginationState);
     };
+
+    useEffect(() => {
+        if (searchInitiated) {
+            handleSearch();
+        }
+    }, [searchInitiated, handleSearch]);
 
     return (
         <div className="flex flex-col items-center py-12 space-y-4">
@@ -147,7 +158,14 @@ const SearchPage = () => {
                     <SearchBar
                         query={query}
                         setQuery={setQuery}
-                        handleSearch={() => handleSearch(query, searchOpt)}
+                        handleSearch={() =>
+                            handleSearch(
+                                query,
+                                searchOpt,
+                                1,
+                                paginationState.pageSize
+                            )
+                        }
                         onSmilesInput={handleSmilesInput}
                     />
                 </div>
