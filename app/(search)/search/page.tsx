@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useDebouncedCallback } from "use-debounce";
 import SearchBar from "@/components/searchpage/SearchBar";
 import { MoleculeProps } from "@/types/molecule";
 import OverviewContainer from "@/components/OverviewContainer";
@@ -60,7 +61,7 @@ const SearchPage = () => {
         totalPages: 0,
     });
 
-    const handleSearch = useCallback(
+    const handleSearch = useDebouncedCallback(
         async (
             searchQuery = query,
             searchOption = searchOpt,
@@ -108,7 +109,8 @@ const SearchPage = () => {
                 setIsLoading(false);
             }
         },
-        [query, searchOpt, paginationState.page, paginationState.pageSize]
+        300
+        // [query, searchOpt, paginationState.page, paginationState.pageSize]
     );
 
     const handleSpecialSearchInput = (
