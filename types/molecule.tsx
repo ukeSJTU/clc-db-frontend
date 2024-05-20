@@ -13,6 +13,7 @@ export type MoleculeProps = {
     cas_id: string;
     pubchem_cid?: string; // Optional as it can be empty
     category: Category[]; // Array of related categories
+    url?: string; // Optional URL field
     pubchem_url?: string; // Optional PubChem URL field
     smiles: string;
     chirality: Chirality[]; // Array of related chirality types

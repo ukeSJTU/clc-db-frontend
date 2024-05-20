@@ -57,6 +57,23 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         </td>
                     </tr>
                     <tr>
+                        <td className="py-2 pr-4 font-semibold">URL</td>
+                        <td className="py-2">
+                            {molecule.url ? (
+                                <a
+                                    href={molecule.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    {molecule.url}
+                                </a>
+                            ) : (
+                                "N/A"
+                            )}
+                        </td>
+                    </tr>
+                    <tr>
                         <td className="py-2 pr-4 font-semibold">PubChem URL</td>
                         <td className="py-2">
                             {molecule.pubchem_url !== "nan" ? (
