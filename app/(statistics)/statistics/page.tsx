@@ -13,7 +13,10 @@ const StatisticsPage = () => {
                 <h3 className="text-2xl font-semibold mb-4">
                     Molecule Distribution by Weight
                 </h3>
-                <div className="bg-white shadow-lg rounded-lg p-6 aspect-w-16 aspect-h-9">
+                <div
+                    className="bg-white shadow-lg rounded-lg p-6"
+                    style={{ height: "400px" }}
+                >
                     <WeightDistributionChart />
                 </div>
             </div>
@@ -21,7 +24,10 @@ const StatisticsPage = () => {
                 <h3 className="text-2xl font-semibold mb-4">
                     Molecule Distribution by Category
                 </h3>
-                <div className="bg-white shadow-lg rounded-lg p-6 aspect-w-16 aspect-h-9">
+                <div
+                    className="bg-white shadow-lg rounded-lg p-6"
+                    style={{ height: "400px" }}
+                >
                     <CategoryDistChart />
                 </div>
             </div>
@@ -29,7 +35,10 @@ const StatisticsPage = () => {
                 <h3 className="text-2xl font-semibold mb-4">
                     Molecule Distribution by Chirality
                 </h3>
-                <div className="bg-white shadow-lg rounded-lg p-6 aspect-w-1 aspect-h-1">
+                <div
+                    className="bg-white shadow-lg rounded-lg p-6"
+                    style={{ height: "300px" }}
+                >
                     <ChiralityDistChart />
                 </div>
             </div>
@@ -37,7 +46,10 @@ const StatisticsPage = () => {
                 <h3 className="text-2xl font-semibold mb-4">
                     Example Result for Cluster
                 </h3>
-                <div className="bg-white shadow-lg rounded-lg p-6 aspect-w-16 aspect-h-9">
+                <div
+                    className="bg-white shadow-lg rounded-lg p-6"
+                    style={{ height: "400px" }}
+                >
                     <ClusterDemoChart />
                 </div>
             </div>
