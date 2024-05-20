@@ -157,8 +157,9 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                             <p className="text-sm text-gray-500">
                                 2D Structure
                             </p>
-                            <div className="w-full h-64 relative">
-                                {molecule.pubchem_cid !== "0" ? (
+                            <div className="w-full h-full relative flex justify-center">
+                                <Molecule2DViewer molecule={molecule} />
+                                {/* {molecule.pubchem_cid !== "0" ? (
                                     <div className="relative w-full h-full bg-white">
                                         (
                                         <Image
@@ -178,7 +179,7 @@ const MoleculeCard = (molecule: MoleculeProps) => {
                                             </p>
                                         </Skeleton>
                                     </div>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     </div>
