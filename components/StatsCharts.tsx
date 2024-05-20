@@ -59,10 +59,11 @@ const CategoryDistChart = () => {
     }, []);
 
     return (
-        <div>
+        <div className="w-full h-full">
             <Bar
                 data={chartData}
                 options={{
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
                         legend: { position: "top" },
@@ -115,10 +116,11 @@ const ChiralityDistChart = () => {
     }, []);
 
     return (
-        <div>
+        <div className="w-full h-full">
             <Pie
                 data={chartData}
                 options={{
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
                         legend: { position: "top" },
@@ -155,7 +157,7 @@ const WeightDistributionChart = () => {
                     ],
                 });
             } catch (error) {
-                console.log("EWrror fetching weight distribution data", error);
+                console.log("Error fetching weight distribution data", error);
             }
         };
 
@@ -163,13 +165,14 @@ const WeightDistributionChart = () => {
     }, []);
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-4">
+        <div className="w-full h-full">
             <Bar
                 data={chartData}
                 options={{
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
-                        legend: { position: "chartArea" },
+                        legend: { position: "top" },
                         title: {
                             display: false,
                             text: "Molecule Weight Distribution",
