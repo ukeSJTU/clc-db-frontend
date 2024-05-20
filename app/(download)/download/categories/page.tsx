@@ -23,14 +23,25 @@ const CategoriesPage = () => {
 
     return (
         <div className="flex flex-col items-center p-4">
-            <h1 className="text-2xl font-bold mb-6">Available Class Types</h1>
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+            <h1 className="text-3xl font-bold mb-4 text-center">
+                Available Class Types
+            </h1>
+            <p className="text-lg text-gray-600 mb-4 text-center">
+                Click on a badge to view all the molecules under that category.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl pb-4">
                 {categories.map((category) => (
-                    <CategoryBadge
+                    <div
                         key={category.id}
-                        category={{ name: category.name }}
-                        abbreviate={false}
-                    />
+                        className="transition duration-300 ease-in-out transform hover:-translate-y-1"
+                    >
+                        <CategoryBadge
+                            key={category.id}
+                            category={{ name: category.name }}
+                            abbreviate={false}
+                            className="text-base font-medium"
+                        />
+                    </div>
                 ))}
             </div>
         </div>

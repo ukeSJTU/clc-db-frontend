@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 interface ClassTypeBadgeProps {
     category: { name: string }; // Expecting a single category object
     abbreviate?: boolean; // Optional prop to control if the name should be abbreviated
+    className?: string; // Optional prop to accept additional CSS classes
 }
 
 const dynamicColor = (typeName: string) => {
@@ -39,6 +40,7 @@ const abbreviateName = (name: string) => {
 const CategoryBadge: React.FC<ClassTypeBadgeProps> = ({
     category,
     abbreviate = true,
+    className = "",
 }) => {
     const router = useRouter();
     const colorClass = dynamicColor(category.name);
@@ -53,7 +55,7 @@ const CategoryBadge: React.FC<ClassTypeBadgeProps> = ({
 
     return (
         <Badge
-            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass} text-nowrap`}
+            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClass} text-nowrap ${className}`}
             title={category.name} // Add a title attribute to show the full name on hover
             onClick={() => handleBadgeClick(category.name)}
         >
