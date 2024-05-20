@@ -12,36 +12,28 @@ const Footer = () => {
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="/overview/card/1"
                             >
-                                About ChemNexus
+                                Card
                             </Link>
                         </li>
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="/overview/table/1"
                             >
-                                Features
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                className="hover:text-gray-200 transition-colors"
-                                href="#"
-                            >
-                                Pricing
+                                Table
                             </Link>
                         </li>
                     </ul>
                 </div>
                 <div className="space-y-4">
-                    <h4 className="text-gray-300 font-semibold">Explore</h4>
+                    <h4 className="text-gray-300 font-semibold">Tools</h4>
                     <ul className="space-y-2">
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="/download/categories"
                             >
                                 Download
                             </Link>
@@ -49,7 +41,7 @@ const Footer = () => {
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="/search"
                             >
                                 Search
                             </Link>
@@ -57,9 +49,9 @@ const Footer = () => {
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="/cluster"
                             >
-                                Community
+                                Cluster
                             </Link>
                         </li>
                     </ul>
@@ -70,25 +62,17 @@ const Footer = () => {
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="https://www.bidepharm.com/"
                             >
-                                Documentation
+                                毕得医药
                             </Link>
                         </li>
                         <li>
                             <Link
                                 className="hover:text-gray-200 transition-colors"
-                                href="#"
+                                href="https://pubchem.ncbi.nlm.nih.gov/"
                             >
-                                Blog
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                className="hover:text-gray-200 transition-colors"
-                                href="#"
-                            >
-                                Support
+                                PubChem
                             </Link>
                         </li>
                     </ul>
@@ -96,9 +80,9 @@ const Footer = () => {
                 <div className="space-y-4">
                     <h4 className="text-gray-300 font-semibold">Powered By</h4>
                     <div className="space-y-2">
-                        <p>
+                        {/* <p>
                             This website uses the following external libraries:
-                        </p>
+                        </p> */}
                         <ul className="space-y-1">
                             <li>
                                 <Link
@@ -132,7 +116,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="mt-8 text-center">
-                <p>© 2024 ChemNexus. All rights reserved.</p>
+                <p>© 2024 CLC-DB. All rights reserved.</p>
             </div>
         </footer>
     );
