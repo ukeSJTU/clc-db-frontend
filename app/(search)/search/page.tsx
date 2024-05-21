@@ -7,6 +7,7 @@ import { MoleculeProps } from "@/types/molecule";
 import OverviewContainer from "@/components/OverviewContainer";
 import SearchOptionsGroup from "@/components/searchpage/SearchOptionsGroup";
 import { SearchHeading, SearchTip } from "@/components/searchpage/SearchText";
+import SearchExamples from "@/components/searchpage/SearchExamples";
 import api from "@/utils/api";
 import {
     DrawStructureComponent,
@@ -140,6 +141,20 @@ const SearchPage = () => {
         setPaginationState(newPaginationState);
     };
 
+    const handleExampleClick = (
+        exampleQuery: string,
+        exampleSearchOpt: string
+    ) => {
+        setQuery(exampleQuery);
+        setSearchOpt(exampleSearchOpt);
+        handleSearch(
+            exampleQuery,
+            exampleSearchOpt,
+            1,
+            paginationState.pageSize
+        );
+    };
+
     useEffect(() => {
         if (searchInitiated) {
             handleSearch();
@@ -170,6 +185,7 @@ const SearchPage = () => {
                         }
                         onSmilesInput={handleSmilesInput}
                     />
+                    <SearchExamples onExampleClick={handleSpecialSearchInput} />
                 </div>
                 <div className="flex flex-row items-center justify-center px-4">
                     <div className="flex justify-end mr-2 w-1/2">
