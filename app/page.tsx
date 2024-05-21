@@ -2,6 +2,7 @@
 
 import api from "@/utils/api";
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const fetchStatistics = async () => {
@@ -28,11 +29,25 @@ const Home: NextPage = () => {
 
     return (
         <div>
-            <main className="p-10">
-                <section className="container mx-auto p-4">
-                    <h1 className="text-4xl font-bold mb-6 text-center">
+            <div className="relative">
+                <Image
+                    src="/bgDark.webp"
+                    alt="Banner"
+                    width={1792}
+                    height={256}
+                    className="w-full h-64 object-cover"
+                />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center bg-black bg-opacity-50 py-4 px-8 rounded-md">
+                    <h1 className="text-4xl font-bold text-white">
                         Welcome to CLC-DB!
                     </h1>
+                </div>
+            </div>
+            <main className="p-10">
+                <section className="container mx-auto p-4">
+                    {/* <h1 className="text-4xl font-bold mb-6 text-center">
+                        Welcome to CLC-DB!
+                    </h1> */}
                     <div className="bg-white shadow-md rounded-lg p-6">
                         <h2 className="text-2xl font-semibold mb-4">
                             What Is CLC-DB?
