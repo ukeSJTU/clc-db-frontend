@@ -16,6 +16,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import Image from "next/image";
 
 const Navbar = () => {
     return (
@@ -208,7 +209,16 @@ const Navbar = () => {
             </NavigationMenu>
 
             <div className="text-lg font-bold">
-                <Link href="/">CLC-DB</Link>
+                <Link href="/">
+                    <Image
+                        src="/favicon.webp"
+                        alt="Favicon"
+                        width={32}
+                        height={32}
+                        className="inline-block m-1"
+                    />
+                    CLC-DB
+                </Link>
             </div>
         </div>
     );
