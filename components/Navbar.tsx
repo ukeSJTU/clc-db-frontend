@@ -208,14 +208,14 @@ const Navbar = () => {
                 </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="text-lg font-bold">
-                <Link href="/">
+            <div className="text-lg font-bold flex items-center">
+                <Link href="/" className="flex items-center">
                     <Image
                         src="/favicon.webp"
                         alt="Favicon"
                         width={32}
                         height={32}
-                        className="inline-block m-1"
+                        className="mr-2"
                     />
                     CLC-DB
                 </Link>
