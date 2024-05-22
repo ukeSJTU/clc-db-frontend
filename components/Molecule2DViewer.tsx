@@ -41,16 +41,10 @@ const Molecule2DImage = ({ molecule }: { molecule: MoleculeProps }) => {
 
     return (
         <div className="w-full h-64 relative">
-            {molecule.pubchem_cid !== "0"
-                ? !hasError
-                    ? renderImage(
-                          `${process.env.NEXT_PUBLIC_STATIC}/2Dimages/${molecule.cas_id}.sdf.png`
-                      )
-                    : molecule.pubchem_cid
-                    ? renderImage(
-                          `https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${molecule.pubchem_cid}&width=500&height=500`
-                      )
-                    : renderNoImagePlaceholder()
+            {!hasError
+                ? renderImage(
+                      `${process.env.NEXT_PUBLIC_STATIC}/2Dimages/${molecule.cas_id}.png`
+                  )
                 : renderSkeleton()}
         </div>
     );
