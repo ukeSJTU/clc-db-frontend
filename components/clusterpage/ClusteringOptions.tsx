@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import SliderWithValue from "@/components/SliderWithValue";
 import {
     FormControl,
     FormField,
@@ -217,11 +218,18 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                                         <FormItem>
                                             <FormLabel>eps</FormLabel>
                                             <FormControl>
-                                                <Slider
+                                                {/* <Slider
                                                     min={0}
                                                     max={2}
                                                     step={0.01}
                                                     {...field}
+                                                /> */}
+                                                <SliderWithValue
+                                                    value={field.value}
+                                                    min={0}
+                                                    max={2}
+                                                    step={0.01}
+                                                    onChange={field.onChange}
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -235,11 +243,18 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                                         <FormItem>
                                             <FormLabel>min_samples</FormLabel>
                                             <FormControl>
-                                                <Slider
+                                                {/* <Slider
                                                     min={1}
                                                     max={10}
                                                     step={1}
                                                     {...field}
+                                                /> */}
+                                                <SliderWithValue
+                                                    value={field.value}
+                                                    min={1}
+                                                    max={10}
+                                                    step={1}
+                                                    onChange={field.onChange}
                                                 />
                                             </FormControl>
                                             <FormMessage />
