@@ -7617,7 +7617,7 @@ const ClusterDemoChart = () => {
             },
         ],
     };
-    return <ReactEcharts option={option} style={{ height: 300 }} />;
+    return <ReactEcharts option={option} style={{ height: 800, width: 800 }} />;
 };
 
 export default ClusterDemoChart;
