@@ -21,7 +21,7 @@ interface CustomTooltipItem extends TooltipItem<"scatter"> {
     raw: {
         x: number;
         y: number;
-        label: string;
+        cas_id: string;
     };
 }
 
@@ -48,6 +48,9 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
                                 y: parseFloat(
                                     results.coordinates[classNumber][index][1]
                                 ),
+                                cas_id: results.coordinates[classNumber][
+                                    index
+                                ][2], // Add cas_id here
                             })
                         ),
                         backgroundColor: `rgba(${Math.floor(
@@ -66,7 +69,7 @@ const ClusteringResultsChart: React.FC<ClusteringResultsChartProps> = ({
                         tooltip: {
                             callbacks: {
                                 label: (context: CustomTooltipItem) =>
-                                    context.raw.label,
+                                    context.raw.cas_id, // Display cas_id in the tooltip
                             },
                         },
                     },
