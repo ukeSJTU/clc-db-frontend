@@ -53,19 +53,21 @@ const Home: NextPage = () => {
                             What Is CLC-DB?
                         </h2>
                         <p className="text-gray-700 leading-relaxed">
-                            CLC-DB (Chiral Ligand and Catalyst Database) is an
+                            <span className="font-semibold">CLC-DB</span>
+                            (Chiral Ligand and Catalyst Database) is an
                             open-source database dedicated to comprehensive data
                             on chiral ligands and catalysts, aimed at
                             accelerating research and innovation in the field of
                             asymmetric catalysis.
                         </p>
                         <p className="text-gray-700 leading-relaxed mt-4">
-                            CLC-DB provides access to 1861 chiral ligands and
-                            catalysts, sourced from authoritative public
-                            databases such as PubChem, and categorized into 32
-                            groups with accurately calculated molecular physical
-                            and chemical properties by RDKIT and high-quality 3D
-                            structures calculated by Gaussian.
+                            CLC-DB provides access to
+                            <span className="font-semibold"> 1861</span> chiral
+                            ligands and catalysts, sourced from authoritative
+                            public databases such as PubChem, and categorized
+                            into 32 groups with accurately calculated molecular
+                            physical and chemical properties by RDKIT and
+                            high-quality 3D structures calculated by Gaussian.
                         </p>
                         <p className="text-gray-700 leading-relaxed mt-4">
                             Additionally, we offer built-in tools for
