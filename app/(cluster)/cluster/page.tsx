@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import ExampleSelector from "@/components/clusterpage/ExampleSelector";
 import FileUploadComponent from "@/components/clusterpage/SDFUploader";
 import DescriptorSelector from "@/components/clusterpage/DescriptorSelector";
 import DescriptorParameters from "@/components/clusterpage/DescriptorParams";
@@ -135,6 +136,35 @@ const ClusterPage: React.FC = () => {
         }
     };
 
+    const handleExampleClick = async (exampleType: string) => {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        try {
+            const response = await api.post("/cluster/process/example/", {
+                example_type: exampleType,
+            });
+            setClusteringResults(response.data);
+            toast({
+                title: "Example clustering completed",
+                description:
+                    "The example clustering has been successfully completed.",
+            });
+        } catch (error) {
+            console.error("Error running example clustering:", error);
+            setErrorMessage(
+                "An error occurred while running the example clustering."
+            );
+            toast({
+                title: "Error",
+                description:
+                    "An error occurred while running the example clustering.",
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="mb-8 text-center">
@@ -147,6 +177,12 @@ const ClusterPage: React.FC = () => {
             </div>
 
             <div className="bg-white shadow-md rounded-lg p-6">
+                <div className="mb-4">
+                    <ExampleSelector
+                        onExampleClick={handleExampleClick}
+                        isLoading={isLoading}
+                    />
+                </div>
                 <Accordion type="single" collapsible>
                     <Form {...form}>
                         <form
