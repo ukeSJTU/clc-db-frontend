@@ -35,11 +35,11 @@ const Navbar = () => {
                                         >
                                             <Icons.logo className="h-6 w-6" />
                                             <div className="mb-2 mt-4 text-lg font-medium">
-                                                CN-Overview
+                                                CLC-DB-Overview
                                             </div>
                                             <p className="text-sm leading-tight text-muted-foreground">
                                                 Overview of all the molecules in
-                                                the database on ChemNexus. Data
+                                                the database on CLC-DB. Data
                                                 rich, interactive and
                                                 user-friendly.
                                             </p>
@@ -87,11 +87,11 @@ const Navbar = () => {
                                         >
                                             <Icons.logo className="h-6 w-6" />
                                             <div className="mb-2 mt-4 text-lg font-medium">
-                                                CN-Download
+                                                CLC-DB-Download
                                             </div>
                                             <p className="text-sm leading-tight text-muted-foreground">
                                                 Download the molecule(s) from
-                                                the database on ChemNexus.
+                                                the database on CLC-DB.
                                                 Choose to download a single
                                                 molecule or multiple molecules.
                                             </p>
@@ -140,10 +140,10 @@ const Navbar = () => {
                                         >
                                             <Icons.logo className="h-6 w-6" />
                                             <div className="mb-2 mt-4 text-lg font-medium">
-                                                CN-Ext
+                                                CLC-DB-Ext
                                             </div>
                                             <p className="text-sm leading-tight text-muted-foreground">
-                                                ChemNexus also supports multiple
+                                                CLC-DB also supports multiple
                                                 external JS library such as
                                                 3Dmol and Kekulejs. Play with
                                                 them here.
