@@ -53,7 +53,9 @@ const Home: NextPage = () => {
                             What Is CLC-DB?
                         </h2>
                         <p className="text-gray-700 leading-relaxed">
-                            <span className="font-semibold">CLC-DB</span>
+                            <span className="font-semibold text-blue-700 text-xl">
+                                CLC-DB
+                            </span>{" "}
                             (Chiral Ligand and Catalyst Database) is an
                             open-source database dedicated to comprehensive data
                             on chiral ligands and catalysts, aimed at
@@ -62,12 +64,16 @@ const Home: NextPage = () => {
                         </p>
                         <p className="text-gray-700 leading-relaxed mt-4">
                             CLC-DB provides access to
-                            <span className="font-semibold"> 1861</span> chiral
-                            ligands and catalysts, sourced from authoritative
-                            public databases such as PubChem, and categorized
-                            into 32 groups with accurately calculated molecular
-                            physical and chemical properties by RDKIT and
-                            high-quality 3D structures calculated by Gaussian.
+                            <span className="font-semibold text-blue-700">
+                                {" "}
+                                1861
+                            </span>{" "}
+                            chiral ligands and catalysts, sourced from
+                            authoritative public databases such as PubChem, and
+                            categorized into 32 groups with accurately
+                            calculated molecular physical and chemical
+                            properties by RDKIT and high-quality 3D structures
+                            calculated by Gaussian.
                         </p>
                         <p className="text-gray-700 leading-relaxed mt-4">
                             Additionally, we offer built-in tools for
