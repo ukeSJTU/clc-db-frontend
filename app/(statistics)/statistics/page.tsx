@@ -37,7 +37,7 @@ const StatisticsPage = () => {
                 </h3>
                 <div
                     className="bg-white shadow-lg rounded-lg p-6 mx-auto"
-                    style={{ height: "300px", maxWidth: "600px" }}
+                    style={{ height: "500px", maxWidth: "800px" }}
                 >
                     <ChiralityDistChart />
                 </div>
