@@ -82,6 +82,12 @@ const Home: NextPage = () => {
                             from the user, facilitating ligand screening for
                             drug development or chemical material research.
                         </p>
+                        <Image
+                            src="/demo.png"
+                            alt="Molecule Structure Demo Picture"
+                            width={1200}
+                            height={256}
+                        />
                     </div>
                     <div className="bg-white shadow-md rounded-lg p-6 mt-8">
                         <h2 className="text-2xl font-semibold mb-4">
