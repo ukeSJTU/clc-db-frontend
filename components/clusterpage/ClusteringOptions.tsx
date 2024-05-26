@@ -104,7 +104,11 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                         </h4>
                         <ul className="list-disc list-inside">
                             <li>
-                                <strong>K-Means</strong>: Good method
+                                <strong>K-Means:</strong>
+                                <p className="text-blue-700 inline">
+                                    {" "}
+                                    Recommended method
+                                </p>
                             </li>
                             <li>
                                 <strong>DBSCAN</strong>
