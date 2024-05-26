@@ -87,7 +87,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     className="hover:text-gray-200 transition-colors"
-                                    href="https://3dmol.org/doc/index.htmls"
+                                    href="https://3dmol.org/doc/index.html"
                                     target="_blank"
                                 >
                                     3Dmol
