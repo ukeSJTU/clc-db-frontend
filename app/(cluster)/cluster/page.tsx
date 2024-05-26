@@ -232,7 +232,7 @@ const ClusterPage: React.FC = () => {
 
                 <Separator className="my-6" />
 
-                <div className="mt-8 text-center">
+                <div className="mt-8 flex flex-col items-center justify-center">
                     {isLoading && (
                         <div className="text-gray-600">
                             Sending request and waiting for response...
@@ -242,7 +242,7 @@ const ClusterPage: React.FC = () => {
                         <div className="text-red-500">{errorMessage}</div>
                     )}
                     {clusteringResults && (
-                        <div className="mt-8">
+                        <div className="mt-8 flex flex-col items-center">
                             <h2 className="text-2xl font-semibold mb-4">
                                 Clustering Results
                             </h2>
