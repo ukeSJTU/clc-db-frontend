@@ -1,16 +1,14 @@
+import Image from "next/image";
 const HelpPage = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-4xl font-bold mb-8">Help</h1>
-
             <h2 className="text-2xl font-bold mb-4">Home Page:</h2>
             <p className="mb-4">
                 Use the <strong className="font-bold">navigation bar</strong> to
                 get quick access to the database.
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image src="/help/1.png" alt="Home Page" width={800} height={400} />
 
             <h2 className="text-2xl font-bold mb-4">Overview:</h2>
             <p className="mb-4">
@@ -21,11 +19,24 @@ const HelpPage = () => {
                 interested in.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
+                <div className="flex flex-row items-center justify-center">
+                    <div className="flex-shrink-0 mr-4">
+                        <Image
+                            src="/help/2.png"
+                            alt="Overview Cards"
+                            width={400}
+                            height={300}
+                        />
+                    </div>
+                    <div className="flex-grow">
+                        <Image
+                            src="/help/3.png"
+                            alt="Overview Table"
+                            width={857}
+                            height={172}
+                            layout="responsive"
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -38,9 +49,12 @@ const HelpPage = () => {
                 <strong className="font-bold">one category</strong>, in a page
                 or all of them.
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image
+                src="/help/4.png"
+                alt="Download Page"
+                width={800}
+                height={400}
+            />
             <p className="mb-4">
                 What you will get here is a folder of SDFs and a combined Excel
                 of basic information. Notice that if downloaded separately, XLSX
@@ -49,12 +63,18 @@ const HelpPage = () => {
                 to obtain a <strong className="font-bold">combined</strong> one.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
+                <Image
+                    src="/help/5.png"
+                    alt="Downloaded Files"
+                    width={400}
+                    height={300}
+                />
+                <Image
+                    src="/help/6.png"
+                    alt="Download Options"
+                    width={400}
+                    height={300}
+                />
             </div>
 
             <h2 className="text-2xl font-bold mb-4">Search:</h2>
@@ -64,29 +84,41 @@ const HelpPage = () => {
                 <strong className="font-bold">a partial keyword search</strong>,
                 and the system will automatically match all relevant results:
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image
+                src="/help/7.png"
+                alt="Search Results"
+                width={800}
+                height={400}
+            />
             <p className="mb-4">
                 You can <strong className="font-bold">draw</strong> a structure
                 and it will be converted into SMILES for searching. Note that
                 partial search also applies.
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image
+                src="/help/8.png"
+                alt="Structure Search"
+                width={800}
+                height={400}
+            />
             <p className="mb-4">
                 Also, we support{" "}
                 <strong className="font-bold">multi-search</strong> by uploading
                 a CSV of IDs:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
+                <Image
+                    src="/help/9.png"
+                    alt="Multi-search"
+                    width={400}
+                    height={300}
+                />
+                <Image
+                    src="/help/10.png"
+                    alt="Multi-search Results"
+                    width={400}
+                    height={300}
+                />
             </div>
 
             <h2 className="text-2xl font-bold mb-4">Clustering:</h2>
@@ -112,9 +144,12 @@ const HelpPage = () => {
                 <strong className="font-bold">upload</strong> them to our online
                 clustering tool.
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image
+                src="/help/11.png"
+                alt="Clustering Upload"
+                width={800}
+                height={400}
+            />
             <p className="mb-4">
                 Secondly, you need to select{" "}
                 <strong className="font-bold">descriptors</strong> for
@@ -129,12 +164,18 @@ const HelpPage = () => {
                 multiple times until you achieve satisfactory results.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
-                <div className="bg-gray-200 h-48 flex items-center justify-center text-gray-500">
-                    Placeholder Image
-                </div>
+                <Image
+                    src="/help/12.png"
+                    alt="Clustering Options"
+                    width={400}
+                    height={300}
+                />
+                <Image
+                    src="/help/13.png"
+                    alt="Clustering Results"
+                    width={400}
+                    height={300}
+                />
             </div>
             <p className="mb-4">
                 Lastly, based on the clustering outcomes,{" "}
@@ -151,9 +192,12 @@ const HelpPage = () => {
                 . This prioritization is likely to assist you in identifying the
                 optimal ligands quickly.
             </p>
-            <div className="bg-gray-200 h-48 mb-8 flex items-center justify-center text-gray-500">
-                Placeholder Image
-            </div>
+            <Image
+                src="/help/14.png"
+                alt="Ligand Selection"
+                width={800}
+                height={400}
+            />
 
             <h2 className="text-2xl font-bold mb-4">Stats:</h2>
             <p className="mb-4">
@@ -174,5 +218,4 @@ const HelpPage = () => {
         </div>
     );
 };
-
 export default HelpPage;
