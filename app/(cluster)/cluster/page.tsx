@@ -29,7 +29,7 @@ const FormSchema = z.object({
     rdkitUseBondTypes: z.boolean().default(false),
     rdkitUseChirality: z.boolean().default(false),
     reductionMethod: z.enum(["PCA", "TSNE"]),
-    clusterMethod: z.enum(["KNN", "DBSCAN"]),
+    clusterMethod: z.enum(["K-Means", "DBSCAN"]),
     clusters: z.number().min(1).default(5),
     knnAlgro: z.enum(["lloyd", "elkan"]), // "auto", "full" are deprecated in sklearn.KMeans after version1.1
     eps: z.number().min(0).default(0.25),
@@ -61,7 +61,7 @@ const ClusterPage: React.FC = () => {
             rdkitUseBondTypes: false,
             rdkitUseChirality: false,
             reductionMethod: "PCA",
-            clusterMethod: "KNN",
+            clusterMethod: "K-Means",
             clusters: 2,
             knnAlgro: "lloyd",
             eps: 0.25,

@@ -104,7 +104,7 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                         </h4>
                         <ul className="list-disc list-inside">
                             <li>
-                                <strong>KNN</strong>: Good method
+                                <strong>K-Means</strong>: Good method
                             </li>
                             <li>
                                 <strong>DBSCAN</strong>
@@ -127,7 +127,9 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="KNN">KNN</SelectItem>
+                                        <SelectItem value="K-Means">
+                                            K-Means
+                                        </SelectItem>
                                         <SelectItem value="DBSCAN">
                                             DBSCAN
                                         </SelectItem>
@@ -137,10 +139,10 @@ const ClusteringOptions: React.FC<ClusteringOptionsProps> = ({
                         )}
                     />
 
-                    {clusterMethod === "KNN" && (
+                    {clusterMethod === "K-Means" && (
                         <Card className="mt-4">
                             <CardHeader>
-                                <CardTitle>KNN Parameters</CardTitle>
+                                <CardTitle>K-Means Parameters</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <FormField
