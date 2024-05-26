@@ -217,15 +217,15 @@ const SearchPage = () => {
                         }),
                     totalPages: paginationState.totalPages,
                 }}
-                topLeftComponent={
-                    searchInitiated && (
-                        <SearchInfoComponent
-                            query={query}
-                            searchOpt={searchOpt}
-                            resultsCount={results.length}
-                        />
-                    )
-                }
+                // topLeftComponent={
+                //     searchInitiated && (
+                //         <SearchInfoComponent
+                //             query={query}
+                //             searchOpt={searchOpt}
+                //             resultsCount={results.length}
+                //         />
+                //     )
+                // }
             />
         </div>
     );
