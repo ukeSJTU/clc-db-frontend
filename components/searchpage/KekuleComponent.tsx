@@ -55,11 +55,11 @@ const KekuleComponent: React.FC<KekuleComponentProps> = ({
                         style={{ width: "600px", height: "400px" }}
                     ></div>
                     <div className="flex justify-between items-center mt-4">
-                        <Button onClick={handleSmilesSubmit} className="ml-4">
-                            Submit
-                        </Button>
                         <Button onClick={onClose} className="ml-4">
                             Close
+                        </Button>
+                        <Button onClick={handleSmilesSubmit} className="ml-4">
+                            Submit
                         </Button>
                     </div>
                 </div>
