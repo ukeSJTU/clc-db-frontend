@@ -23,8 +23,9 @@ const HelpPage = () => {
                     <Image
                         src="/help/1.png"
                         alt="Navigation Bar"
-                        width={1200}
-                        height={600}
+                        width={1292}
+                        height={617}
+                        quality={100}
                     />
                 </div>
             </section>
@@ -45,15 +46,17 @@ const HelpPage = () => {
                             src="/help/2.png"
                             alt="Overview Cards"
                             width={610}
-                            height={690}
+                            height={688}
+                            quality={100}
                         />
                     </div>
                     <div className="bg-white p-4 flex justify-center">
                         <Image
                             src="/help/3.png"
                             alt="Overview Table"
-                            width={980}
-                            height={170}
+                            width={957}
+                            height={172}
+                            quality={100}
                         />
                     </div>
                 </div>
@@ -73,8 +76,9 @@ const HelpPage = () => {
                     <Image
                         src="/help/4.png"
                         alt="Download Page"
-                        width={800}
-                        height={364}
+                        width={1519}
+                        height={692}
+                        quality={100}
                     />
                 </div>
                 <p className="my-4">
@@ -91,6 +95,7 @@ const HelpPage = () => {
                             alt="Downloaded Files"
                             width={566}
                             height={725}
+                            quality={100}
                         />
                     </div>
                     <div className="bg-white p-4 flex justify-center">
@@ -99,6 +104,7 @@ const HelpPage = () => {
                             alt="Download Options"
                             width={1487}
                             height={328}
+                            quality={100}
                         />
                     </div>
                 </div>
@@ -119,6 +125,7 @@ const HelpPage = () => {
                         alt="Search Results"
                         width={1272}
                         height={683}
+                        quality={100}
                     />
                 </div>
                 <p className="my-4">
@@ -132,6 +139,7 @@ const HelpPage = () => {
                         alt="Structure Search"
                         width={1860}
                         height={610}
+                        quality={100}
                     />
                 </div>
                 <p className="my-4">
@@ -145,6 +153,7 @@ const HelpPage = () => {
                             alt="Multi-search"
                             width={263}
                             height={209}
+                            quality={100}
                         />
                     </div>
                     <div className="bg-white p-4 flex justify-center">
@@ -153,6 +162,7 @@ const HelpPage = () => {
                             alt="Multi-search Results"
                             width={986}
                             height={537}
+                            quality={100}
                         />
                     </div>
                 </div>
@@ -207,6 +217,7 @@ const HelpPage = () => {
                             alt="Clustering Options"
                             width={1686}
                             height={702}
+                            quality={100}
                         />
                     </div>
                     <div className="bg-white p-4 flex justify-center">
@@ -215,6 +226,7 @@ const HelpPage = () => {
                             alt="Clustering Results"
                             width={1652}
                             height={817}
+                            quality={100}
                         />
                     </div>
                 </div>
@@ -233,6 +245,7 @@ const HelpPage = () => {
                         alt="Ligand Selection"
                         width={1038}
                         height={561}
+                        quality={100}
                     />
                 </div>
             </section>
