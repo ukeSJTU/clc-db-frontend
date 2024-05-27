@@ -117,35 +117,6 @@ const ClusterPage: React.FC = () => {
         }
     };
 
-    const prehandleExampleClick = async (exampleType: string) => {
-        setIsLoading(true);
-        setErrorMessage("");
-
-        try {
-            const response = await api.post("/cluster/process/example/", {
-                example_type: exampleType,
-            });
-            setClusteringResults(response.data);
-            toast({
-                title: "Example clustering completed",
-                description:
-                    "The example clustering has been successfully completed.",
-            });
-        } catch (error) {
-            console.error("Error running example clustering:", error);
-            setErrorMessage(
-                "An error occurred while running the example clustering."
-            );
-            toast({
-                title: "Error",
-                description:
-                    "An error occurred while running the example clustering.",
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     const handleExampleClick = (data: z.infer<typeof clusterFormSchema>) => {
         form.reset(data);
         handleSubmit(data);
