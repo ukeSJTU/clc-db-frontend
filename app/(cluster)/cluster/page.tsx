@@ -17,8 +17,9 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { ClusterClusterFormSchema } from "@/types/form";
 
-const FormSchema = z.object({
+const ClusterFormSchema = z.object({
     selectedFiles: z.array(z.instanceof(File)),
     descriptor: z.enum(["E3FP", "RDKit"]),
     bits: z.number().min(0).default(1024),
@@ -48,8 +49,8 @@ const ClusterPage: React.FC = () => {
         form.setValue("selectedFiles", files);
     };
 
-    const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
+    const form = useForm<z.infer<typeof ClusterFormSchema>>({
+        resolver: zodResolver(ClusterFormSchema),
         defaultValues: {
             selectedFiles: [],
             descriptor: "E3FP",
@@ -69,7 +70,7 @@ const ClusterPage: React.FC = () => {
         },
     });
 
-    const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
+    const handleSubmit = async (data: z.infer<typeof ClusterFormSchema>) => {
         if (data.selectedFiles.length === 0) {
             // alert("Please select at least one file.");
             toast({
