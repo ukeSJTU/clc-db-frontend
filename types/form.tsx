@@ -18,4 +18,5 @@ const ClusterFormSchema = z.object({
     minSamples: z.number().min(1).default(5),
 });
 
-export type { ClusterFormSchema };
+export const clusterFormSchema = ClusterFormSchema;
+export type ClusterFormSchema = z.infer<typeof ClusterFormSchema>;

@@ -17,25 +17,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
-import { ClusterClusterFormSchema } from "@/types/form";
-
-const ClusterFormSchema = z.object({
-    selectedFiles: z.array(z.instanceof(File)),
-    descriptor: z.enum(["E3FP", "RDKit"]),
-    bits: z.number().min(0).default(1024),
-    radius: z.number().min(0).default(1.5),
-    rdkitInv: z.boolean().default(true),
-    rdkitRadius: z.number().min(0).default(2),
-    rdkitUseFeatures: z.boolean().default(false),
-    rdkitUseBondTypes: z.boolean().default(false),
-    rdkitUseChirality: z.boolean().default(false),
-    reductionMethod: z.enum(["PCA", "TSNE"]),
-    clusterMethod: z.enum(["K-Means", "DBSCAN"]),
-    clusters: z.number().min(1).default(5),
-    knnAlgro: z.enum(["lloyd", "elkan"]), // "auto", "full" are deprecated in sklearn.KMeans after version1.1
-    eps: z.number().min(0).default(0.25),
-    minSamples: z.number().min(1).default(5),
-});
+import { clusterFormSchema, ClusterFormSchema } from "@/types/form";
 
 const ClusterPage: React.FC = () => {
     const [clusteringResults, setClusteringResults] = React.useState<any>(null);
@@ -49,8 +31,8 @@ const ClusterPage: React.FC = () => {
         form.setValue("selectedFiles", files);
     };
 
-    const form = useForm<z.infer<typeof ClusterFormSchema>>({
-        resolver: zodResolver(ClusterFormSchema),
+    const form = useForm<z.infer<typeof clusterFormSchema>>({
+        resolver: zodResolver(clusterFormSchema),
         defaultValues: {
             selectedFiles: [],
             descriptor: "E3FP",
@@ -70,9 +52,8 @@ const ClusterPage: React.FC = () => {
         },
     });
 
-    const handleSubmit = async (data: z.infer<typeof ClusterFormSchema>) => {
+    const handleSubmit = async (data: z.infer<typeof clusterFormSchema>) => {
         if (data.selectedFiles.length === 0) {
-            // alert("Please select at least one file.");
             toast({
                 title: "No files selected",
                 description: "Please select at least one file.",
@@ -110,7 +91,6 @@ const ClusterPage: React.FC = () => {
                 minSamples: data.minSamples.toString(),
             };
 
-            // Log the request data
             console.log("Request Data:", requestData);
 
             const clusteringResponse = await api.post(
