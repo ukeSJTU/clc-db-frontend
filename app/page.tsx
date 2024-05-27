@@ -57,10 +57,10 @@ const Home: NextPage = () => {
                                 CLC-DB
                             </span>{" "}
                             (Chiral Ligand and Catalyst Database) is an
-                            open-source database dedicated of comprehensive data
-                            on chiral ligands and catalysts, aimed at
-                            accelerating research and innovation in the field of
-                            asymmetric catalysis.
+                            open-source database providing comprehensive data on
+                            chiral ligands and catalysts, aimed at accelerating
+                            research and innovation in the field of asymmetric
+                            catalysis.
                         </p>
                         <p className="text-gray-700 leading-relaxed mt-4">
                             CLC-DB provides access to
