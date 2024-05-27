@@ -11,6 +11,7 @@ import DescriptorSelector from "@/components/clusterpage/DescriptorSelector";
 import DescriptorParameters from "@/components/clusterpage/DescriptorParams";
 import ClusteringOptions from "@/components/clusterpage/ClusteringOptions";
 import ClusteringResultsChart from "@/components/clusterpage/ClusteringResultsChart";
+import ClusterParamsSheet from "@/components/clusterpage/ClusterSettings";
 
 import api from "@/utils/api";
 import { Separator } from "@/components/ui/separator";
@@ -24,6 +25,7 @@ const ClusterPage: React.FC = () => {
     const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [isSheetOpen, setIsSheetOpen] = React.useState(false);
     const { toast } = useToast();
 
     const handleFileChange = (files: File[]) => {
@@ -176,13 +178,21 @@ const ClusterPage: React.FC = () => {
                                 />
                             </AccordionItem>
 
-                            <Button
-                                type="submit"
-                                disabled={isLoading}
-                                className="w-full"
-                            >
-                                {isLoading ? "Submitting..." : "Submit"}
-                            </Button>
+                            <div className="flex justify-between">
+                                <Button
+                                    type="button"
+                                    onClick={() => setIsSheetOpen(true)}
+                                >
+                                    Show Example Settings
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="w-auto"
+                                >
+                                    {isLoading ? "Submitting..." : "Submit"}
+                                </Button>
+                            </div>
                         </form>
                     </Form>
                 </Accordion>
@@ -212,6 +222,12 @@ const ClusterPage: React.FC = () => {
                     )}
                 </div>
             </div>
+            <FormProvider {...form}>
+                <ClusterParamsSheet
+                    open={isSheetOpen}
+                    onOpenChange={setIsSheetOpen}
+                />
+            </FormProvider>
         </div>
     );
 };
