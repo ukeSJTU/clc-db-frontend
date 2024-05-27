@@ -275,6 +275,48 @@ const HelpPage = () => {
                         quality={100}
                     />
                 </div>
+                <p className="my-4">
+                    What&apos;s more, we provide a{" "}
+                    <strong className="text-blue-700">quick sample</strong> for
+                    your reference. Click here to generate an example consisting
+                    of 100 samples with auto-selected parameters. These samples
+                    are processed using E3FP or RDKIT fingerprints,
+                    dimensionality reduction with PCA, and K-Means clustering.
+                </p>
+                <div className="bg-white p-4 flex justify-center">
+                    <Image
+                        src="/help/15.png"
+                        alt="Cluster Example"
+                        width={318}
+                        height={294}
+                        quality={100}
+                    />
+                </div>
+                <p className="my-4">
+                    Click here to access the 100 samples used in the example.
+                </p>
+                <div className="bg-white p-4 flex justify-center">
+                    <Image
+                        src="/help/16.png"
+                        alt="Download Cluster Example"
+                        width={434}
+                        height={156}
+                        quality={100}
+                    />
+                </div>
+                <p className="my-4">
+                    Click here to refer to the basic parameters used in the
+                    example.
+                </p>
+                <div className="bg-white p-4 flex justify-center">
+                    <Image
+                        src="/help/17.png"
+                        alt="View Cluster Params"
+                        width={350}
+                        height={216}
+                        quality={100}
+                    />
+                </div>
             </section>
 
             <section className="mb-12">
