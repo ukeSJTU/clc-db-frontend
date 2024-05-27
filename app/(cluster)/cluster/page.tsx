@@ -117,7 +117,7 @@ const ClusterPage: React.FC = () => {
         }
     };
 
-    const handleExampleClick = async (exampleType: string) => {
+    const prehandleExampleClick = async (exampleType: string) => {
         setIsLoading(true);
         setErrorMessage("");
 
@@ -144,6 +144,11 @@ const ClusterPage: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleExampleClick = (data: z.infer<typeof clusterFormSchema>) => {
+        form.reset(data);
+        handleSubmit(data);
     };
 
     return (
