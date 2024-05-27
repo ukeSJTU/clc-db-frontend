@@ -16,8 +16,9 @@ const HelpPage = () => {
                     <a href="/">Home Page</a>
                 </h2>
                 <p className="mb-4">
-                    Use the <strong>navigation bar</strong> to get quick access
-                    to the database.
+                    Use the{" "}
+                    <strong className="text-blue-700">navigation bar</strong> to
+                    get quick access to the database.
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -36,9 +37,10 @@ const HelpPage = () => {
                 </h2>
                 <p className="mb-4">
                     Retrieve the information in the format of cards or tables.
-                    Suitable for casual <strong>browsing</strong>. You can click
-                    to download or review details of the certain molecule you
-                    are interested in.
+                    Suitable for casual{" "}
+                    <strong className="text-blue-700">browsing</strong>. You can
+                    click to download or review details of the certain molecule
+                    you are interested in.
                 </p>
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
@@ -67,10 +69,12 @@ const HelpPage = () => {
                     <a href="/download/categories">Download</a>
                 </h2>
                 <p className="mb-4">
-                    Suitable for <strong>batch downloading</strong>. It&apos;s
-                    similar to the overview page but you can choose to download
-                    multiple molecules of <strong>one category</strong>, in a
-                    page or all of them.
+                    Suitable for{" "}
+                    <strong className="text-blue-700">batch downloading</strong>
+                    . It&apos;s similar to the overview page but you can choose
+                    to download multiple molecules of{" "}
+                    <strong className="text-blue-700">one category</strong>, in
+                    a page or all of them.
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -85,8 +89,10 @@ const HelpPage = () => {
                     What you will get here is a folder of SDFs and a combined
                     Excel of basic information. Notice that if downloaded
                     separately, XLSX files will be individual and require manual
-                    merging of rows. This is the <strong>only method</strong> to
-                    obtain a <strong>combined</strong> one.
+                    merging of rows. This is the{" "}
+                    <strong className="text-blue-700">only method</strong> to
+                    obtain a <strong className="text-blue-700">combined</strong>{" "}
+                    one.
                 </p>
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
@@ -116,8 +122,12 @@ const HelpPage = () => {
                 </h2>
                 <p className="mb-4">
                     You can search for CAS ID, Name, or SMILE. Notice that you
-                    can perform <strong>a partial keyword search</strong>, and
-                    the system will automatically match all relevant results:
+                    can perform{" "}
+                    <strong className="text-blue-700">
+                        a partial keyword search
+                    </strong>
+                    , and the system will automatically match all relevant
+                    results:
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -129,9 +139,9 @@ const HelpPage = () => {
                     />
                 </div>
                 <p className="my-4">
-                    You can <strong>draw</strong> a structure and it will be
-                    converted into SMILES for searching. Note that partial
-                    search also applies.
+                    You can <strong className="text-blue-700">draw</strong> a
+                    structure and it will be converted into SMILES for
+                    searching. Note that partial search also applies.
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -143,8 +153,9 @@ const HelpPage = () => {
                     />
                 </div>
                 <p className="my-4">
-                    Also, we support <strong>multi-search</strong> by uploading
-                    a CSV of IDs:
+                    Also, we support{" "}
+                    <strong className="text-blue-700">multi-search</strong> by
+                    uploading a CSV of IDs:
                 </p>
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
@@ -173,11 +184,12 @@ const HelpPage = () => {
                     <a href="/cluster">Cluster</a>
                 </h2>
                 <p className="mb-4">
-                    <strong>Clustering</strong> is the <strong>core</strong>{" "}
-                    function of this database. Thanks to the high-quality 3D
-                    coordinate information computed, you can download SDF files
-                    and perform dimensionality reduction and clustering to guide
-                    your experiments.
+                    <strong className="text-blue-700">Clustering</strong> is the{" "}
+                    <strong className="text-blue-700">core</strong> function of
+                    this database. Thanks to the high-quality 3D coordinate
+                    information computed, you can download SDF files and perform
+                    dimensionality reduction and clustering to guide your
+                    experiments.
                 </p>
                 <p className="mb-4">
                     Let&apos;s assume you are conducting a ligand screening
@@ -187,10 +199,12 @@ const HelpPage = () => {
                     is here to assist you:
                 </p>
                 <p className="mb-4">
-                    Firstly, you need to <strong>download</strong> all relevant
-                    SDF files from the database, including those you have
-                    completed and those you are yet to explore, and then{" "}
-                    <strong>upload</strong> them to our online clustering tool.
+                    Firstly, you need to{" "}
+                    <strong className="text-blue-700">download</strong> all
+                    relevant SDF files from the database, including those you
+                    have completed and those you are yet to explore, and then{" "}
+                    <strong className="text-blue-700">upload</strong> them to
+                    our online clustering tool.
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -201,14 +215,21 @@ const HelpPage = () => {
                     />
                 </div>
                 <p className="my-4">
-                    Secondly, you need to select <strong>descriptors</strong>{" "}
-                    for clustering, as well as the{" "}
-                    <strong>dimensionality reduction method</strong>,{" "}
-                    <strong>clustering algorithm</strong>, and their
-                    corresponding <strong>parameters</strong>. We provide a
-                    visual adjustment bar for your convenience, so please
-                    experiment multiple times until you achieve satisfactory
-                    results.
+                    Secondly, you need to select{" "}
+                    <strong className="text-blue-700">descriptors</strong> for
+                    clustering, as well as the{" "}
+                    <strong className="text-blue-700">
+                        dimensionality reduction method
+                    </strong>
+                    ,{" "}
+                    <strong className="text-blue-700">
+                        clustering algorithm
+                    </strong>
+                    , and their corresponding{" "}
+                    <strong className="text-blue-700">parameters</strong>. We
+                    provide a visual adjustment bar for your convenience, so
+                    please experiment multiple times until you achieve
+                    satisfactory results.
                 </p>
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
@@ -232,12 +253,18 @@ const HelpPage = () => {
                 </div>
                 <p className="my-4">
                     Lastly, based on the clustering outcomes,{" "}
-                    <strong>select</strong> the ligands you will explore next.
-                    In general, you should prioritize ligands that are{" "}
-                    <strong>close to those with high yields</strong> and{" "}
-                    <strong>different from those with low yields</strong>. This
-                    prioritization is likely to assist you in identifying the
-                    optimal ligands quickly.
+                    <strong className="text-blue-700">select</strong> the
+                    ligands you will explore next. In general, you should
+                    prioritize ligands that are{" "}
+                    <strong className="text-blue-700">
+                        close to those with high yields
+                    </strong>{" "}
+                    and{" "}
+                    <strong className="text-blue-700">
+                        different from those with low yields
+                    </strong>
+                    . This prioritization is likely to assist you in identifying
+                    the optimal ligands quickly.
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
@@ -255,8 +282,9 @@ const HelpPage = () => {
                     <a href="/statistics">Stats</a>
                 </h2>
                 <p className="mb-4">
-                    Obtain various <strong>graphics</strong>, such as molecular
-                    weight distribution and ligand type distribution.
+                    Obtain various{" "}
+                    <strong className="text-blue-700">graphics</strong>, such as
+                    molecular weight distribution and ligand type distribution.
                 </p>
             </section>
 
