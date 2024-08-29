@@ -40,7 +40,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
     const handleDownloadPage = async () => {
         // Generate paths for all SDF files in the current page
         const sdfFiles = molecules.map(
-            (molecule) => `/all_sdfs/${molecule.cas_id}.sdf`
+            (molecule) => `${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${molecule.cas_id}.sdf`
         );
 
         try {
@@ -103,7 +103,7 @@ const CategoryDownloadPage = ({ params }: { params: { category: string } }) => {
                     sdfFiles.push(
                         ...data.results.map(
                             (molecule: MoleculeProps) =>
-                                `/all_sdfs/${molecule.cas_id}.sdf`
+                                `${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${molecule.cas_id}.sdf`
                         )
                     );
                     nextPage++;

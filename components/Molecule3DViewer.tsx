@@ -43,7 +43,7 @@ const Molecule3DViewer: React.FC<Molecule3DViewerProps> = ({ casId }) => {
         // Fetch the .sdf file based on the CAS ID
         const fetchData = async () => {
             try {
-                const response = await fetch(`/all_sdfs/${casId}.sdf`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${casId}.sdf`);
 
                 // Check if the response returned a 404 error or any other error
                 if (!response.ok) {

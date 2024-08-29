@@ -31,7 +31,7 @@ const Navbar = () => {
                                     <NavigationMenuLink asChild>
                                         <a
                                             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                                            href="/"
+                                            href="/services/clc-db"
                                         >
                                             <Icons.logo className="h-6 w-6" />
                                             <div className="mb-2 mt-4 text-lg font-medium">
@@ -46,12 +46,12 @@ const Navbar = () => {
                                         </a>
                                     </NavigationMenuLink>
                                 </li>
-                                <ListItem href="/overview/card/1" title="Card">
+                                <ListItem href="/services/clc-db/overview/card/1" title="Card">
                                     View all the molecules in the database in a
                                     card format.
                                 </ListItem>
                                 <ListItem
-                                    href="/overview/table/1"
+                                    href="/services/clc-db/overview/table/1"
                                     title="Table"
                                 >
                                     View the table of all the molecules in the
@@ -221,7 +221,7 @@ const Navbar = () => {
             <div className="text-lg font-bold flex items-center">
                 <Link href="/" className="flex items-center">
                     <Image
-                        src="/favicon.webp"
+                        src="/services/clc-db/favicon.webp"
                         alt="Favicon"
                         width={32}
                         height={32}

@@ -13,7 +13,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/">Home Page</a>
+                    <a href="/services/clc-db">Home Page</a>
                 </h2>
                 <p className="mb-4">
                     Use the{" "}
@@ -22,7 +22,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/1.png"
+                        src="/services/clc-db/help/1.png"
                         alt="Navigation Bar"
                         width={1292}
                         height={617}
@@ -33,7 +33,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/overview/card/1">Overview</a>
+                    <a href="/services/clc-db/overview/card/1">Overview</a>
                 </h2>
                 <p className="mb-4">
                     Retrieve the information in the format of cards or tables.
@@ -45,7 +45,7 @@ const HelpPage = () => {
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/2.png"
+                            src="/services/clc-db/help/2.png"
                             alt="Overview Cards"
                             width={610}
                             height={688}
@@ -54,7 +54,7 @@ const HelpPage = () => {
                     </div>
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/3.png"
+                            src="/services/clc-db/help/3.png"
                             alt="Overview Table"
                             width={957}
                             height={172}
@@ -66,7 +66,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/download/categories">Download</a>
+                    <a href="/services/clc-db/download/categories">Download</a>
                 </h2>
                 <p className="mb-4">
                     Suitable for{" "}
@@ -78,7 +78,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/4.png"
+                        src="/services/clc-db/help/4.png"
                         alt="Download Page"
                         width={1519}
                         height={692}
@@ -97,7 +97,7 @@ const HelpPage = () => {
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/5.png"
+                            src="/services/clc-db/help/5.png"
                             alt="Downloaded Files"
                             width={566}
                             height={725}
@@ -106,7 +106,7 @@ const HelpPage = () => {
                     </div>
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/6.png"
+                            src="/services/clc-db/help/6.png"
                             alt="Download Options"
                             width={1487}
                             height={328}
@@ -118,7 +118,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/search">Search</a>
+                    <a href="/services/clc-db/search">Search</a>
                 </h2>
                 <p className="mb-4">
                     You can search for CAS ID, Name, or SMILE. Notice that you
@@ -131,7 +131,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/7.png"
+                        src="/services/clc-db/help/7.png"
                         alt="Search Results"
                         width={1272}
                         height={683}
@@ -145,7 +145,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/8.png"
+                        src="/services/clc-db/help/8.png"
                         alt="Structure Search"
                         width={1860}
                         height={610}
@@ -160,7 +160,7 @@ const HelpPage = () => {
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/9.png"
+                            src="/services/clc-db/help/9.png"
                             alt="Multi-search"
                             width={263}
                             height={209}
@@ -169,7 +169,7 @@ const HelpPage = () => {
                     </div>
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/10.png"
+                            src="/services/clc-db/help/10.png"
                             alt="Multi-search Results"
                             width={986}
                             height={537}
@@ -181,7 +181,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/cluster">Cluster</a>
+                    <a href="/services/clc-db/cluster">Cluster</a>
                 </h2>
                 <p className="mb-4">
                     <strong className="text-blue-700">Clustering</strong> is the{" "}
@@ -208,7 +208,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/11.png"
+                        src="/services/clc-db/help/11.png"
                         alt="Clustering Upload"
                         width={1660}
                         height={464}
@@ -234,7 +234,7 @@ const HelpPage = () => {
                 <div className="grid grid-cols-1 gap-8">
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/12.png"
+                            src="/services/clc-db/help/12.png"
                             alt="Clustering Options"
                             width={1686}
                             height={702}
@@ -243,7 +243,7 @@ const HelpPage = () => {
                     </div>
                     <div className="bg-white p-4 flex justify-center">
                         <Image
-                            src="/help/13.png"
+                            src="/services/clc-db/help/13.png"
                             alt="Clustering Results"
                             width={1652}
                             height={817}
@@ -268,7 +268,7 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/14.png"
+                        src="/services/clc-db/help/14.png"
                         alt="Ligand Selection"
                         width={1038}
                         height={561}
@@ -285,10 +285,10 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/15.png"
+                        src="/services/clc-db/help/15.png"
                         alt="Cluster Example"
-                        width={318}
-                        height={294}
+                        width={791}
+                        height={720}
                         quality={100}
                     />
                 </div>
@@ -297,10 +297,10 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/16.png"
+                        src="/services/clc-db/help/16.png"
                         alt="Download Cluster Example"
-                        width={434}
-                        height={156}
+                        width={1117}
+                        height={390}
                         quality={100}
                     />
                 </div>
@@ -310,10 +310,10 @@ const HelpPage = () => {
                 </p>
                 <div className="bg-white p-4 flex justify-center">
                     <Image
-                        src="/help/17.png"
+                        src="/services/clc-db/help/17.png"
                         alt="View Cluster Params"
-                        width={350}
-                        height={216}
+                        width={1280}
+                        height={720}
                         quality={100}
                     />
                 </div>
@@ -321,7 +321,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/statistics">Stats</a>
+                    <a href="/services/clc-db/statistics">Stats</a>
                 </h2>
                 <p className="mb-4">
                     Obtain various{" "}
@@ -332,7 +332,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/help">Help</a>
+                    <a href="/services/clc-db/help">Help</a>
                 </h2>
                 <p className="mb-4">
                     Click here and you will jump to this page for help.
@@ -341,7 +341,7 @@ const HelpPage = () => {
 
             <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 underline">
-                    <a href="/contact">Contact</a>
+                    <a href="/services/clc-db/contact">Contact</a>
                 </h2>
                 <p>
                     If you have any questions, don&apos;t hesitate to contact

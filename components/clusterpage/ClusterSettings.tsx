@@ -54,7 +54,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="E3FP">E3FP</SelectItem>
-                                <SelectItem value="RDKit">RDKit</SelectItem>
+                                <SelectItem value="RDKit">Morgan</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -85,7 +85,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="rdkitInv" className="text-right">
-                            RDKit Invariants
+                            Morgan Invariants
                         </Label>
                         <Switch
                             id="rdkitInv"
@@ -96,7 +96,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="rdkitRadius" className="text-right">
-                            RDKit Radius
+                            Morgan Radius
                         </Label>
                         <Input
                             id="rdkitRadius"
@@ -111,7 +111,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                             htmlFor="rdkitUseFeatures"
                             className="text-right"
                         >
-                            RDKit Use Features
+                            Morgan Use Features
                         </Label>
                         <Switch
                             id="rdkitUseFeatures"
@@ -125,7 +125,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                             htmlFor="rdkitUseBondTypes"
                             className="text-right"
                         >
-                            RDKit Use Bond Types
+                            Morgan Use Bond Types
                         </Label>
                         <Switch
                             id="rdkitUseBondTypes"
@@ -139,7 +139,7 @@ const ClusterParamsSheet: React.FC<ClusteringExampleSettingsProps> = ({
                             htmlFor="rdkitUseChirality"
                             className="text-right"
                         >
-                            RDKit Use Chirality
+                            Morgan Use Chirality
                         </Label>
                         <Switch
                             id="rdkitUseChirality"

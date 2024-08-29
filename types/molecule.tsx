@@ -26,4 +26,6 @@ export type MoleculeProps = {
     hydrogen_bond_acceptor_count?: number; // Optional hydrogen bond acceptor count
     hydrogen_bond_donor_count?: number; // Optional hydrogen bond donor count
     rotatable_bond_count?: number; // Optional rotatable bond count
+    InChI?: string;
+    InChIKey?: string;
 };

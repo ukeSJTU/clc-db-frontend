@@ -55,7 +55,7 @@ const DescriptorSelector: React.FC<DescriptorSelectorProps> = ({
                                             E3FP
                                         </SelectItem>
                                         <SelectItem value="RDKit">
-                                            RDKit
+                                            Morgan
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>

@@ -90,7 +90,7 @@ const Footer = () => {
                                     href="https://3dmol.org/doc/index.html"
                                     target="_blank"
                                 >
-                                    3Dmol
+                                    3Dmol.js
                                 </Link>
                             </li>
                             <li>
@@ -116,7 +116,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="mt-8 text-center">
-                <p>© 2024 CLC-DB. All rights reserved.</p>
+                <p>© 2024 <Link className="underline" href={"https://compbio.sjtu.edu.cn/home.html"} >Yang Lab</Link>. All rights reserved.</p>
             </div>
         </footer>
     );

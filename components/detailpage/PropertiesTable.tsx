@@ -28,6 +28,18 @@ const MoleculePropertiesTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         </td>
                     </tr>
                     <tr>
+                        <td className="py-2 pr-4 font-semibold">InChI</td>
+                        <td className="py-2">
+                            {molecule.InChI || "N/A"}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="py-2 pr-4 font-semibold">InChIKey</td>
+                        <td className="py-2">
+                            {molecule.InChIKey || "N/A"}
+                        </td>
+                    </tr>
+                    <tr>
                         <td className="py-2 pr-4 font-semibold">
                             Molecular Formula
                         </td>

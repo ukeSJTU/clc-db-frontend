@@ -23,11 +23,16 @@ const nextConfig = {
                 port: "",
                 pathname: "/static/**",
             },
+            {
+                protocol: "https",
+                hostname: "compbio.sjtu.edu.cn"
+            }
         ],
     },
     compiler: {
         removeConsole: process.env.NODE_ENV === "production",
     },
+    basePath: "/services/clc-db",
 };
 
 export default nextConfig;

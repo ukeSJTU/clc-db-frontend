@@ -124,7 +124,7 @@ const ExampleSelector: React.FC<ExampleSelectorProps> = ({
         return await Promise.all(
             exampleFiles.map(async (fileName) => {
                 const response = await fetch(
-                    `/cluster/example_data/${fileName}`
+                    `https://compbio.sjtu.edu.cn/services/clc-db/static/cluster/example_data/${fileName}`
                 );
                 const blob = await response.blob();
                 return new File([blob], fileName, {
@@ -202,7 +202,7 @@ const ExampleSelector: React.FC<ExampleSelectorProps> = ({
                     E3FP Example
                 </Button>
                 <Button onClick={handleKnnExample} disabled={isLoading}>
-                    RDKit Example
+                    Morgan Example
                 </Button>
                 <Button onClick={handleDownloadExamples} disabled={isLoading}>
                     Download Examples

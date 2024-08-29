@@ -42,7 +42,7 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         </td>
                     </tr>
                     <tr>
-                        <td className="py-2 pr-4 font-semibold">Chirality</td>
+                        <td className="py-2 pr-4 font-semibold">Type of Chirality</td>
                         <td className="py-2">
                             <div className="flex flex-wrap">
                                 {molecule.chirality?.map((type, index) => (
@@ -91,7 +91,7 @@ const MoleculeBasicInfoTable = ({ molecule }: { molecule: MoleculeProps }) => {
                         </td>
                     </tr>
                     <tr>
-                        <td className="py-2 pr-4 font-semibold">SMILE</td>
+                        <td className="py-2 pr-4 font-semibold">SMILES</td>
                         <td className="py-2">{molecule.smiles}</td>
                     </tr>
                 </tbody>

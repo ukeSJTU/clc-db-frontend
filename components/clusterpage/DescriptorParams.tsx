@@ -42,7 +42,7 @@ const E3FPParameters: React.FC<E3FPParametersProps> = ({ control }) => {
                             name="bits"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>nBits of RDKit</FormLabel>
+                                    <FormLabel>nBits of E3FP</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
@@ -130,7 +130,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
         <Card>
             <AccordionTrigger>
                 <CardHeader>
-                    <CardTitle>Step 3. RDKit Parameters</CardTitle>
+                    <CardTitle>Step 3. Morgan Parameters</CardTitle>
                 </CardHeader>
             </AccordionTrigger>
             <AccordionContent>
@@ -141,7 +141,7 @@ const RDKitParameters: React.FC<RDKitParametersProps> = ({ control }) => {
                             name="bits"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>nBits of RDKit</FormLabel>
+                                    <FormLabel>nBits of Morgan</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"

@@ -74,7 +74,7 @@ const MoleculeDetailPage = ({ params }: { params: { casid: string } }) => {
         return <div>Loading...</div>;
     }
 
-    const sdfFiles = [`/all_sdfs/${molecule.cas_id}.sdf`];
+    const sdfFiles = [`${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${molecule.cas_id}.sdf`];
 
     return (
         <div className="max-w-7xl mx-auto p-4">

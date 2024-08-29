@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         <div>
             <div className="relative">
                 <Image
-                    src="/bgDark.webp"
+                    src="/services/clc-db/bgDark.webp"
                     alt="Banner"
                     width={1792}
                     height={256}
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
                             drug development or chemical material research.
                         </p>
                         <Image
-                            src="/demo.png"
+                            src="/services/clc-db/demo.png"
                             alt="Molecule Structure Demo Picture"
                             width={1200}
                             height={256}
@@ -173,6 +173,11 @@ const Home: NextPage = () => {
                         </ul>
                     </div>
                 </section>
+		<section className="container mx-auto p-4">
+		    <div className="bg-white shadow-md rounded-lg p-6">
+			<b>Reference:</b> G Yu, K Yu, X Wang, X Huo*, Y Yang*. CLC-DB: an online open-source database of chiral ligands and catalysts. ChemRxiv. 2024; doi:10.26434/chemrxiv-2024-h2rdl.
+		    </div>
+		</section>
                 <section className="container mx-auto p-4 mt-8 bg-blue-100 rounded-md shadow-md">
                     <h2 className="text-2xl font-semibold text-center mb-4">
                         Statistics

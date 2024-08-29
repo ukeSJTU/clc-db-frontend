@@ -56,7 +56,7 @@ const MoleculeDataRow = ({ molecule }: { molecule: MoleculeProps }) => {
                     {/* Download  Button */}
                     <ZipDownloadButton
                         molecules={[molecule]}
-                        sdfFiles={[`/all_sdfs/${molecule.cas_id}.sdf`]}
+                        sdfFiles={[`${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${molecule.cas_id}.sdf`]}
                     />
                     {/* View Details Button */}
                     <Button
@@ -107,7 +107,7 @@ const MolecularTableLayout = ({ molecules }: MoleculesProps) => {
 // Modify this component to fit your data structure and desired ui
 const MoleculeCard = (molecule: MoleculeProps) => {
     const router = useRouter();
-    const sdfFiles = [`/all_sdfs/${molecule.cas_id}.sdf`];
+    const sdfFiles = [`${process.env.NEXT_PUBLIC_STATIC}/all_sdfs/${molecule.cas_id}.sdf`];
 
     const handleClick = () => {
         router.push(`/detail/${molecule.cas_id}`);
